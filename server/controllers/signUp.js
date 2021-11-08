@@ -7,7 +7,7 @@ export const createUser = async (req, res) => {
   const securePassword = await bcrypt.hash(password, saltPassword);
 
   const signedUser = new User({
-    email: email,
+    email,
     password: securePassword,
   });
 
