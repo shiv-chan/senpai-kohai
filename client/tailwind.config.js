@@ -4,13 +4,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-      primaryPink: "#f4eeff", // main bg
-      secondaryPurple: "#a6b1e1", // secondary bg
-      lightPurple: "#dcd6f7", // dropdown menu, tech stack tags
-      darkPurple: "#424874", // headers, top titles etc
-      veryDarkPurple: "#2f2e41", // some titles
-      pinkishGray: "#d0cde1", // icons
-      ourGray: "#c4c4c4", // no img
+      primary_bg_color: "#f4eeff", // main bg
+      secondary_bg_color: "#a6b1e1", // secondary bg
+      tertiary_bg_color: "#dcd6f7", // dropdown menu, tech stack tags
+      primary_title_color: "#424874", // titles 
+      header_color: "#424874" // header
+    },
+    spacing: {
+      // height from the main content to the bottom of Header
+      // for now 3rem but we can change it anytime
+      headerHeight: "3rem", 
+
     }
   },
   },
