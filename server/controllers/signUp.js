@@ -16,7 +16,7 @@ export const createUser = async (req, res) => {
     if (user) {
       res.status(409).send({ message: "This email is already registered" });
     } else {
-      await siginedUpUser.save();
+      await signedUser.save();
       res.status(201).json(signedUser);
     }
   } catch (error) {
