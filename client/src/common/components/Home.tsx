@@ -1,7 +1,8 @@
 import React from 'react';
 
 const Home = () => {
-	return <div>This is Home</div>;
+	// test, added style here just to see the classes work
+	return <div　className="bg-primary_bg_color w-screen h-96 mt-headerHeight text-primary_title_color">This is Home</div>;
 };
 
 export default Home;

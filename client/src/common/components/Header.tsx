@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Header = () => {
-	return <div>This is Header</div>;
+	// test tailwind
+	return <div className="bg-header_color text-white">This is Header</div>;
+
 };
 
 export default Header;
