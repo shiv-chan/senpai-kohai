@@ -1,10 +1,7 @@
 import User from '../models/userModels.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import { userValidation } from '../validation.js';
-
-dotenv.config();
 
 export const sendUser = async (req, res) => {
 	const { email, password } = req.body;
@@ -23,7 +20,7 @@ export const sendUser = async (req, res) => {
 				if (result) {
 					// create and assign a token
 					const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-					res.cookie('accrss_token', token, {
+					res.cookie('access_token', token, {
 						httpOnly: true,
 						// secure: true  // --> uncomment on production
 					});
