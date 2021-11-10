@@ -2,11 +2,16 @@ import User from '../models/userModels.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { userValidation } from '../validation.js';
 
 dotenv.config();
 
 export const sendUser = async (req, res) => {
 	const { email, password } = req.body;
+
+	// validate the data before send data
+	const { error } = userValidation(req.body);
+	if (error) return res.status(409).send({ message: error.details[0].message });
 
 	try {
 		const user = await User.findOne({ email }).exec();
@@ -16,14 +21,14 @@ export const sendUser = async (req, res) => {
 					throw new Error(error);
 				}
 				if (result) {
-					// 201 request succeeded, and resource created and returend
-
 					// create and assign a token
 					const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 					res.cookie('accrss_token', token, {
 						httpOnly: true,
 						// secure: true  // --> uncomment on production
 					});
+
+					// 201 request succeeded, and resource created and returend
 					res.status(201).json({ message: 'logged in successfully!' });
 				} else {
 					res
