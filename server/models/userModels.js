@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
 
 const userSchema = new mongoose.Schema({
 	email: {
@@ -12,6 +13,33 @@ const userSchema = new mongoose.Schema({
 	date: {
 		type: Date,
 		default: new Date(),
+	},
+	publicEmail: {
+		type: String,
+	},
+	senpaiProfile: {
+		id: {
+			type: String,
+			default: uuidv4(),
+		},
+		description: {
+			type: String,
+		},
+		techStack: {
+			type: Array,
+		},
+	},
+	kohaiProfile: {
+		id: {
+			type: String,
+			default: uuidv4(),
+		},
+		description: {
+			type: String,
+		},
+		techStack: {
+			type: Array,
+		},
 	},
 });
 
