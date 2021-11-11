@@ -7,7 +7,8 @@ const Header = () => {
   return (
     <>
       {location.pathname === "/signup" ||
-      location.pathname === "/login " ? null : (
+      location.pathname === "/login" ||
+      location.pathname === "/forgotpassword" ? null : (
         <div className="bg-header_color text-white">This is Header</div>
       )}
     </>
