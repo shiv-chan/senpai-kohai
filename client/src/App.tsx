@@ -13,7 +13,7 @@ const App: React.FunctionComponent<{}> = (props) => {
 						<Route
 							key={index}
 							path={route.path}
-							element={<route.component />}
+							element={<route.component props={route.props} />}
 						/>
 					);
 				})}

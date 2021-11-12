@@ -2,9 +2,8 @@ import IRoute from '../interfaces/route';
 import Home from '../common/components/Home';
 import BrowsingPage from '../common/components/BrowsingPage';
 import SenpaiProfile from '../features/profile/SenpaiProfile';
-import SenpaiProfileSetting from '../features/profile/setting/SenpaiProfileSetting';
+import ProfileSetting from '../features/profile/setting/ProfileSetting';
 import KohaiProfile from '../features/profile/KohaiProfile';
-import KohaiProfileSetting from '../features/profile/setting/KohaiProfileSetting';
 import LogIn from '../features/login/LogIn';
 import SignUp from '../features/signup/SignUp';
 import Detail from '../common/components/Detail';
@@ -26,9 +25,9 @@ const routes: IRoute[] = [
 		component: SenpaiProfile,
 	},
 	{
-		path: 'setting/senpai',
+		path: 'profile/setting/senpai',
 		name: 'Senpai Profile Setting',
-		component: SenpaiProfileSetting,
+		component: ProfileSetting,
 	},
 	{
 		path: 'profile/kohai',
@@ -36,9 +35,9 @@ const routes: IRoute[] = [
 		component: KohaiProfile,
 	},
 	{
-		path: 'setting/kohai',
+		path: 'profile/setting/kohai',
 		name: 'Kohai Profile Setting',
-		component: KohaiProfileSetting,
+		component: ProfileSetting,
 	},
 	{
 		path: 'login',
