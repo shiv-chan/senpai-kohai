@@ -2,7 +2,7 @@ import User from '../models/userModels.js';
 import jwt from 'jsonwebtoken';
 
 export const createProfile = (profileType) => async (req, res) => {
-	const { publicEmail, description, techStack } = req.body;
+	const { name, publicEmail, description, techStack } = req.body;
 	const token = req.cookies.access_token;
 
 	try {
@@ -10,6 +10,7 @@ export const createProfile = (profileType) => async (req, res) => {
 		const updatedUser = await User.updateOne(
 			{ _id: decoded },
 			{
+				name,
 				publicEmail,
 				[profileType]: {
 					description,
