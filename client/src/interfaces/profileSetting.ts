@@ -1,6 +1,6 @@
 export default interface IProfileSetting {
 	name: string;
-	email: string;
+	publicEmail: string;
 	techStack: string[];
 	description: string;
 }
