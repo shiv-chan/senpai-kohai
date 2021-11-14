@@ -22,6 +22,10 @@ module.exports = {
 				mobile_m: '375px',
 				mobile_l: '425px',
 			},
+			minHeight: {
+				6: '6rem',
+				12: '12rem',
+			},
 		},
 	},
 	variants: {
