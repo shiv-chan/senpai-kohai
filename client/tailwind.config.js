@@ -17,6 +17,11 @@ module.exports = {
 				laptopHeaderHeight: '4rem',
 				paddingAroundtheContent: '2.5rem',
 			},
+			screens: {
+				mobile_s: '320px',
+				mobile_m: '375px',
+				mobile_l: '425px',
+			},
 		},
 	},
 	variants: {
