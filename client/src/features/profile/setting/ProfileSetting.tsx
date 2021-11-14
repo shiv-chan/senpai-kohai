@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import IProfileSetting from '../../../interfaces/profileSetting';
-import {
-	SENPAI_PROFILE_ITEMS,
-	KOHAI_PROFILE_ITEMS,
-} from './ProfileSettingItems';
+import SenpaiProfileSettingItems from './SenpaiProfileSettingItems';
+import KohaiProfileSettingItems from './KohaiProfileSettingItems';
 import axios from 'axios';
 
 const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 	const { pathname } = useLocation(); // used as a flag to see if it's senpai or kohai *returns as /profile/setting/senpai
 	const navigate = useNavigate();
+	const [isSenpai, setIsSenpai] = useState<undefined | boolean>(undefined);
 	const [inputs, setInputs] = useState<IProfileSetting>({
 		name: '',
 		publicEmail: '',
 		techStack: [],
 		description: '',
 	});
+
+	useLayoutEffect(() => {
+		if (pathname === '/profile/setting/senpai') {
+			setIsSenpai(true);
+		} else {
+			setIsSenpai(false);
+		}
+	}, []);
 
 	const handleOnChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,7 +46,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 				`http://localhost:5000${pathname}`,
 				inputs
 			);
-			if (pathname === '/profile/setting/senpai') {
+			if (isSenpai) {
 				navigate('/profile/senpai');
 			} else {
 				navigate('/profile/kohai');
@@ -50,9 +57,15 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		}
 	};
 
+	const bgColor = () => {
+		return isSenpai ? 'bg-primary_bg_color' : 'bg-secondary_bg_color';
+	};
+
 	return (
 		// TODO: adjust margin-top based on the height of the header
-		<div className="bg-primary_bg_color w-screen min-h-screen mt-mobileHeaderHeight lg:mt-laptopHeaderHeight">
+		<div
+			className={`${bgColor()} w-screen min-h-screen mt-mobileHeaderHeight lg:mt-laptopHeaderHeight`}
+		>
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex gap-x-8 items-center">
 					<img
@@ -100,28 +113,17 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 							className="border border-gray-300 rounded focus:outline-none focus:border-primary_title_color"
 						/>
 					</article>
-					<article>
-						<label htmlFor="tech-stack" className="font-bold block">
-							{pathname === '/profile/setting/senpai' && (
-								<p>*{SENPAI_PROFILE_ITEMS.skillsTitle}</p>
-							)}
-							{pathname === '/profile/setting/kohai' && (
-								<p>*{KOHAI_PROFILE_ITEMS.skillsTitle}</p>
-							)}
-						</label>
-						<p className="text-sm">
-							Please place your languages and skills separeted with a comma.
-						</p>
-						<textarea
-							id="tech-stack"
-							name="techStack"
-							rows={3}
-							cols={32}
-							value={inputs.techStack}
-							onChange={handleOnChange}
-							className="border border-gray-300 rounded focus:outline-none focus:border-primary_title_color mobile_s:w-full"
+					{isSenpai ? (
+						<SenpaiProfileSettingItems
+							inputs={inputs}
+							handleOnChange={handleOnChange}
 						/>
-					</article>
+					) : (
+						<KohaiProfileSettingItems
+							inputs={inputs}
+							handleOnChange={handleOnChange}
+						/>
+					)}
 					<article>
 						<label htmlFor="description" className="block font-bold">
 							Description
