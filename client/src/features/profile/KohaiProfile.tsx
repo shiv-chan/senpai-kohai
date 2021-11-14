@@ -21,7 +21,7 @@ const KohaiProfile = () => {
 					<div className="flex flex-col justify-center">
 						<h1 className="text-xl font-bold mb-3">Jane Doe</h1>
 						<Link
-							to="/profile/setting/senpai"
+							to="/profile/setting/kohai"
 							className="flex items-center gap-x-1 absolute top-0	right-0 underline"
 						>
 							<HiPencil />
