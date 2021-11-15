@@ -10,7 +10,10 @@ const SignUp = () => {
         <div className="flex flex-col justify-end h-full w-7/12">
           <p className="flex-initial text-4xl mb-2">Create an Account</p>
           <p className="flex-initial mb-12">
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="underline">
+              Login
+            </Link>
           </p>
           <form action="" className="flex flex-col">
             <label htmlFor="email" className="text-lg mb-2">

@@ -10,7 +10,10 @@ const LogIn = () => {
         <div className="flex flex-col justify-end h-full w-7/12">
           <p className="flex-initial text-4xl mb-2">Login</p>
           <p className="flex-initial mb-12">
-            Not registered yet? <Link to="/signup">Create an Account</Link>
+            Not registered yet?{" "}
+            <Link to="/signup" className="underline">
+              Create an Account
+            </Link>
           </p>
           <form action="" className="flex flex-col">
             <label htmlFor="email" className="text-lg mb-2">
@@ -23,7 +26,9 @@ const LogIn = () => {
             <input type="password" className="h-10 mb-12" />
             <input type="checkbox" className="p-10" />
             <label htmlFor="">Remember me</label>
-            <Link to="/forgotpassword">Forgot password?</Link>
+            <Link to="/forgotpassword" className="underline">
+              Forgot password?
+            </Link>
             <button className="button">Login</button>
           </form>
         </div>

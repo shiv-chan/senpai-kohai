@@ -9,7 +9,9 @@ const Header = () => {
       {location.pathname === "/signup" ||
       location.pathname === "/login" ||
       location.pathname === "/forgotpassword" ? null : (
-        <div className="bg-header_color text-white">This is Header</div>
+        <div className="bg-header_color text-white h-headerHeight">
+          This is Header
+        </div>
       )}
     </>
   );

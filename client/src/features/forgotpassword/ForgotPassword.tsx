@@ -15,7 +15,9 @@ const ForgotPassword = () => {
             </label>
             <input type="email" className="mb-8 h-10 text-xl" />
             <button className="button">Send</button>
-            <Link to="/login">Back to login</Link>
+            <Link to="/login" className="underline">
+              Back to login
+            </Link>
           </form>
         </div>
       </section>
