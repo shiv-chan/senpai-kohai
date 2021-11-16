@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
 			type: String,
 			default: uuidv4(),
 		},
+		isActive: {
+			type: Boolean,
+		},
 		description: {
 			type: String,
 		},
@@ -36,6 +39,9 @@ const userSchema = new mongoose.Schema({
 		id: {
 			type: String,
 			default: uuidv4(),
+		},
+		isActive: {
+			type: Boolean,
 		},
 		description: {
 			type: String,
