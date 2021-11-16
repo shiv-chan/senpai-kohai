@@ -1,9 +1,10 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router-dom';
 import IProfileSetting from '../../../interfaces/profileSetting';
 import SenpaiProfileSettingItems from './SenpaiProfileSettingItems';
 import KohaiProfileSettingItems from './KohaiProfileSettingItems';
 import axios from 'axios';
+import ToggleButton from '../../../common/components/ToggleButton';
 
 const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 	const { pathname } = useLocation(); // used as a flag to see if it's senpai or kohai *returns as /profile/setting/senpai
@@ -74,7 +75,8 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 						className="w-1/3 h-1/3 rounded-full"
 					/>
 					<div>
-						<h1 className="text-xl font-bold">Jane Doe</h1>
+						<h1 className="text-xl font-bold mb-2">Jane Doe</h1>
+						<ToggleButton isSenpai={isSenpai} />
 					</div>
 				</section>
 				<p className="text-red-500">*required</p>
