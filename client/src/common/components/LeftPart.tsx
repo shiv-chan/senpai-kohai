@@ -18,13 +18,10 @@ const LeftPart: React.FC = () => {
           />
         )}
         {location.pathname === "/forgotpassword" ||
-          (location.pathname === "/forgotpassword2" && (
-            <img
-              src="./assets/password.svg"
-              alt="terms"
-              className="w-80 mb-16"
-            />
-          ))}
+        location.pathname === "/forgotpassword2" ||
+        location.pathname === "/forgotpassword3" ? (
+          <img src="./assets/password.svg" alt="terms" className="w-80 mb-16" />
+        ) : null}
         <p className="flex-initial text-2xl">Find your guide, Support youngs</p>
       </div>
     </section>

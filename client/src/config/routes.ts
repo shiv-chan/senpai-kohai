@@ -9,6 +9,7 @@ import LogIn from "../features/login/LogIn";
 import SignUp from "../features/signup/SignUp";
 import ForgotPassword from "../features/forgotpassword/ForgotPassword";
 import ForgotPassword2 from "../features/forgotpassword/ForgotPassword2";
+import ForgotPassword3 from "../features/forgotpassword/ForgotPassword3";
 import Detail from "../common/components/Detail";
 
 const routes: IRoute[] = [
@@ -61,6 +62,11 @@ const routes: IRoute[] = [
     path: "forgotpassword2",
     name: "Forgot password",
     component: ForgotPassword2,
+  },
+  {
+    path: "forgotpassword3",
+    name: "Forgot password",
+    component: ForgotPassword3,
   },
   {
     path: "profile/:id",

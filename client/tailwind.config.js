@@ -13,7 +13,6 @@ module.exports = {
       spacing: {
         // height from the main content to the bottom of Header
         // for now 3rem but we can change it anytime
-        headerHeight: "4rem",
         mobileHeaderHeight: "3.5rem",
         laptopHeaderHeight: "4rem",
         paddingAroundtheContent: "2.5rem",
@@ -28,6 +27,7 @@ module.exports = {
         tablet_s: "640px",
         // max-width
         mobile_s_max: { max: "319px" },
+        mobile_m_max: { max: "374px" },
         mobile_l_max: { max: "424px" },
         mobile_xl_max: { max: "639px" },
         tablet_l_max: { max: "1024px" },
