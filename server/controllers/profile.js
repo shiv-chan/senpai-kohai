@@ -1,7 +1,7 @@
 import User from '../models/userModels.js';
 import jwt from 'jsonwebtoken';
 
-export const createProfile = (profileType) => async (req, res) => {
+export const put_porfile = (profileType) => async (req, res) => {
 	const { name, publicEmail, isActive, description, techStack } = req.body;
 
 	try {
@@ -24,7 +24,7 @@ export const createProfile = (profileType) => async (req, res) => {
 	}
 };
 
-export const getProfile = (profileType) => async (req, res) => {
+export const get_profile = (profileType) => async (req, res) => {
 	const token = req.cookies.access_token;
 
 	try {

@@ -2,7 +2,7 @@ import User from '../models/userModels.js';
 import bcrypt from 'bcrypt';
 import { userValidation } from '../validation.js';
 
-export const createUser = async (req, res) => {
+export const post_signUp = async (req, res) => {
 	const { email, password } = req.body;
 
 	// validate the data before send data

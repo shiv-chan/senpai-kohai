@@ -1,10 +1,10 @@
 import express from 'express';
 const router = express.Router();
-import { createProfile, getProfile } from '../controllers/profile.js';
+import { put_porfile, get_profile } from '../controllers/profile.js';
 
-router.put('/setting/senpai', createProfile('senpaiProfile'));
-router.put('/setting/kohai', createProfile('kohaiProfile'));
-router.get('/senpai', getProfile('senpaiProfile'));
-router.get('/kohai', getProfile('kohaiProfile'));
+router.put('/setting/senpai', put_porfile('senpaiProfile'));
+router.put('/setting/kohai', put_porfile('kohaiProfile'));
+router.get('/senpai', get_profile('senpaiProfile'));
+router.get('/kohai', get_profile('kohaiProfile'));
 
 export default router;
