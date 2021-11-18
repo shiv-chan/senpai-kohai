@@ -24,10 +24,11 @@ export const sendUser = async (req, res) => {
           // create and assign a token
           const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
           res.cookie("access_token", token, {
+            // sameSite: "none",
+            // httpOnly: false,
             httpOnly: true,
             // secure: true  // --> uncomment on production
           });
-
           // 201 request succeeded, and resource created and returend
           res.status(201).json({ message: "logged in successfully!" });
         } else {
