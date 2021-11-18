@@ -23,6 +23,7 @@ const LogIn = () => {
 					headers: {
 						'Content-Type': 'application/json',
 					},
+					withCredentials: true,
 				}
 			);
 			console.log('logged in successfully!');
