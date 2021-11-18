@@ -2,8 +2,7 @@ import User from '../models/userModels.js';
 import jwt from 'jsonwebtoken';
 
 export const createProfile = (profileType) => async (req, res) => {
-	const { name, publicEmail, description, techStack } = req.body;
-	const token = req.cookies.access_token;
+	const { name, publicEmail, isActive, description, techStack } = req.body;
 
 	try {
 		const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -13,6 +12,7 @@ export const createProfile = (profileType) => async (req, res) => {
 				name,
 				publicEmail,
 				[profileType]: {
+					isActive,
 					description,
 					techStack,
 				},

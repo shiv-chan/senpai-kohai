@@ -59,10 +59,9 @@ const ToggleButton: React.FunctionComponent<{ isSenpai: undefined | boolean }> =
 
 			setIsChecked((prevState) => !prevState);
 			try {
-				const response = await axios.put(
-					`http://localhost:5000${pathname}`,
-					checked
-				);
+				const response = await axios.put(`http://localhost:5000${pathname}`, {
+					isActive: checked,
+				});
 				console.log(response);
 			} catch (err: any) {
 				console.error(err.response.data.message);
