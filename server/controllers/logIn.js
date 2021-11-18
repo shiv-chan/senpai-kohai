@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { userValidation } from '../validation.js';
 
-export const post_login = async (req, res) => {
+export const login_post = async (req, res) => {
 	const { email, password } = req.body;
 
 	// validate the data before send data

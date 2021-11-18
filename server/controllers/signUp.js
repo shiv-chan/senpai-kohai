@@ -2,7 +2,7 @@ import User from '../models/userModels.js';
 import bcrypt from 'bcrypt';
 import { userValidation } from '../validation.js';
 
-export const post_signUp = async (req, res) => {
+export const signUp_post = async (req, res) => {
 	const { email, password } = req.body;
 
 	// validate the data before send data
@@ -24,6 +24,12 @@ export const post_signUp = async (req, res) => {
 			res.status(409).send({ message: 'This email is already registered' });
 		} else {
 			await signedUser.save();
+			// create and assign a token
+			const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+			res.cookie('access_token', token, {
+				// httpOnly: true,
+				// secure: true  // --> uncomment on production
+			});
 			res.status(201).json(signedUser);
 		}
 	} catch (error) {
