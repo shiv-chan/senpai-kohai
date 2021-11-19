@@ -13,7 +13,7 @@ const Header = () => {
 	// const handleClick = () => setClick(!click);
 
 	// test tailwind
-	return <div className="bg-header_color text-white flex justify-between items=center font-black h-laptopHeaderHeight p-4 mobile_s:h-mobileHeaderHeight" >
+	return <div className="bg-header_color text-white flex justify-between items=center font-black h-laptopHeaderHeight p-4" >
 				<div className="flex-grow text-3xl mobile_s:text-lg">
 					<Link to="/">
 						Senpai-Kohai
@@ -26,7 +26,7 @@ const Header = () => {
 					<Link to="/signup">Sign up</Link>
 				</div> */}
 
-				<div className="text-base box-border border-2 w-24 rounded-full cursor-pointer font-base hover:bg-primary_bg_color mr-10 text-center mobile_s:text-sm">
+				<div className="text-base box-border border-2 w-24 rounded-full cursor-pointer font-base hover:bg-primary_bg_color mr-10 text-center">
 					Sign Out
 				</div>
 				
@@ -38,7 +38,7 @@ const Header = () => {
 						<header className="bg-header_color h-10 flex items-center justify-center">
 						{isClosed ? (
 							<button
-							className="w-12 mb-2 mobile_s:w-9 mb-6"
+							className="w-12 mb-2 "
 							aria-label="Open menu"
 							title="Open menu"
 							onClick={() => setClosed(false)}
@@ -57,7 +57,7 @@ const Header = () => {
 							</button>
 						) : (
 							<button
-							className="w-12 mb-2 mobile_s:w-9 mb-6"
+							className="w-12 mb-2"
 							aria-label="Close menu"
 							title="Close menu"
 							onClick={() => setClosed(true)}
@@ -83,7 +83,7 @@ const Header = () => {
 					{!isClosed && (
 						<div
 						aria-hidden={isClosed}
-						className="bg-primary_bg_color text-center mt-20">
+						className="bg-primary_bg_color text-center mt-20 absolute ">
 							<ul className="text-header_color bg-primary_bg_color text-5xl">
 								<li className="p-5">
 								<a href=""> My Browsing Peeps </a>
@@ -99,13 +99,11 @@ const Header = () => {
 						
 						</div>
 					)}
-
-
-		</div>
+				</div>
 					
 				
 
-				</div>
+			</div>
 				
 
 	
