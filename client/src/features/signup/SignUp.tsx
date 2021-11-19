@@ -13,24 +13,25 @@ const SignUp = () => {
 		e.preventDefault();
 		try {
 			console.log('clicked');
-			await axios.post(
+			const res = await axios.post(
 				'http://localhost:5000/signup',
 				{
 					email,
 					password,
 				},
 				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
 					withCredentials: true,
 				}
 			);
-			console.log('signed up successfully!');
+			console.log(res.data.message);
 			setEmail('');
 			setPassword('');
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			if (error.response) {
+				console.error(error.response.data.message);
+			} else {
+				console.error(`Error: ${error}`);
+			}
 		}
 	};
 
