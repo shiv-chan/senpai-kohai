@@ -23,7 +23,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		} else {
 			setIsSenpai(false);
 		}
-	}, []);
+	}, [pathname]);
 
 	const handleOnChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

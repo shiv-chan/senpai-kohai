@@ -17,7 +17,7 @@ const ToggleButton: React.FunctionComponent<{ isSenpai: undefined | boolean }> =
 
 		const [isChecked, setIsChecked] = useState(true);
 
-		const ToggleLabel = styled(FormControlLabel)(({}) => ({
+		const ToggleLabel = styled(FormControlLabel)(() => ({
 			'& .MuiFormControlLabel-label': {
 				fontSize: mobileDevices ? '0.65rem' : '1rem',
 			},
