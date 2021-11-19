@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import loginRoute from './routes/logIn.js';
 import signUpRoute from './routes/signUp.js';
 import profileRoute from './routes/profile.js';
+import authorizationRoute from './routes/authorization.js';
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use('/login', loginRoute);
 app.use('/signup', signUpRoute);
 app.use('/profile', profileRoute);
+app.use('/authorization', authorizationRoute);
 
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 5000;
