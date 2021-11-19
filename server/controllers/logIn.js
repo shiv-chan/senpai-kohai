@@ -26,7 +26,7 @@ export const login_post = async (req, res) => {
 					});
 
 					// 201 request succeeded, and resource created and returend
-					res.status(201).json({ message: 'logged in successfully!' });
+					res.status(201).json({ message: 'Logged in successfully!' });
 				} else {
 					res
 						.status(403) // forbidden error... you don't have an access to browse the page
