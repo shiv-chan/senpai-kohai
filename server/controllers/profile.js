@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 export const porfile_put = (profileType) => async (req, res) => {
 	const { name, publicEmail, isActive, description, techStack } = req.body;
+	const token = req.cookies.access_token;
 
 	try {
 		const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -18,7 +19,7 @@ export const porfile_put = (profileType) => async (req, res) => {
 				},
 			}
 		).exec();
-		res.status(201).send(updatedUser);
+		res.status(201).json(updatedUser);
 	} catch (error) {
 		res.status(409).json({ message: error.message });
 	}
@@ -31,7 +32,7 @@ export const profile_get = (profileType) => async (req, res) => {
 		const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
 		const user = await User.findOne({ _id: decoded }).exec();
 		const profile = user[profileType];
-		res.status(201).send(profile);
+		res.status(201).json(profile);
 	} catch (error) {
 		res.status(409).json({ message: error.message });
 	}
