@@ -1,7 +1,7 @@
 import User from '../models/userModels.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { userValidation } from '../validation.js';
+import { userValidation } from '../utils/validation.js';
 
 export const signUp_post = async (req, res) => {
 	const { email, password } = req.body;
