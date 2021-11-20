@@ -13,7 +13,12 @@ dotenv.config();
 // set them to properly send a reqest
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 // route middlewares
 app.use("/login", loginRoute);
