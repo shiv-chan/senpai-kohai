@@ -5,6 +5,8 @@ import SenpaiProfileSettingItems from './SenpaiProfileSettingItems';
 import KohaiProfileSettingItems from './KohaiProfileSettingItems';
 import axios from 'axios';
 import ToggleButton from '../../../common/components/ToggleButton';
+import { checkValidToken } from '../../../common/authorizationSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/hook';
 
 const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 	const { pathname } = useLocation(); // used as a flag to see if it's senpai or kohai *returns as /profile/setting/senpai
@@ -17,13 +19,20 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		description: '',
 	});
 
+	const hasValidToken = useAppSelector(
+		(state) => state.authorization.hasValidToken
+	);
+	const dispatch = useAppDispatch();
+
 	useLayoutEffect(() => {
+		dispatch(checkValidToken());
+
 		if (pathname === '/profile/setting/senpai') {
 			setIsSenpai(true);
 		} else {
 			setIsSenpai(false);
 		}
-	}, [pathname]);
+	}, [pathname, dispatch]);
 
 	const handleOnChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
