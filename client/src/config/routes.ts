@@ -1,12 +1,12 @@
 import IRoute from '../interfaces/route';
 import Home from '../common/components/Home';
-// import BrowsingPage from '../common/components/BrowsingPage';
-// import SenpaiProfile from '../features/profile/SenpaiProfile';
-// import ProfileSetting from '../features/profile/setting/ProfileSetting';
-// import KohaiProfile from '../features/profile/KohaiProfile';
+import BrowsingPage from '../common/components/BrowsingPage';
+import SenpaiProfile from '../features/profile/SenpaiProfile';
+import ProfileSetting from '../features/profile/setting/ProfileSetting';
+import KohaiProfile from '../features/profile/KohaiProfile';
 import LogIn from '../features/login/LogIn';
 import SignUp from '../features/signup/SignUp';
-// import Detail from '../common/components/Detail';
+import Detail from '../common/components/Detail';
 
 const routes: IRoute[] = [
 	{
@@ -14,7 +14,6 @@ const routes: IRoute[] = [
 		name: 'Home',
 		component: Home,
 	},
-	/*
 	{
 		path: 'board',
 		name: 'Browsing Page',
@@ -40,7 +39,6 @@ const routes: IRoute[] = [
 		name: 'Kohai Profile Setting',
 		component: ProfileSetting,
 	},
-	*/
 	{
 		path: 'login',
 		name: 'Log in',
@@ -51,13 +49,11 @@ const routes: IRoute[] = [
 		name: 'Sign up',
 		component: SignUp,
 	},
-	/*
 	{
 		path: 'profile/:id',
 		name: 'Detail',
 		component: Detail,
 	},
-	*/
 ];
 
 export default routes;
