@@ -1,35 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { FaTimes } from 'react-icons/fa';
 // import { FaBars } from 'react-icons/fa';
 
 const Header = () => {
-	const [isClosed, setClosed] = useState(false);
+	const [isClosed, setClosed] = useState(true);
+
+	useEffect(() => {
+		document.addEventListener('mousedown', () => {
+			setClosed(true);
+		});
+	});
 
 	return (
 		<div
-			className="bg-header_color 
-						text-white flex 
-						justify-between 
+			className="bg-header_color
+						text-white flex
+						justify-between
 						items=center 
 						font-black 
 						w-screen
-						h-laptopHeaderHeight
-						mobile_l_max:h-mobileHeaderHeight 
+						h-14
+						md:h-16
 						p-4
 						mx-auto
 						"
 		>
 			<div
 				className="flex-grow 
-							text-3xl 
+							text-lg
 							w-screen
-							mobile_l_max:text-sm
+							md:text-3xl
 							"
 			>
 				<Link to="/">Senpai-Kohai</Link>
 			</div>
-
+			{/* {!user ? ( */}
 			{/* <div className="text-base 
 								box-border 
 								border-2 
@@ -45,26 +51,33 @@ const Header = () => {
 				<div className="bg-primary_bg_color text-header_color w-20 text-base box-border border-2 rounded-full cursor-pointer hover:bg-secondary_bg_color text-center">
 					<Link to="/signup">Sign up</Link>
 				</div> */}
+			{/* ) : ( */}
 
 			<div
-				className="text-base
+				className="text-xs
 							box-border 
-							border-2 w-24
+							border-2 
+							md:w-40
+							p-0.5
+							md:p-0
+							w-40
 							rounded-full 
 							cursor-pointer 
 							hover:bg-primary_bg_color 
-							mr-10 text-center
-							mobile_l_max:text-sm
+							mr-10 
+							text-center
+							md:text-base
+							ml-6
 							"
 			>
 				Sign Out
 			</div>
 
-			<main className="">
+			<div className="">
 				<header className="bg-header_color h-10 flex items-center justify-center">
 					{isClosed ? (
 						<button
-							className="w-12 mb-2"
+							className="w-8 mb-4 md:w-12 md:mb-2"
 							aria-label="Open menu"
 							title="Open menu"
 							onClick={() => setClosed(false)}
@@ -83,7 +96,7 @@ const Header = () => {
 						</button>
 					) : (
 						<button
-							className="w-12 mb-2"
+							className="w-8 mb-4 md:w-12 md:mb-2"
 							aria-label="Close menu"
 							title="Close menu"
 							onClick={() => setClosed(true)}
@@ -101,31 +114,39 @@ const Header = () => {
 						</button>
 					)}
 				</header>
-			</main>
-
+			</div>
+			{/* )} */}
 			<div
 				className="absolute 
 							text-centet 
-							w-screen"
+							w-screen
+							-ml-4
+							"
 			>
 				{!isClosed && (
 					<div
 						aria-hidden={isClosed}
-						className="bg-primary_bg_color 
+						className="
+									bg-primary_bg_color 
 									text-center 
-									mt-20 
+									mt-12 
 									absolute 
 									w-full"
 					>
-						<ul className="text-header_color bg-primary_bg_color text-5xl">
-							<li className="p-8">
+						<ul
+							className="text-header_color 
+									bg-primary_bg_color 
+									text-5x1
+									md:text-3xl"
+						>
+							<li className="p-4 md:p-8">
 								<Link to="/"> My Browsing Peeps </Link>
 							</li>
-							<li className="p-8">
-								<Link to="/"> My Profile as Senpai </Link>
+							<li className="p-4 md:p-8">
+								<Link to="/SenpaiProfile"> My Profile as Senpai </Link>
 							</li>
-							<li className="p-8">
-								<Link to=""> My Profile as Kohai </Link>
+							<li className="p-4 md:p-8">
+								<Link to="/kohaiprofile"> My Profile as Kohai </Link>
 							</li>
 						</ul>
 					</div>
