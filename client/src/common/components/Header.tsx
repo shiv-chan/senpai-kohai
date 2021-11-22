@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { FaTimes } from 'react-icons/fa';
 // import { FaBars } from 'react-icons/fa';
@@ -11,6 +11,8 @@ const Header = () => {
 			setClosed(true);
 		});
 	});
+
+	const mymenu = React.useRef() as React.MutableRefObject<HTMLDivElement>;
 
 	return (
 		<div
@@ -35,7 +37,7 @@ const Header = () => {
 			>
 				<Link to="/">Senpai-Kohai</Link>
 			</div>
-			{/* {!user ? ( */}
+			{/* {!hasValidToken ? ( */}
 			{/* <div className="text-base 
 								box-border 
 								border-2 
@@ -125,6 +127,7 @@ const Header = () => {
 			>
 				{!isClosed && (
 					<div
+						ref={mymenu}
 						aria-hidden={isClosed}
 						className="
 									bg-primary_bg_color 
