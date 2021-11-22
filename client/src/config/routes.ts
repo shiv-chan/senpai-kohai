@@ -12,46 +12,55 @@ const routes: IRoute[] = [
 	{
 		path: '/',
 		name: 'Home',
+		protected: false,
 		component: Home,
-	},
-	{
-		path: 'board',
-		name: 'Browsing Page',
-		component: BrowsingPage,
-	},
-	{
-		path: 'profile/senpai',
-		name: 'Senpai Profile',
-		component: SenpaiProfile,
-	},
-	{
-		path: 'profile/setting/senpai',
-		name: 'Senpai Profile Setting',
-		component: ProfileSetting,
-	},
-	{
-		path: 'profile/kohai',
-		name: 'Kohai Profile',
-		component: KohaiProfile,
-	},
-	{
-		path: 'profile/setting/kohai',
-		name: 'Kohai Profile Setting',
-		component: ProfileSetting,
 	},
 	{
 		path: 'login',
 		name: 'Log in',
+		protected: false,
 		component: LogIn,
 	},
 	{
 		path: 'signup',
 		name: 'Sign up',
+		protected: false,
 		component: SignUp,
+	},
+	{
+		path: 'board',
+		name: 'Browsing Page',
+		protected: true,
+		component: BrowsingPage,
+	},
+	{
+		path: 'profile/senpai',
+		name: 'Senpai Profile',
+		protected: true,
+		component: SenpaiProfile,
+	},
+	{
+		path: 'profile/setting/senpai',
+		name: 'Senpai Profile Setting',
+		protected: true,
+		component: ProfileSetting,
+	},
+	{
+		path: 'profile/kohai',
+		name: 'Kohai Profile',
+		protected: true,
+		component: KohaiProfile,
+	},
+	{
+		path: 'profile/setting/kohai',
+		name: 'Kohai Profile Setting',
+		protected: true,
+		component: ProfileSetting,
 	},
 	{
 		path: 'profile/:id',
 		name: 'Detail',
+		protected: true,
 		component: Detail,
 	},
 ];
