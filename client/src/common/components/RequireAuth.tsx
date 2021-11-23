@@ -22,7 +22,9 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 		return <Navigate to="/login" state={{ from: location }} />;
 	}
 
-	return children;
+	console.log(hasValidToken);
+
+	return hasValidToken ? children : null;
 };
 
 export default RequireAuth;
