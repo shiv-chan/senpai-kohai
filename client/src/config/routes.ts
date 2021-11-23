@@ -6,6 +6,9 @@ import ProfileSetting from '../features/profile/setting/ProfileSetting';
 import KohaiProfile from '../features/profile/KohaiProfile';
 import LogIn from '../features/login/LogIn';
 import SignUp from '../features/signup/SignUp';
+import ForgotPassword from '../features/forgotpassword/ForgotPassword';
+import ForgotPasswordMessage from '../features/forgotpassword/ForgotPasswordMessage';
+import ForgotPasswordReset from '../features/forgotpassword/ForgotPasswordReset';
 import Detail from '../common/components/Detail';
 
 const routes: IRoute[] = [
@@ -56,6 +59,24 @@ const routes: IRoute[] = [
 		name: 'Kohai Profile Setting',
 		protected: true,
 		component: ProfileSetting,
+	},
+	{
+		path: 'forgotpassword',
+		name: 'Forgot password',
+		protected: false,
+		component: ForgotPassword,
+	},
+	{
+		path: 'forgotpassword/message',
+		name: 'Forgot password',
+		protected: false,
+		component: ForgotPasswordMessage,
+	},
+	{
+		path: 'forgotpassword/reset',
+		name: 'Forgot password',
+		protected: false,
+		component: ForgotPasswordReset,
 	},
 	{
 		path: 'profile/:id',
