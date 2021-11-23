@@ -45,7 +45,10 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		try {
 			const response = await axios.put(
 				`http://localhost:5000${pathname}`,
-				inputs
+				inputs,
+				{
+					withCredentials: true,
+				}
 			);
 			if (isSenpai) {
 				navigate('/profile/senpai');
