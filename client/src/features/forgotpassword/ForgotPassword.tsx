@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import LeftPart from '../../common/components/LeftPart';
-import { MdMail } from 'react-icons/md';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import LeftPart from "../../common/components/LeftPart";
+import { MdMail } from "react-icons/md";
+import axios from "axios";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
 
   const sendResetPwEmail = async (e: React.FormEvent<HTMLButtonElement>) => {
-    const data = { email };
     e.preventDefault();
+    const data = { email, id: "12324345" };
     try {
-      console.log('clicked');
-      await axios.post('http://localhost:5000/forgotpassword', data, {
-        withCredentials: true,
-      });
-      console.log('email sent!');
-      setEmail('');
+      console.log("clicked");
+      const response = await axios.post(
+        "http://localhost:5000/forgotpassword",
+        data
+      );
+      console.log(response.data.message);
+      setEmail("");
     } catch (error) {
-      console.log(error);
+      console.log(`this is error ${error}`);
     }
   };
   return (
