@@ -4,11 +4,42 @@ import { Squash as Hamburger } from 'hamburger-react';
 
 const Header = () => {
 	const [isOpen, setOpen] = useState(false);
+	const [isLogin, setIsLogin] = useState(false); // TODO: replace with a global state later
 
 	const menuStyle = () => {
 		return isOpen
 			? { height: '30vh', transform: 'translateY(0%)' }
 			: { height: '30vh', transform: 'translateY(-120%)' };
+	};
+
+	const headerItems = () => {
+		return isLogin ? (
+			<div className="flex items-center gap-3 relative">
+				<button className="border-2 border-solid	border-primary_bg_color rounded-full px-3 text-sm">
+					Log out
+				</button>
+				<Hamburger
+					toggled={isOpen}
+					toggle={setOpen}
+					size={20}
+					distance="lg"
+					rounded
+				/>
+			</div>
+		) : (
+			<div className="flex items-center gap-3 relative">
+				<Link to="/login">
+					<button className="border-2 border-solid	border-primary_bg_color rounded-full px-3 text-sm">
+						Log in
+					</button>
+				</Link>
+				<Link to="/signup">
+					<button className="font-bold text-header_color border-2 border-solid	border-primary_bg_color bg-primary_bg_color rounded-full px-3 text-sm">
+						Sign up
+					</button>
+				</Link>
+			</div>
+		);
 	};
 
 	const closeClickingOutsideMenu = (e: any) => {
@@ -30,18 +61,7 @@ const Header = () => {
 							Senpai-Kohai
 						</Link>
 					</div>
-					<div className="flex items-center gap-1 relative">
-						<button className="self-center border-2 border-solid	border-primary_bg_color rounded-full px-5 text-sm	">
-							Log out
-						</button>
-						<Hamburger
-							toggled={isOpen}
-							toggle={setOpen}
-							size={20}
-							distance="lg"
-							rounded
-						/>
-					</div>
+					{headerItems()}
 				</div>
 			</header>
 			<div
