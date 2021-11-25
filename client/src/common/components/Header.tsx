@@ -1,10 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { FaTimes } from 'react-icons/fa';
-// import { FaBars } from 'react-icons/fa';
+import useComponentVisible from './useComponentVisible';
 
 const Header = () => {
 	const [isClosed, setClosed] = useState(true);
+
+	// const { ref, isComponentVisible } = useComponentVisible(true);
+	// console.log(isComponentVisible, 'COMPONENT');
+	// const mymenu = useRef<any>();
+
+	// useEffect(() => {
+	// 	document.addEventListener('mousedown', (e) => {
+	// 		if (mymenu && !mymenu.current.contains(e.target)) {
+	// 			setClosed(false);
+	// 		}
+	// 	});
+	// }, [mymenu]);
 
 	useEffect(() => {
 		document.addEventListener('mousedown', () => {
@@ -127,7 +138,6 @@ const Header = () => {
 			>
 				{!isClosed && (
 					<div
-						ref={mymenu}
 						aria-hidden={isClosed}
 						className="
 									bg-primary_bg_color 
