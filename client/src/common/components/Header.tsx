@@ -11,13 +11,25 @@ const Header = () => {
 			: { height: '30vh', transform: 'translateY(-120%)' };
 	};
 
+	const closeClickingOutsideMenu = (e: any) => {
+		if (e.target.closest('.menu') === null) {
+			setOpen(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('click', closeClickingOutsideMenu);
+	}, []);
+
 	return (
 		<>
-			<header className="bg-header_color w-screen h-mobileHeaderHeight md:h-laptopHeaderHeight fixed z-10">
+			<header className="bg-header_color w-screen h-mobileHeaderHeight md:h-laptopHeaderHeight fixed z-10 menu">
 				<div className="flex items-center	font-sans text-primary_bg_color h-full mx-4">
-					<Link to="/" className="italic font-bold flex-grow self-center">
-						Senpai-Kohai
-					</Link>
+					<div className="flex-grow">
+						<Link to="/" className="italic font-bold">
+							Senpai-Kohai
+						</Link>
+					</div>
 					<div className="flex items-center gap-1 relative">
 						<button className="self-center border-2 border-solid	border-primary_bg_color rounded-full px-5 text-sm	">
 							Log out
@@ -33,17 +45,17 @@ const Header = () => {
 				</div>
 			</header>
 			<div
-				className="w-screen bg-tertiary_bg_color absolute top-mobileHeaderHeight flex justify-center items-center transition duration-500 ease-linear transform"
+				className="w-screen bg-tertiary_bg_color absolute top-mobileHeaderHeight flex justify-center items-center transition duration-500 ease-linear transform menu"
 				style={menuStyle()}
 			>
 				<ul className="text-header_color font-sans font-bold flex flex-col gap-y-4 text-xl">
-					<Link to="/board">
+					<Link to="/board" onClick={() => setOpen(false)}>
 						<li>Browsing Peeps</li>
 					</Link>
-					<Link to="/profile/senpai">
+					<Link to="/profile/senpai" onClick={() => setOpen(false)}>
 						<li>My Profile as Senpai</li>
 					</Link>
-					<Link to="/profile/kohai">
+					<Link to="/profile/kohai" onClick={() => setOpen(false)}>
 						<li>My Profile as Kohai</li>
 					</Link>
 				</ul>
