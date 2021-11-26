@@ -14,10 +14,9 @@ const descriptionSampleData =
 	"Hi 👋\n\nI'm Jane!\n\nI can support you, my Kohai in the following ways.\n- Code review\n- Mock interview\n\nPlease feel free to email me!";
 
 const SenpaiProfile = () => {
-	console.log(descriptionSampleData);
 	return (
 		// TODO: adjust margin-top based on the height of the header
-		<div className="bg-primary_bg_color w-screen min-h-screen mt-mobileHeaderHeight lg:mt-laptopHeaderHeight">
+		<div className="bg-primary_bg_color w-full min-h-screen mt-mobileHeaderHeight lg:mt-laptopHeaderHeight">
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex gap-x-8 relative">
 					<img
