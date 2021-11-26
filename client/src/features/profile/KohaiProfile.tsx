@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { RiUser3Fill, MdEmail, HiPencil } from 'react-icons/all';
 
+// sample data for test
 const skillsSampleData: string[] = ['JavaScript', 'HTML', 'CSS'];
 const descriptionSampleData =
 	"Hi 👋\n\nI'm Jane!\n\nI am looking for my Senpai to achieve my career goal!!";

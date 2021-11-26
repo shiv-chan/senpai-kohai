@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaUserNinja, MdEmail, HiPencil } from 'react-icons/all';
 
+// sample data for test
 const skillsSampleData: string[] = [
 	'JavaScript',
 	'React',
