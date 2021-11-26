@@ -2,20 +2,35 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './common/components/Header';
 import routes from './config/routes';
+import RequireAuth from './common/components/RequireAuth';
 
-const App: React.FunctionComponent<{}> = (props) => {
+const App: React.FunctionComponent = () => {
 	return (
 		<Router>
 			<Header />
 			<Routes>
 				{routes.map((route, index) => {
-					return (
-						<Route
-							key={index}
-							path={route.path}
-							element={<route.component props={route.props} />}
-						/>
-					);
+					if (route.protected) {
+						return (
+							<Route
+								key={index}
+								path={route.path}
+								element={
+									<RequireAuth>
+										<route.component props={route.props} />
+									</RequireAuth>
+								}
+							/>
+						);
+					} else {
+						return (
+							<Route
+								key={index}
+								path={route.path}
+								element={<route.component props={route.props} />}
+							/>
+						);
+					}
 				})}
 			</Routes>
 		</Router>

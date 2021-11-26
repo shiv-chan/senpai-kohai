@@ -16,11 +16,21 @@ module.exports = {
 				mobileHeaderHeight: '3.5rem',
 				laptopHeaderHeight: '4rem',
 				paddingAroundtheContent: '2.5rem',
+				custom_left: '93%',
+				mb_custom_left: '89%',
 			},
 			screens: {
+				//min-width
 				mobile_s: '320px',
 				mobile_m: '375px',
 				mobile_l: '425px',
+				tablet_s: '640px',
+				// max-width
+				mobile_s_max: { max: '319px' },
+				mobile_m_max: { max: '374px' },
+				mobile_l_max: { max: '424px' },
+				mobile_xl_max: { max: '639px' },
+				tablet_l_max: { max: '1024px' },
 			},
 			minHeight: {
 				6: '6rem',

@@ -1,14 +1,9 @@
 import User from '../models/userModels.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { userValidation } from '../validation.js';
 
-export const sendUser = async (req, res) => {
+export const login_post = async (req, res) => {
 	const { email, password } = req.body;
-
-	// validate the data before send data
-	const { error } = userValidation(req.body);
-	if (error) return res.status(409).send({ message: error.details[0].message });
 
 	try {
 		const user = await User.findOne({ email }).exec();
@@ -26,13 +21,15 @@ export const sendUser = async (req, res) => {
 					});
 
 					// 201 request succeeded, and resource created and returend
-					res.status(201).json({ message: 'logged in successfully!' });
+					res.status(201).json({ message: 'Logged in successfully!' });
 				} else {
 					res
 						.status(403) // forbidden error... you don't have an access to browse the page
 						.json({ message: 'Either email or password is invalid' });
 				}
 			});
+		} else {
+			res.status(403).json({ message: 'Either email or password is invalid' });
 		}
 	} catch (error) {
 		// 409 conflict happened in resources
