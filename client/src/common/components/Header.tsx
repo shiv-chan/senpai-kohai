@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   const headerItems = () => {
-    return !isLogin ? (
+    return isLogin ? (
       <div className="flex items-center gap-3">
         <button className="border-2 border-solid	border-primary_bg_color rounded-full px-3 text-sm">
           Log out
