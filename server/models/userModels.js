@@ -55,6 +55,7 @@ const userSchema = new mongoose.Schema({
 		},
 		isActive: {
 			type: Boolean,
+			default: false,
 		},
 		description: {
 			type: String,
@@ -70,6 +71,7 @@ const userSchema = new mongoose.Schema({
 		},
 		isActive: {
 			type: Boolean,
+			default: false,
 		},
 		description: {
 			type: String,

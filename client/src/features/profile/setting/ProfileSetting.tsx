@@ -15,6 +15,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		publicEmail: '',
 		techStack: [],
 		description: '',
+		isActive: false,
 	});
 
 	useLayoutEffect(() => {
@@ -55,9 +56,12 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 			} else {
 				navigate('/profile/kohai');
 			}
-			console.log(response);
 		} catch (err: any) {
-			console.error(err.response.data.message);
+			if (err.response) {
+				console.error(err.response.data.message);
+			} else {
+				console.error(err);
+			}
 		}
 	};
 
@@ -79,7 +83,11 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 					/>
 					<div>
 						<h1 className="text-xl font-bold mb-2">Jane Doe</h1>
-						<ToggleButton isSenpai={isSenpai} />
+						<ToggleButton
+							isSenpai={isSenpai}
+							inputs={inputs}
+							setInputs={setInputs}
+						/>
 					</div>
 				</section>
 				<p className="text-red-500">*required</p>

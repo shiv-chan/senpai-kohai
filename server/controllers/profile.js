@@ -7,15 +7,40 @@ export const porfile_put = (profileType) => async (req, res) => {
 
 	try {
 		const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+		const targetUser = await User.findOne({ _id: decoded._id });
 		const updatedUser = await User.updateOne(
 			{ _id: decoded },
 			{
 				name,
 				publicEmail,
 				[profileType]: {
+					id: targetUser[profileType].id,
 					isActive,
 					description,
 					techStack,
+				},
+			}
+		).exec();
+		res.status(201).json(updatedUser);
+	} catch (error) {
+		res.status(409).json({ message: error.message });
+	}
+};
+
+export const profile_toggle_put = (profileType) => async (req, res) => {
+	const { isActive } = req.body;
+	const token = req.cookies.access_token;
+
+	try {
+		const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+		const targetUser = await User.findOne({ _id: decoded._id });
+		const prevProfileObject = await targetUser[profileType].toObject();
+		const updatedUser = await User.updateOne(
+			{ _id: decoded },
+			{
+				[profileType]: {
+					...prevProfileObject,
+					isActive,
 				},
 			}
 		).exec();
