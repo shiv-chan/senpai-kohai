@@ -21,7 +21,9 @@ const SignUp = () => {
 		e.preventDefault();
 		try {
 			console.log('clicked');
-			await axios.post('http://localhost:5000/signup', inputs);
+			await axios.post('http://localhost:5000/signup', inputs, {
+				withCredentials: true,
+			});
 			console.log('signed up successfully!');
 			setInputs({
 				email: '',
