@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authorizationReducer from '../common/authorizationSlice';
+import usersReducer from '../common/usersSlice';
+import myProfileReducer from '../common/myProfileSlice';
 
 const store = configureStore({
 	reducer: {
 		authorization: authorizationReducer,
+		users: usersReducer,
+		myProfile: myProfileReducer,
 	},
 });
 

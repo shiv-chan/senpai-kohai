@@ -5,16 +5,20 @@ import SenpaiProfileSettingItems from './SenpaiProfileSettingItems';
 import KohaiProfileSettingItems from './KohaiProfileSettingItems';
 import axios from 'axios';
 import ToggleButton from '../../../common/components/ToggleButton';
+import { useAppSelector } from '../../../app/hook';
 
 const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
+	const myProfile = useAppSelector((state) => state.myProfile.myProfile);
 	const { pathname } = useLocation(); // used as a flag to see if it's senpai or kohai *returns as /profile/setting/senpai
 	const navigate = useNavigate();
 	const [isSenpai, setIsSenpai] = useState<undefined | boolean>(undefined);
+	const profileType = isSenpai ? 'senpaiProfile' : 'kohaiProfile';
 	const [inputs, setInputs] = useState<IProfileSetting>({
 		name: '',
 		publicEmail: '',
 		techStack: [],
 		description: '',
+		isActive: false,
 	});
 
 	useLayoutEffect(() => {
@@ -23,7 +27,17 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		} else {
 			setIsSenpai(false);
 		}
-	}, [pathname]);
+
+		if (Object.keys(myProfile).length !== 0) {
+			setInputs({
+				name: myProfile.name,
+				publicEmail: myProfile.publicEmail,
+				techStack: myProfile[profileType].techStack,
+				description: myProfile[profileType].description,
+				isActive: myProfile[profileType].isActive,
+			});
+		}
+	}, [pathname, myProfile, profileType]);
 
 	const handleOnChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -55,14 +69,29 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 			} else {
 				navigate('/profile/kohai');
 			}
-			console.log(response);
 		} catch (err: any) {
-			console.error(err.response.data.message);
+			if (err.response) {
+				console.error(err.response.data.message);
+			} else {
+				console.error(err);
+			}
 		}
 	};
 
 	const bgColor = () => {
 		return isSenpai ? 'bg-primary_bg_color' : 'bg-secondary_bg_color';
+	};
+
+	const profileName = () => {
+		if (isSenpai) {
+			return myProfile.name === ''
+				? `Senpai#${myProfile.senpaiProfile.id.slice(0, 5)}`
+				: myProfile.name;
+		} else {
+			return myProfile.name === ''
+				? `Kohai#${myProfile.kohaiProfile.id.slice(0, 5)}`
+				: myProfile.name;
+		}
 	};
 
 	return (
@@ -78,8 +107,12 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 						className="w-1/3 h-1/3 rounded-full"
 					/>
 					<div>
-						<h1 className="text-xl font-bold mb-2">Jane Doe</h1>
-						<ToggleButton isSenpai={isSenpai} />
+						<h1 className="text-xl font-bold mb-2">{profileName()}</h1>
+						<ToggleButton
+							isSenpai={isSenpai}
+							inputs={inputs}
+							setInputs={setInputs}
+						/>
 					</div>
 				</section>
 				<p className="text-red-500">*required</p>
