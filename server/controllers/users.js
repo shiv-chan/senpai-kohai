@@ -11,7 +11,7 @@ export const users_get = async (req, res) => {
 
 			const allUsers = await User.find({}).exec();
 			if (allUsers) {
-				res.status(201).json({ allUsers });
+				res.status(201).json({ allUsers, _id: decodedToken._id });
 			} else {
 				res.status(409).json({ message: 'no data found!' });
 			}

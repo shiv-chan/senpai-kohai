@@ -7,7 +7,7 @@ export const authorization_get = async (req, res) => {
 	if (token) {
 		try {
 			const decodedToken = await jwt.verify(token, process.env.TOKEN_SECRET);
-			res.status(201).end();
+			res.status(201).json({ _id: decodedToken._id });
 		} catch (error) {
 			res.status(409).json({ message: error.message });
 		}
