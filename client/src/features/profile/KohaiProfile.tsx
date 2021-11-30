@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { RiUser3Fill, MdEmail, HiPencil } from 'react-icons/all';
 import { useAppSelector } from '../../app/hook';
@@ -6,11 +6,9 @@ import { useAppSelector } from '../../app/hook';
 const KohaiProfile = () => {
 	const myProfile = useAppSelector((state) => state.myProfile.myProfile);
 
-	useEffect(() => {}, [myProfile]);
-
 	const profileName = () => {
 		return myProfile.name === ''
-			? `Senpai#${myProfile.kohaiProfile.id.slice(0, 5)}`
+			? `Kohai#${myProfile.kohaiProfile.id.slice(0, 5)}`
 			: myProfile.name;
 	};
 
@@ -20,13 +18,10 @@ const KohaiProfile = () => {
 			: myProfile.publicEmail;
 	};
 
-	console.log(myProfile);
-
 	return (
-		// TODO: adjust margin-top based on the height of the header
 		<div className="bg-secondary_bg_color w-full min-h-screen mt-mobileHeaderHeight lg:mt-laptopHeaderHeight">
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
-				<section className="flex gap-x-8 relative">
+				<section className="flex flex-wrap gap-x-8 gap-y-4 relative">
 					<img
 						src="https://dummyimage.com/300x300/ededed/d4d4d4.png"
 						alt="dummy-profile"
