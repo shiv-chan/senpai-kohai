@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RiUser3Fill, MdEmail, HiPencil } from 'react-icons/all';
-
-// sample data for test
-const skillsSampleData: string[] = ['JavaScript', 'HTML', 'CSS'];
-const descriptionSampleData =
-	"Hi 👋\n\nI'm Jane!\n\nI am looking for my Senpai to achieve my career goal!!";
+import { useAppSelector } from '../../app/hook';
 
 const KohaiProfile = () => {
+	const myProfile = useAppSelector((state) => state.myProfile.myProfile);
+
+	useEffect(() => {}, [myProfile]);
+
+	const profileName = () => {
+		return myProfile.name === ''
+			? `Senpai#${myProfile.kohaiProfile.id.slice(0, 5)}`
+			: myProfile.name;
+	};
+
+	const publicEmail = () => {
+		return myProfile.publicEmail === ''
+			? 'Contact is not provided yet'
+			: myProfile.publicEmail;
+	};
+
+	console.log(myProfile);
+
 	return (
 		// TODO: adjust margin-top based on the height of the header
 		<div className="bg-secondary_bg_color w-full min-h-screen mt-mobileHeaderHeight lg:mt-laptopHeaderHeight">
@@ -19,7 +33,7 @@ const KohaiProfile = () => {
 						className="w-1/3 h-1/3 rounded-full"
 					/>
 					<div className="flex flex-col justify-center">
-						<h1 className="text-xl font-bold mb-3">Jane Doe</h1>
+						<h1 className="text-xl font-bold mb-3">{profileName()}</h1>
 						<Link
 							to="/profile/setting/kohai"
 							className="flex items-center gap-x-1 absolute top-0	right-0 underline"
@@ -34,7 +48,7 @@ const KohaiProfile = () => {
 							</div>
 							<div className="flex items-center gap-x-2">
 								<MdEmail />
-								<span>janed@mail.com</span>
+								<span>{publicEmail()}</span>
 							</div>
 						</article>
 					</div>
@@ -43,17 +57,24 @@ const KohaiProfile = () => {
 					<article>
 						<h2 className="font-bold mb-1">Skills</h2>
 						<div className="bg-white rounded p-4 min-h-6">
-							{skillsSampleData.map((skill) => (
-								<div className="inline-block mx-1 my-2 px-2 rounded-full bg-tertiary_bg_color">
-									{skill}
-								</div>
-							))}
+							{Object.keys(myProfile).length !== 0 &&
+								myProfile.kohaiProfile.techStack.map(
+									(skill: String, index: Number) => (
+										<div
+											key={`${index}`}
+											className="inline-block mx-1 my-2 px-2 rounded-full bg-tertiary_bg_color"
+										>
+											{skill}
+										</div>
+									)
+								)}
 						</div>
 					</article>
 					<article>
 						<h2 className="font-bold mb-1">Description</h2>
 						<div className="whitespace-pre-line bg-white rounded p-4 min-h-12">
-							{descriptionSampleData}
+							{Object.keys(myProfile).length !== 0 &&
+								myProfile.kohaiProfile.description}
 						</div>
 					</article>
 				</section>
