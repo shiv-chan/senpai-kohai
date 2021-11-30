@@ -51,10 +51,10 @@ const Home = () => {
 				</div>
 			</div>
 			<section className="p-10 md:p-20 relative">
-				<h2 className="text-2xl md:text-5xl text-center font-bold mb-6">
+				<h2 className="text-2xl md:text-5xl text-center font-bold mb-10 md:mb-20">
 					About
 				</h2>
-				<div className="text-md md:text-xl max-w-screen-lg mx-auto relative z-10">
+				<div className="text-md md:text-2xl max-w-screen-lg mx-auto relative z-10">
 					<p className="mb-4">
 						Volutpat enim commodo condimentum diam pellentesque egestas.
 					</p>
@@ -68,12 +68,12 @@ const Home = () => {
 				<img
 					src="./assets/BlobL.svg"
 					alt="blob-l"
-					className="absolute w-48 h-48 top-1/3 -left-14"
+					className="absolute w-48 h-48 md:w-72 md:h-72 xl:w-full xl:h-full top-1/3 md:top-1/4 -left-14 xl:-left-1/2"
 				/>
 				<img
 					src="./assets/BlobR.svg"
 					alt="blob-r"
-					className="absolute w-48 h-48 top-1/4 -right-14"
+					className="absolute w-48 h-48 md:w-72 md:h-72 xl:w-full xl:h-full top-1/4 -right-14 xl:-top-0 xl:-right-1/2"
 				/>
 			</section>
 			<div className="p-10 md:p-20 bg-BlobR bg-no-repeat bg-right bg-contain ">
