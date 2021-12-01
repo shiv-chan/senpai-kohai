@@ -141,7 +141,7 @@ const Home = () => {
 						</h2>
 						<div className="md:flex md:p-10 md:mt-20 flex-1 justify-items-stretch">
 							<img
-								className="md:w-2/4 ms:p-20 justify-self-center"
+								className="md:w-3/4 ms:p-20 justify-self-center"
 								src="./assets/contact.svg"
 								alt="contact"
 							/>
