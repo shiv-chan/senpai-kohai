@@ -129,19 +129,17 @@ const Home = () => {
 			</section>
 			<section className="p-10">
 				<h2 className="text-2xl md:text-5xl font-bold text-center">Contact</h2>
-				<div className="md:flex md:p-10 md:mt-20 flex-1 justify-items-stretch">
+				<div className="md:flex md:p-10 p-10 md: grid justify-items-stretch">
 					<img
-						className="md:w-2/4 ms:p-20 justify-self-center"
+						className="md:w-3/6 w-3/4 md:p-20 justify-self-center"
 						src="./assets/contact.svg"
 						alt="contact"
 					/>
 
-					<div className="text-center mt-10 md:mt-15 md:p-10  text-base md:text-2xl justify-self-center">
-						<p>
-							Please reach at xxxx@xxxx.com <br />
-							Thank you!
-						</p>
-					</div>
+					<p className="text-center mt-10 md:mt-24 md:p-10  text-base md:text-2xl">
+						Please reach at xxxx@xxxx.com <br />
+						Thank you!
+					</p>
 				</div>
 			</section>
 		</div>
