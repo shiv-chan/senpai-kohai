@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaQuestionCircle } from 'react-icons/fa';
 
 import {
 	Accordion,
@@ -14,42 +15,46 @@ const Home = () => {
 	// test, added style here just to see the classes work
 	return (
 		<div className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden">
-			<div className="p-10 md:p-20">
-				<div className="md:float-right w:20 md:w-2/4 ">
-					<img src="./assets/shared_workspace.svg" />
-				</div>
-
-				<div className="text-3xl font-black md:text-7xl mt-5 text-center md:text-justify">
+			<section className="p-10 md:p-20 md:grid md:grid-cols-7 md:grid-row-4 grid justify-items-stretch">
+				<h1 className="text-3xl font-bold md:text-7xl mt-5 text-center md:text-left col-start-1 col-span-3">
 					Senpai Kohai
-				</div>
-				<div className="mt-5 font-extrabold text-base w-auto md:text-2xl text-center md:text-justify">
+				</h1>
+				<img
+					className="md:w-6/6 md:row-span-4 md:col-span-4 mt-5"
+					src="./assets/shared_workspace.svg"
+					alt="shared_workspace"
+				/>
+				<p className="mt-5 font-bold text-base w-auto md:text-2xl text-center md:text-left col-span-3">
 					Find your guide, Support youngs
-				</div>
-				<div className="underline cursor-pointer mt-5 text-sm md:text-xl text-center md:text-justify">
-					<span className="">What are Senpai and Kohai?</span>
-				</div>
-				<div className="flex justify-center items-center md:justify-start">
-					<div
-						className="cursor-pointer 
+				</p>
+				<p className="underline cursor-pointer mt-5 w-auto text-sm md:text-lg text-center md:text-left flex col-span-3 justify-self-center md:justify-self-start">
+					<FaQuestionCircle />
+					&nbsp; What are Senpai and Kohai?
+				</p>
+				<div
+					className="cursor-pointer 
 								mt-5 
 								border-2 
-								w-24 
+								py-2
+								md:py-1.5
+								w-28
+								h-10 
 								text-primary_bg_color 
 								bg-primary_title_color 
 								rounded-full 
-								py-3 
 								font-black 
 								hover:bg-secondary_bg_color 
 								text-center
 								text-sm
-								justify-center
 								md:text-base
+								col-end-2
+								justify-self-center
+								md:justify-self-start
 								"
-					>
-						<Link to="/signup">Join Now</Link>
-					</div>
+				>
+					<Link to="/signup">Join Now</Link>
 				</div>
-			</div>
+			</section>
 			<section className="p-10 md:p-20 relative">
 				<h2 className="text-2xl md:text-5xl text-center font-bold mb-10 md:mb-20">
 					About
@@ -76,16 +81,16 @@ const Home = () => {
 					className="absolute w-48 h-48 md:w-72 md:h-72 xl:w-full xl:h-full top-1/4 -right-14 xl:-top-0 xl:-right-1/2"
 				/>
 			</section>
-			<div className="p-10 md:p-20 bg-BlobR bg-no-repeat bg-right bg-contain ">
-				<div className="text-3xl font-black text-center md:text-7xl">Q&As</div>
+			<section className="p-10 md:p-20">
+				<h2 className="text-2xl font-bold text-center md:text-5xl">Q&As</h2>
 				<Accordion className="p-10 text-sm md:text-2xl w-auto">
-					<AccordionItem className="p-5 bg-red">
+					<AccordionItem className="p-5">
 						<AccordionItemHeading>
 							<AccordionItemButton>
 								Who is Senpai for Kohai ?
 							</AccordionItemButton>
 						</AccordionItemHeading>
-						<AccordionItemPanel className="bg-primary_bg_color text-primary_title_color">
+						<AccordionItemPanel>
 							<p>
 								dolorum! Iste assumenda molestias, rerum provident eos
 								consequatur voluptatibus aut repudiandae? Hic repudiandae eos
@@ -97,7 +102,7 @@ const Home = () => {
 						<AccordionItemHeading>
 							<AccordionItemButton>Why you need Senpai ?</AccordionItemButton>
 						</AccordionItemHeading>
-						<AccordionItemPanel className="bg-primary_bg_color text-primary_title_color">
+						<AccordionItemPanel>
 							<p>
 								dolorum! Iste assumenda molestias, rerum provident eos
 								consequatur voluptatibus aut repudiandae? Hic repudiandae eos
@@ -112,7 +117,7 @@ const Home = () => {
 						<AccordionItemHeading>
 							<AccordionItemButton>How does it work ?</AccordionItemButton>
 						</AccordionItemHeading>
-						<AccordionItemPanel className="bg-primary_bg_color text-primary_title_color">
+						<AccordionItemPanel>
 							<p>
 								Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat
 								occaecat ut occaecat consequat est minim minim esse tempor
@@ -126,7 +131,7 @@ const Home = () => {
 								What you can do for Kohais ?
 							</AccordionItemButton>
 						</AccordionItemHeading>
-						<AccordionItemPanel className="bg-primary_bg_color text-primary_title_color">
+						<AccordionItemPanel>
 							<p>
 								Exercitation in fugiat est ut ad ea cupidatat ut in cupidatat
 								occaecat ut occaecat consequat est minim minim esse tempor
@@ -138,21 +143,22 @@ const Home = () => {
 						</AccordionItemPanel>
 					</AccordionItem>
 				</Accordion>
-			</div>
-			<div className="p-10 md:p-20">
-				<div className="text-3xl md:text-7xl font-black text-center">
-					Contact
+			</section>
+			<section className="p-10">
+				<h2 className="text-2xl md:text-5xl font-bold text-center">Contact</h2>
+				<div className="md:flex md:p-10 p-10 md: grid justify-items-stretch">
+					<img
+						className="md:w-3/6 w-3/4 md:p-20 justify-self-center"
+						src="./assets/contact.svg"
+						alt="contact"
+					/>
+
+					<p className="text-center mt-10 md:mt-24 md:p-10  text-base md:text-2xl">
+						Please reach at xxxx@xxxx.com <br />
+						Thank you!
+					</p>
 				</div>
-				<div className="md:flex p-10 md:p-20 justify-center items-center">
-					<div className="md:w-2/4 ms:p-20">
-						<img src="./assets/contact.svg" />
-					</div>
-					<div className="md:p-20 md:mt-40  mt-10 text-xl md:text-2xl text-center md:text-start">
-						<p>Please reach at xxxx@xxxx.com</p>
-						<p>Thank you!</p>
-					</div>
-				</div>
-			</div>
+			</section>
 		</div>
 	);
 };
