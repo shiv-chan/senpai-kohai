@@ -6,11 +6,10 @@ module.exports = {
 			colors: {
 				primary_bg_color: '#f4eeff', // main bg
 				secondary_bg_color: '#a6b1e1', // secondary bg
-				tertiary_bg_color: '#dcd6f7', // dropdown menu, tech stack tags, blobR
+				tertiary_bg_color: '#dcd6f7', // dropdown menu, tech stack tags
 				primary_title_color: '#424874', // titles
 				header_color: '#424874', // header
 			},
-			fontSize: {},
 			spacing: {
 				// height from the main content to the bottom of Header
 				// for now 3rem but we can change it anytime
@@ -18,11 +17,24 @@ module.exports = {
 				laptopHeaderHeight: '4rem',
 				paddingAroundtheContent: '2.5rem',
 			},
-
 			screens: {
+				//min-width
 				mobile_s: '320px',
 				mobile_m: '375px',
 				mobile_l: '425px',
+				tablet_s: '640px',
+				// max-width
+				mobile_s_max: { max: '319px' },
+				mobile_m_max: { max: '374px' },
+				mobile_l_max: { max: '424px' },
+				mobile_xl_max: { max: '639px' },
+				tablet_l_max: { max: '1024px' },
+				custom_left: '93%',
+				mb_custom_left: '89%',
+			},
+			minHeight: {
+				6: '6rem',
+				12: '12rem',
 			},
 		},
 	},

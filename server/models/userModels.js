@@ -1,21 +1,98 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
+import validator from 'validator';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
-  // should we also add other data schema as well?
   email: {
     type: String,
-    required: true,
+    required: [true, 'An email is required.'],
+    validate: {
+      validator: function (val) {
+        return validator.isEmail(val);
+      },
+      message: 'Please enter a valid email.',
+    },
+    unique: true,
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'A password is required'],
+    validate: {
+      validator: function (val) {
+        return validator.isStrongPassword(val, {
+          minLength: 6,
+          minLowercase: 1,
+          minUppercase: 0,
+          minNumbers: 1,
+          minSymbols: 0,
+        });
+      },
+      message:
+        'A password must be at least 6 charactors including at least one letter and number.',
+    },
   },
   date: {
     type: Date,
     default: new Date(),
   },
+  name: {
+    type: String,
+    default: '',
+  },
+  publicEmail: {
+    type: String,
+    validate: {
+      validator: function (val) {
+        return validator.isEmail(val);
+      },
+      message: 'Please enter a valid email.',
+    },
+  },
+  senpaiProfile: {
+    id: {
+      type: String,
+      default: uuidv4(),
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    techStack: {
+      type: Array,
+    },
+  },
+  kohaiProfile: {
+    id: {
+      type: String,
+      default: uuidv4(),
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    techStack: {
+      type: Array,
+    },
+  },
 });
 
-const User = mongoose.model("User", userSchema);
+// fire a function before an instance saved to data base
+userSchema.pre('save', async function (next) {
+  // encrypt the password
+  const saltPassword = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, saltPassword);
+  next();
+});
+
+const User = mongoose.model('User', userSchema);
 
 export default User;
