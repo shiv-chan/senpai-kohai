@@ -32,6 +32,10 @@ module.exports = {
 				mobile_xl_max: { max: '639px' },
 				tablet_l_max: { max: '1024px' },
 			},
+			minHeight: {
+				6: '6rem',
+				12: '12rem',
+			},
 		},
 	},
 	variants: {
