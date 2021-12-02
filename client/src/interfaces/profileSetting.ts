@@ -3,4 +3,5 @@ export default interface IProfileSetting {
 	publicEmail: string;
 	techStack: string[];
 	description: string;
+	isActive: boolean;
 }
