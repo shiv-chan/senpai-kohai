@@ -21,7 +21,7 @@ export const verifyUrl = async (req, res) => {
     } else {
       res.status(403).json({ message: 'uh oh url is already expired' });
       console.log('uh oh url is already expired');
-      // await forgotPwUser.deleteOne({ _id: user._id });
+      await forgotPwUser.deleteOne({ _id: user._id });
     }
   } catch (error) {
     console.log(error);

@@ -13,10 +13,17 @@ const ForgotPasswordReset: React.FC = () => {
     password: '',
     confirmedPassword: '',
   });
-  // const [isUrlValid, setIsUrlValid] = useState<null | boolean>(null);
-  const [isUrlValid, setIsUrlValid] = useState<null | boolean>(true);
+  const [isUrlValid, setIsUrlValid] = useState<null | boolean>(null);
+  // const [isUrlValid, setIsUrlValid] = useState<null | boolean>(true);
+  // add more errors later
+  const [passwordError, setPasswordError] = useState<boolean>(false);
   const { hasheduserid } = useParams();
   console.log(hasheduserid);
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPasswords({ ...passwords, [name]: value });
+  };
 
   useEffect(() => {
     const hashedUserId = { hasheduserid };
@@ -47,9 +54,15 @@ const ForgotPasswordReset: React.FC = () => {
   const createNewPassword = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // some functions
+    if (passwords.password !== passwords.confirmedPassword) {
+      setPasswordError(true);
+      return;
+    }
     try {
+      const passwordsData = { ...passwords, hasheduserid };
       await axios.put(
-        `http://localhost:5000/forgotpassword/reset/${hasheduserid}/send`
+        `http://localhost:5000/forgotpassword/reset/${hasheduserid}/send`,
+        passwordsData
       );
     } catch (error) {
       console.log(error);
@@ -76,10 +89,9 @@ const ForgotPasswordReset: React.FC = () => {
                   <input
                     type={isVisible ? 'text' : 'password'}
                     className="h-10 mb-12 w-full px-8"
-                    onChange={(e) =>
-                      setPasswords({ ...passwords, password: e.target.value })
-                    }
+                    onChange={(e) => handleOnChange(e)}
                     value={passwords.password}
+                    name="password"
                   />
                   <FaUnlockAlt className="absolute top-2.5 left-2 text-xl text-gray-300" />
                   <AiFillEyeInvisible
@@ -113,16 +125,17 @@ const ForgotPasswordReset: React.FC = () => {
                   <input
                     type="password"
                     className="h-10 mb-12 w-full px-8"
-                    onChange={(e) =>
-                      setPasswords({
-                        ...passwords,
-                        confirmedPassword: e.target.value,
-                      })
-                    }
+                    onChange={(e) => handleOnChange(e)}
                     value={passwords.confirmedPassword}
+                    name="confirmedPassword"
                   />
                   <FaUnlockAlt className="absolute top-2.5 left-2 text-xl text-gray-300" />
                 </div>
+                {passwordError && (
+                  <p className="text-warning_color">
+                    Please set the same passwords on both input fields
+                  </p>
+                )}
                 <button
                   className="button mb-10"
                   onClick={(e) => createNewPassword(e)}
