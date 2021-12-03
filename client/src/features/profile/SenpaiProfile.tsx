@@ -19,7 +19,7 @@ const SenpaiProfile = () => {
 	};
 
 	return (
-		<div className="bg-primary_bg_color w-full min-h-screen mt-mobileHeaderHeight lg:mt-laptopHeaderHeight">
+		<div className="bg-primary_bg_color w-full min-h-screen pt-mobileHeaderHeight lg:pt-laptopHeaderHeight">
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex flex-wrap gap-x-8 gap-y-4 relative">
 					<img
