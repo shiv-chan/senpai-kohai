@@ -12,6 +12,6 @@ app.use('/reset/:hasheduserid', (req, res, next) => {
 const router = express.Router();
 router.post('/', sendResetPasswordEmail);
 router.post('/reset/:hasheduserid', verifyUrl);
-router.post('/reset/:id/sent', updatePassword);
+router.put('/reset/:id/send', updatePassword);
 
 export default router;

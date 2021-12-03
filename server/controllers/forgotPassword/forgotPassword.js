@@ -6,10 +6,10 @@ import sendgridTransport from 'nodemailer-sendgrid-transport';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
 
-const emailInfo = (hashedUserId) => {
+const emailInfo = (email, hashedUserId) => {
   return {
     from: 'info.senpai.kohai@gmail.com',
-    to: 'info.senpai.kohai@gmail.com',
+    to: email,
     subject: '[Senpai Kohai] Reset your password',
     // change this url before deploying
     text: `Reset your password from this link: http://localhost:3000/forgotpassword/reset/${hashedUserId}`,
@@ -47,7 +47,7 @@ export const sendResetPasswordEmail = async (req, res) => {
         urlCreatedAt: moment().utc().valueOf(),
       });
       await resetPwUser.save();
-      transportWithGmail.sendMail(emailInfo(token), (error, info) => {
+      transportWithGmail.sendMail(emailInfo(email, token), (error, info) => {
         // transporter.sendMail(emailInfo(req.body), (error, info) => {
         if (error) {
           console.log(error);
