@@ -5,13 +5,14 @@ import { verifyUrl } from '../controllers/forgotPassword/verifyUrl.js';
 const app = express();
 
 app.use('/reset/:hasheduserid', (req, res, next) => {
-  console.log('Request Id:', req.params.id);
+  console.log('Request Id:', req.params.hasheduserid);
   next();
 });
 
 const router = express.Router();
 router.post('/', sendResetPasswordEmail);
-router.post('/reset/:hasheduserid', verifyUrl);
-router.put('/reset/:id/send', updatePassword);
+// router.post('/reset/:hasheduserid', verifyUrl);
+router.get('/reset/:hasheduserid', verifyUrl);
+router.put('/reset/:hasheduserid/send', updatePassword);
 
 export default router;

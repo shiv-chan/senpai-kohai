@@ -12,7 +12,7 @@ const ForgotPasswordInvalidUrl = () => {
             Uh oh, the URL is already expired!
           </p>
           <Link to="/login" className="flex-initial underline m-auto">
-            Try Again
+            Try Again?
           </Link>
         </div>
       </section>

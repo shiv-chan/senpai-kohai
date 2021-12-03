@@ -93,19 +93,6 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.pre('updateOne', async (next) => {
-  // encrypt the password
-  const saltPassword = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(
-    this.password,
-    saltPassword,
-    (error, hash) => {
-      console.log(error);
-    }
-  );
-  next();
-});
-
 const User = mongoose.model('User', userSchema);
 
 export default User;

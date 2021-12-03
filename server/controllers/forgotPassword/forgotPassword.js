@@ -54,7 +54,6 @@ export const sendResetPasswordEmail = async (req, res) => {
       res.status(201).json({ message: 'email sent!' });
     } else {
       res.status(403).json({ message: `${email} is not registered` });
-      // console.log(`${email} is not registered`);
       console.log(res.status(403));
     }
   } catch (error) {

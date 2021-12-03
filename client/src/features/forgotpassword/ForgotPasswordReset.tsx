@@ -18,7 +18,6 @@ const ForgotPasswordReset: React.FC = () => {
   // add more errors later
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const { hasheduserid } = useParams();
-  console.log(hasheduserid);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,22 +25,17 @@ const ForgotPasswordReset: React.FC = () => {
   };
 
   useEffect(() => {
-    const hashedUserId = { hasheduserid };
     const verifyUrl = async () => {
       try {
         console.log('verifying');
-        await axios
-          .post(
-            `http://localhost:5000/forgotpassword/reset/${hasheduserid}`,
-            hashedUserId
-          )
-          .then((response) => {
-            console.log(response.data);
-          });
+        const response = await axios.get(
+          `http://localhost:5000/forgotpassword/reset/${hasheduserid}`
+        );
+        console.log(response.data.message);
         setIsUrlValid(true);
       } catch (error) {
-        console.log('the url is already expired');
-        // setIsUrlValid(false);
+        console.log(`the url is already expired! ${error}`);
+        setIsUrlValid(false);
       }
     };
     verifyUrl();
@@ -59,11 +53,16 @@ const ForgotPasswordReset: React.FC = () => {
       return;
     }
     try {
-      const passwordsData = { ...passwords, hasheduserid };
-      await axios.put(
-        `http://localhost:5000/forgotpassword/reset/${hasheduserid}/send`,
-        passwordsData
-      );
+      // const passwordsData = { ...passwords, hasheduserid };
+      await axios
+        .put(
+          `http://localhost:5000/forgotpassword/reset/${hasheduserid}/send`,
+          // passwordsData
+          passwords
+        )
+        .then((response) => {
+          console.log(response.data);
+        });
     } catch (error) {
       console.log(error);
     }
