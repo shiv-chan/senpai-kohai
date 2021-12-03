@@ -7,7 +7,6 @@ import moment from 'moment';
 import jwt from 'jsonwebtoken';
 
 const emailInfo = (hashedUserId) => {
-  console.log('miyabiiiii');
   return {
     from: 'info.senpai.kohai@gmail.com',
     to: 'info.senpai.kohai@gmail.com',

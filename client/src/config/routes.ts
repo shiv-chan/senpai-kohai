@@ -64,7 +64,7 @@ const routes: IRoute[] = [
     component: ForgotPasswordMessage,
   },
   {
-    path: 'forgotpassword/reset/:id',
+    path: 'forgotpassword/reset/:hasheduserid',
     name: 'Forgot password',
     component: ForgotPasswordReset,
   },
