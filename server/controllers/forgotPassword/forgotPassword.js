@@ -1,6 +1,6 @@
 import User from '../../models/userModels.js';
 import forgotPwUser from '../../models/forgotPwUserModels.js';
-import { userValidationForForgotPw } from '../../validation.js';
+// import { userValidationForForgotPw } from '../../validation.js';
 import nodemailer from 'nodemailer';
 import sendgridTransport from 'nodemailer-sendgrid-transport';
 import moment from 'moment';
@@ -32,12 +32,11 @@ export const sendResetPasswordEmail = async (req, res) => {
     },
   });
   const { email } = req.body;
-  const { error } = userValidationForForgotPw(req.body);
-  console.log(req.body);
-  if (error) return res.status(409).send({ message: error.details[0].message });
+  // const { error } = userValidationForForgotPw(req.body);
+  // if (error) return res.status(409).send({ message: error.details[0].message });
   try {
     const user = await User.findOne({ email }).exec();
-    console.log(user);
+    // console.log(user);
     if (user) {
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
       const resetPwUser = new forgotPwUser({
