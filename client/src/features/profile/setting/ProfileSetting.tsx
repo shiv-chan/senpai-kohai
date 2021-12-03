@@ -20,6 +20,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		description: '',
 		isActive: false,
 	});
+	const [fileUrl, setFileUrl] = useState('');
 
 	useLayoutEffect(() => {
 		if (pathname === '/profile/setting/senpai') {
@@ -51,6 +52,10 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 			const returnedArr: string[] = [];
 			commaSpliceArr.map((ele) => returnedArr.push(ele.trim()));
 			setInputs({ ...inputs, techStack: returnedArr });
+		} else if (name === 'image') {
+			const files = (e.target as HTMLInputElement).files;
+			const imageUrl = files && URL.createObjectURL(files[0]);
+			imageUrl && setFileUrl(imageUrl);
 		} else {
 			setInputs({ ...inputs, [name]: value });
 		}
@@ -105,7 +110,12 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex gap-x-8 items-center">
 					<img
-						src="https://dummyimage.com/300x300/ededed/d4d4d4.png"
+						src={
+							fileUrl
+								? fileUrl
+								: 'https://dummyimage.com/300x300/ededed/d4d4d4.png'
+						}
+						// src="https://dummyimage.com/300x300/ededed/d4d4d4.png"
 						alt="dummy-profile"
 						className="w-1/3 h-1/3 rounded-full"
 					/>
@@ -138,7 +148,13 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 						<label htmlFor="image" className="font-bold block">
 							Profile Picture
 						</label>
-						<input type="file" id="image" name="image" accept="image/*" />
+						<input
+							type="file"
+							id="image"
+							name="image"
+							accept="image/*"
+							onChange={handleOnChange}
+						/>
 					</article>
 					<article>
 						<label htmlFor="email" className="font-bold block">
