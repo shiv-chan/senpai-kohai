@@ -44,7 +44,6 @@ export const sendResetPasswordEmail = async (req, res) => {
       });
       await resetPwUser.save();
       transportWithGmail.sendMail(emailInfo(email, token), (error, info) => {
-        // transporter.sendMail(emailInfo(req.body), (error, info) => {
         if (error) {
           console.log(error);
         } else {

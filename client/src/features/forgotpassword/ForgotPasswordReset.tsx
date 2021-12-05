@@ -6,6 +6,7 @@ import { FaUnlockAlt } from 'react-icons/fa';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import ForgotPasswordInvalidUrl from './ForgotPasswordInvalidUrl';
 import axios from 'axios';
+import validator from 'validator';
 
 const ForgotPasswordReset: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -14,9 +15,8 @@ const ForgotPasswordReset: React.FC = () => {
     confirmedPassword: '',
   });
   const [isUrlValid, setIsUrlValid] = useState<null | boolean>(null);
-  // const [isUrlValid, setIsUrlValid] = useState<null | boolean>(true);
-  // add more errors later
-  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [arePasswordsDiff, setArePasswordDiff] = useState<boolean>(false);
+  const [isPasswordWeak, setIsPasswordWeak] = useState<boolean>(false);
   const { hasheduserid } = useParams();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +33,13 @@ const ForgotPasswordReset: React.FC = () => {
         );
         console.log(response.data.message);
         setIsUrlValid(true);
-      } catch (error) {
+      } catch (error: any) {
         console.log(`the url is already expired! ${error}`);
+        if (error.response) {
+          console.error(error.response.data.message);
+        } else {
+          console.error(error);
+        }
         setIsUrlValid(false);
       }
     };
@@ -45,26 +50,37 @@ const ForgotPasswordReset: React.FC = () => {
     return;
   }, [isVisible]);
 
-  const createNewPassword = async (e: React.FormEvent<HTMLButtonElement>) => {
+  const updatePassword = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // some functions
     if (passwords.password !== passwords.confirmedPassword) {
-      setPasswordError(true);
+      setArePasswordDiff(true);
+      return;
+    } else if (
+      !validator.isStrongPassword(passwords.password, {
+        minLength: 6,
+        minLowercase: 1,
+        minUppercase: 0,
+        minNumbers: 1,
+        minSymbols: 0,
+      })
+    ) {
+      setIsPasswordWeak(true);
       return;
     }
     try {
-      // const passwordsData = { ...passwords, hasheduserid };
-      await axios
-        .put(
-          `http://localhost:5000/forgotpassword/reset/${hasheduserid}/send`,
-          // passwordsData
-          passwords
-        )
-        .then((response) => {
-          console.log(response.data);
-        });
-    } catch (error) {
+      const response = await axios.put(
+        `http://localhost:5000/forgotpassword/reset/${hasheduserid}/send`,
+        passwords
+      );
+      console.log(response.data.message);
+    } catch (error: any) {
       console.log(error);
+      if (error.response) {
+        console.error(error.response.data.message);
+      } else {
+        console.error(error);
+      }
     }
     setPasswords({ password: '', confirmedPassword: '' });
     setIsVisible(false);
@@ -72,9 +88,9 @@ const ForgotPasswordReset: React.FC = () => {
 
   return (
     <>
-      {isUrlValid === null ? null : isUrlValid === true ? (
-        <main className="flex w-screen h-screen bg-primary_bg_color text-primary_title_color">
-          <LeftPart />
+      <main className="flex w-screen h-screen bg-primary_bg_color text-primary_title_color">
+        <LeftPart />
+        {isUrlValid === null ? null : isUrlValid === true ? (
           <section className="flex justify-center my-auto h-9/12 w-1/2 tablet_l_max:w-full ">
             <div className="flex flex-col justify-end h-full w-7/12 mobile_xl_max:w-9/12">
               <p className="flex-initial mb-8 mobile_m_max:text-2xl mobile_m:text-3xl tablet_s:text-4xl">
@@ -130,14 +146,20 @@ const ForgotPasswordReset: React.FC = () => {
                   />
                   <FaUnlockAlt className="absolute top-2.5 left-2 text-xl text-gray-300" />
                 </div>
-                {passwordError && (
+                {arePasswordsDiff && (
                   <p className="text-warning_color">
                     Please set the same passwords on both input fields
                   </p>
                 )}
+                {isPasswordWeak && (
+                  <p className="text-warning_color">
+                    Your password has to be minimum 6 letters, at least one
+                    lowercase and one number
+                  </p>
+                )}
                 <button
                   className="button mb-10"
-                  onClick={(e) => createNewPassword(e)}
+                  onClick={(e) => updatePassword(e)}
                 >
                   Create
                 </button>
@@ -147,10 +169,10 @@ const ForgotPasswordReset: React.FC = () => {
               </form>
             </div>
           </section>
-        </main>
-      ) : (
-        <ForgotPasswordInvalidUrl />
-      )}
+        ) : (
+          <ForgotPasswordInvalidUrl />
+        )}
+      </main>
     </>
   );
 };
