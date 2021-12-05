@@ -5,11 +5,11 @@ import bcrypt from 'bcrypt';
 import validator from 'validator';
 
 export const updatePassword = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const hasheduserid = req.params.hasheduserid;
   const { password, confirmedPassword } = req.body;
   const decodedUserId = jwt.verify(hasheduserid, process.env.TOKEN_SECRET);
-  console.log(decodedUserId);
+  // console.log(decodedUserId);
 
   try {
     // validate here on backend too just in case

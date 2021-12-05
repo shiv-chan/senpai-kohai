@@ -38,9 +38,9 @@ const LogIn = () => {
       <LeftPart />
       <section className="flex justify-center my-auto h-9/12 w-1/2 tablet_l_max:w-full ">
         <div className="flex flex-col justify-end h-full w-7/12 mobile_xl_max:w-9/12">
-          <p className="flex-initial text-4xl mb-2 mobile_l_max:text-3xl">
+          <h2 className="flex-initial text-4xl mb-2 mobile_l_max:text-3xl">
             Login
-          </p>
+          </h2>
           <p className="flex-initial mb-12 mobile_l_max:text-sm">
             Not registered yet?{' '}
             <Link to="/signup" className="underline font-bold">

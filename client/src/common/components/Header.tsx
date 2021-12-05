@@ -48,9 +48,7 @@ const Header = () => {
     <>
       {location.pathname === '/signup' ||
       location.pathname === '/login' ||
-      location.pathname === '/forgotpassword' ||
-      location.pathname === '/forgotpassword/message' ||
-      location.pathname.includes('/forgotpassword/reset/') ? null : (
+      location.pathname.includes('/forgotpassword') ? null : (
         <>
           <header className="bg-header_color w-screen h-mobileHeaderHeight md:h-laptopHeaderHeight fixed z-30 menu">
             <div className="flex items-center	font-sans text-primary_bg_color h-full mx-4">

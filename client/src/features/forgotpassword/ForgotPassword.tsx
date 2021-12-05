@@ -32,9 +32,9 @@ const ForgotPassword = () => {
           <LeftPart />
           <section className="flex justify-center my-auto h-9/12 w-1/2 tablet_l_max:w-full">
             <div className="flex flex-col justify-center h-full w-7/12 mobile_xl_max:w-9/12">
-              <p className="flex-initial text-4xl mb-12 mobile_l_max:text-3xl">
+              <h2 className="flex-initial text-4xl mb-12 mobile_l_max:text-3xl">
                 Forgot password?
-              </p>
+              </h2>
               <form action="" className="flex flex-col w-full">
                 <label htmlFor="email" className="text-lg mb-2">
                   Email Address
@@ -50,13 +50,16 @@ const ForgotPassword = () => {
                 </div>
                 <Link to="/forgotpassword/message">
                   <button
-                    className="button mb-10 w-full"
+                    className="button w-full"
                     onClick={(e) => sendResetPwEmail(e)}
                   >
                     Send
                   </button>
                 </Link>
-                <Link to="/login" className="flex-initial underline m-auto">
+                <Link
+                  to="/login"
+                  className="flex-initial underline m-auto mt-10"
+                >
                   Back to login
                 </Link>
               </form>
