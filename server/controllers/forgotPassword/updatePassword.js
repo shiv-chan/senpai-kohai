@@ -16,7 +16,7 @@ export const updatePassword = async (req, res) => {
     if (password !== confirmedPassword) {
       throw new Error('the password are not exactly the same');
     } else if (
-      validator.isStrongPassword(password, {
+      !validator.isStrongPassword(password, {
         minLength: 6,
         minLowercase: 1,
         minUppercase: 0,

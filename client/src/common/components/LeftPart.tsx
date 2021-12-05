@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const LeftPart: React.FC = () => {
   const location = useLocation();
+
+  useEffect(() => {
+    return;
+  }, [location.pathname]);
+
   return (
     <section className="flex flex-col justify-center items-center w-1/2 h-full bg-white  tablet_l_max:hidden">
       <div className="h-9/12">

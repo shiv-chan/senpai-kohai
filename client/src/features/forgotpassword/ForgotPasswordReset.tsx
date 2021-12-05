@@ -6,7 +6,8 @@ import { FaUnlockAlt } from 'react-icons/fa';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import ForgotPasswordInvalidUrl from './ForgotPasswordInvalidUrl';
 import axios from 'axios';
-import validator from 'validator';
+const PASSWORD_REGEX =
+  /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9~`! @#\$%\^&*()_\-\+=\{\[\}\]\|\\:;"'<,>\.\?/]{6,32}$/;
 
 const ForgotPasswordReset: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -20,6 +21,8 @@ const ForgotPasswordReset: React.FC = () => {
   const { hasheduserid } = useParams();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setArePasswordDiff((prevState) => prevState && false);
+    setIsPasswordWeak((prevState) => prevState && false);
     const { name, value } = e.target;
     setPasswords({ ...passwords, [name]: value });
   };
@@ -56,15 +59,7 @@ const ForgotPasswordReset: React.FC = () => {
     if (passwords.password !== passwords.confirmedPassword) {
       setArePasswordDiff(true);
       return;
-    } else if (
-      !validator.isStrongPassword(passwords.password, {
-        minLength: 6,
-        minLowercase: 1,
-        minUppercase: 0,
-        minNumbers: 1,
-        minSymbols: 0,
-      })
-    ) {
+    } else if (!PASSWORD_REGEX.test(passwords.password)) {
       setIsPasswordWeak(true);
       return;
     }
@@ -74,6 +69,8 @@ const ForgotPasswordReset: React.FC = () => {
         passwords
       );
       console.log(response.data.message);
+      setArePasswordDiff((prevState) => prevState && false);
+      setIsPasswordWeak((prevState) => prevState && false);
     } catch (error: any) {
       console.log(error);
       if (error.response) {
@@ -88,9 +85,9 @@ const ForgotPasswordReset: React.FC = () => {
 
   return (
     <>
-      <main className="flex w-screen h-screen bg-primary_bg_color text-primary_title_color">
-        <LeftPart />
-        {isUrlValid === null ? null : isUrlValid === true ? (
+      {isUrlValid === null ? null : isUrlValid === true ? (
+        <main className="flex w-screen h-screen bg-primary_bg_color text-primary_title_color">
+          <LeftPart />
           <section className="flex justify-center my-auto h-9/12 w-1/2 tablet_l_max:w-full ">
             <div className="flex flex-col justify-end h-full w-7/12 mobile_xl_max:w-9/12">
               <p className="flex-initial mb-8 mobile_m_max:text-2xl mobile_m:text-3xl tablet_s:text-4xl">
@@ -169,10 +166,10 @@ const ForgotPasswordReset: React.FC = () => {
               </form>
             </div>
           </section>
-        ) : (
-          <ForgotPasswordInvalidUrl />
-        )}
-      </main>
+        </main>
+      ) : (
+        <ForgotPasswordInvalidUrl />
+      )}
     </>
   );
 };
