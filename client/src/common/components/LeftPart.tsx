@@ -17,17 +17,17 @@ const LeftPart: React.FC = () => {
           <p className="flex-initial text-5xl mb-16">Let's Get Started</p>
         )}
         {location.pathname === '/signup' && (
-          <img src="./assets/terms.svg" alt="terms" className="w-80 mb-16" />
+          <img src="/assets/terms.svg" alt="terms" className="w-80 mb-16" />
         )}
         {location.pathname === '/login' && (
           <img
-            src="./assets/shared_workspace.svg"
+            src="/assets/shared_workspace.svg"
             alt="terms"
             className="w-80 mb-16"
           />
         )}
         {location.pathname.includes('/forgotpassword') && (
-          <img src="./assets/password.svg" alt="terms" className="w-80 mb-16" />
+          <img src="/assets/password.svg" alt="terms" className="w-80 mb-16" />
         )}
         <p className="flex-initial text-2xl">Find your guide, Support youngs</p>
       </div>
