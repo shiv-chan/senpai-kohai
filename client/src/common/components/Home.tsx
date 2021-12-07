@@ -83,8 +83,8 @@ const Home = () => {
 			</section>
 			<section className="p-10 md:p-20">
 				<h2 className="text-2xl font-bold text-center md:text-5xl">Q&As</h2>
-				<Accordion className="p-10 text-sm md:text-2xl w-auto">
-					<AccordionItem className="p-5">
+				<Accordion className="text-sm md:text-2xl">
+					<AccordionItem className="p-3">
 						<AccordionItemHeading>
 							<AccordionItemButton>
 								Who is Senpai for Kohai ?
@@ -98,7 +98,7 @@ const Home = () => {
 							</p>
 						</AccordionItemPanel>
 					</AccordionItem>
-					<AccordionItem className="p-5">
+					<AccordionItem className="p-3">
 						<AccordionItemHeading>
 							<AccordionItemButton>Why you need Senpai ?</AccordionItemButton>
 						</AccordionItemHeading>
@@ -113,7 +113,7 @@ const Home = () => {
 							</p>
 						</AccordionItemPanel>
 					</AccordionItem>
-					<AccordionItem className="p-5">
+					<AccordionItem className="p-3">
 						<AccordionItemHeading>
 							<AccordionItemButton>How does it work ?</AccordionItemButton>
 						</AccordionItemHeading>
@@ -125,11 +125,9 @@ const Home = () => {
 							</p>
 						</AccordionItemPanel>
 					</AccordionItem>
-					<AccordionItem className="p-5">
+					<AccordionItem className="p-3">
 						<AccordionItemHeading>
-							<AccordionItemButton>
-								What you can do for Kohais ?
-							</AccordionItemButton>
+							<AccordionItemButton>Why Kohais and Senpai ?</AccordionItemButton>
 						</AccordionItemHeading>
 						<AccordionItemPanel>
 							<p>
