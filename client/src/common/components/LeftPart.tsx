@@ -22,12 +22,16 @@ const LeftPart: React.FC = () => {
         {location.pathname === '/login' && (
           <img
             src="/assets/shared_workspace.svg"
-            alt="terms"
+            alt="shared_workspace"
             className="w-80 mb-16"
           />
         )}
         {location.pathname.includes('/forgotpassword') && (
-          <img src="/assets/password.svg" alt="terms" className="w-80 mb-16" />
+          <img
+            src="/assets/password.svg"
+            alt="password"
+            className="w-80 mb-16"
+          />
         )}
         <p className="flex-initial text-2xl">Find your guide, Support youngs</p>
       </div>

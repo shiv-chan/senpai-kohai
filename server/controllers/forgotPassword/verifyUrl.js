@@ -2,10 +2,9 @@ import forgotPwUser from '../../models/forgotPwUserModels.js';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
 
-export const verifyUrl = async (req, res) => {
+export const verifyUrl_get = async (req, res) => {
   const timeAccessedToUrlAt = moment().utc().valueOf();
   const hasheduserid = req.params.hasheduserid;
-  console.log(`hashed user id in verify url: ${hasheduserid}`);
   const decodedUserId = jwt.verify(hasheduserid, process.env.TOKEN_SECRET);
   try {
     const forgotPasswordUser = await forgotPwUser.findOne({

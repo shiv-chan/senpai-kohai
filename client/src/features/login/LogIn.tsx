@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LeftPart from '../../common/components/LeftPart';
 import ISingUpLogIn from '../../interfaces/signUpLogIn';
 import axios from 'axios';
@@ -14,6 +14,8 @@ const LogIn = () => {
     password: '',
   });
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [errMsgFromServer, setErrMsgFromServer] = useState<string>('');
+  const navigate = useNavigate();
 
   const loginWithEmailAndPassword = async (
     e: React.FormEvent<HTMLButtonElement>
@@ -21,17 +23,31 @@ const LogIn = () => {
     e.preventDefault();
     try {
       console.log('clicked');
-      await axios.post('http://localhost:5000/login', inputs, {
+      const response = await axios.post('http://localhost:5000/login', inputs, {
         withCredentials: true,
       });
-      console.log('logged in successfully!');
-      setInputs({
-        email: '',
-        password: '',
-      });
-    } catch (error) {
+      navigate('/board');
+      console.log(response.data.message);
+      // setInputs({
+      //   email: '',
+      //   password: '',
+      // });
+    } catch (error: any) {
       console.log(error);
+      if (error.response) {
+        console.error(error.response.data.message);
+        setErrMsgFromServer(error.response.data.message);
+      } else {
+        console.error(error);
+        setErrMsgFromServer('Sorry, unexpected error occured');
+      }
     }
+  };
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    errMsgFromServer.length !== 0 && setErrMsgFromServer('');
+    setInputs({ ...inputs, [name]: value });
   };
   return (
     <main className="flex w-screen h-screen bg-primary_bg_color text-primary_title_color">
@@ -55,10 +71,9 @@ const LogIn = () => {
               <input
                 type="email"
                 className="mb-8 h-10 text-xl w-full pl-8"
-                onChange={(e) =>
-                  setInputs({ ...inputs, email: e.target.value })
-                }
+                onChange={(e) => handleOnChange(e)}
                 value={inputs.email}
+                name="email"
               />
               <MdMail className="absolute top-2.5 left-2 text-xl text-gray-300" />
             </div>
@@ -69,10 +84,9 @@ const LogIn = () => {
               <input
                 type={isVisible ? 'text' : 'password'}
                 className="h-10 mb-12 w-full px-8"
-                onChange={(e) =>
-                  setInputs({ ...inputs, password: e.target.value })
-                }
+                onChange={(e) => handleOnChange(e)}
                 value={inputs.password}
+                name="password"
               />
               <FaUnlockAlt className="absolute top-2.5 left-2 text-xl text-gray-300" />
               <AiFillEyeInvisible
@@ -112,11 +126,12 @@ const LogIn = () => {
               </Link>
             </div>
             <button
-              className="button"
+              className="button mb-2"
               onClick={(e) => loginWithEmailAndPassword(e)}
             >
               Login
             </button>
+            <p className="text-warning_color text-center">{errMsgFromServer}</p>
           </form>
         </div>
       </section>

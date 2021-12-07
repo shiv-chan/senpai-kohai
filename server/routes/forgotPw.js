@@ -1,7 +1,7 @@
 import express from 'express';
-import { sendResetPasswordEmail } from '../controllers/forgotPassword/forgotPassword.js';
-import { updatePassword } from '../controllers/forgotPassword/updatePassword.js';
-import { verifyUrl } from '../controllers/forgotPassword/verifyUrl.js';
+import { sendResetPasswordEmail_post } from '../controllers/forgotPassword/forgotPassword.js';
+import { updatePassword_put } from '../controllers/forgotPassword/updatePassword.js';
+import { verifyUrl_get } from '../controllers/forgotPassword/verifyUrl.js';
 const app = express();
 
 app.use('/reset/:hasheduserid', (req, res, next) => {
@@ -10,9 +10,8 @@ app.use('/reset/:hasheduserid', (req, res, next) => {
 });
 
 const router = express.Router();
-router.post('/', sendResetPasswordEmail);
-// router.post('/reset/:hasheduserid', verifyUrl);
-router.get('/reset/:hasheduserid', verifyUrl);
-router.put('/reset/:hasheduserid/send', updatePassword);
+router.post('/', sendResetPasswordEmail_post);
+router.get('/reset/:hasheduserid', verifyUrl_get);
+router.put('/reset/:hasheduserid/send', updatePassword_put);
 
 export default router;

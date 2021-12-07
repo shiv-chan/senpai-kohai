@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
 
-export const updatePassword = async (req, res) => {
+export const updatePassword_put = async (req, res) => {
   // console.log(req.body);
   const hasheduserid = req.params.hasheduserid;
   const { password, confirmedPassword } = req.body;

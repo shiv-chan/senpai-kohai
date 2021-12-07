@@ -8,6 +8,13 @@ import axios from 'axios';
 const ForgotPassword = () => {
   const [email, setEmail] = useState<string>('');
   const [isEmailsent, setIsEmailsent] = useState<boolean>(false);
+  const [errMsgFromServer, setErrMsgFromServer] = useState<string>('');
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    errMsgFromServer.length !== 0 && setErrMsgFromServer('');
+    setEmail(e.target.value);
+  };
 
   const sendResetPwEmail = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -20,9 +27,14 @@ const ForgotPassword = () => {
       );
       console.log(response.data.message);
       setIsEmailsent(true);
-      // setEmail("");
-    } catch (error) {
-      console.log(`this is error ${error}`);
+    } catch (error: any) {
+      if (error.response) {
+        console.error(error.response.data.message);
+        setErrMsgFromServer(error.response.data.message);
+      } else {
+        console.error(error);
+        setErrMsgFromServer('Sorry, unexpected error occured');
+      }
     }
   };
   return (
@@ -44,18 +56,21 @@ const ForgotPassword = () => {
                     type="email"
                     className="mb-8 h-10 text-xl w-full pl-8"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleOnChange(e)}
                   />
                   <MdMail className="absolute top-2.5 left-2 text-xl text-gray-300" />
                 </div>
-                <Link to="/forgotpassword/message">
-                  <button
-                    className="button w-full"
-                    onClick={(e) => sendResetPwEmail(e)}
-                  >
-                    Send
-                  </button>
-                </Link>
+                <button
+                  className="button w-full mb-2"
+                  onClick={(e) => sendResetPwEmail(e)}
+                >
+                  Send
+                </button>
+                {errMsgFromServer.length !== 0 && (
+                  <p className="text-warning_color text-center">
+                    {errMsgFromServer}
+                  </p>
+                )}
                 <Link
                   to="/login"
                   className="flex-initial underline m-auto mt-10"

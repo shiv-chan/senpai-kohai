@@ -15,7 +15,7 @@ const emailInfo = (email, hashedUserId) => {
   };
 };
 
-export const sendResetPasswordEmail = async (req, res) => {
+export const sendResetPasswordEmail_post = async (req, res) => {
   // const transporter = nodemailer.createTransport(
   //   sendgridTransport({
   //     auth: {
@@ -33,7 +33,6 @@ export const sendResetPasswordEmail = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email }).exec();
-    // console.log(user);
     if (user) {
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
       const resetPwUser = new forgotPwUser({
@@ -53,7 +52,6 @@ export const sendResetPasswordEmail = async (req, res) => {
       res.status(201).json({ message: 'email sent!' });
     } else {
       res.status(403).json({ message: `${email} is not registered` });
-      console.log(res.status(403));
     }
   } catch (error) {
     res.status(409).json({ message: error.message });

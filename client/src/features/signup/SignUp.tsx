@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LeftPart from '../../common/components/LeftPart';
 import ISingUpLogIn from '../../interfaces/signUpLogIn';
 import axios from 'axios';
@@ -7,30 +7,78 @@ import { MdMail } from 'react-icons/md';
 import { FaUnlockAlt } from 'react-icons/fa';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
+import validator from 'validator';
 
-const SignUp = () => {
+const SignUp: React.FC = () => {
   const [inputs, setInputs] = useState<ISingUpLogIn>({
     email: '',
     password: '',
   });
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState<boolean>(false);
+  const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
+  const [errMsgFromServer, setErrMsgFromServer] = useState<string>('');
+  const navigate = useNavigate();
+
+  const checkPassword = (password: string) =>
+    !validator.isStrongPassword(password, {
+      minLength: 6,
+      minLowercase: 1,
+      minUppercase: 0,
+      minNumbers: 1,
+      minSymbols: 0,
+    });
 
   const signUpWithEmailAndPassword = async (
     e: React.FormEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
+    if (!validator.isEmail(inputs.email)) {
+      setIsEmailInvalid(true);
+      return;
+    } else if (checkPassword(inputs.password)) {
+      setIsPasswordInvalid(true);
+      return;
+    }
     try {
-      console.log('clicked');
-      await axios.post('http://localhost:5000/signup', inputs, {
-        withCredentials: true,
-      });
-      console.log('signed up successfully!');
-      setInputs({
-        email: '',
-        password: '',
-      });
-    } catch (error) {
-      console.log(error);
+      const response = await axios.post(
+        'http://localhost:5000/signup',
+        inputs,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data.message);
+      navigate('/board');
+    } catch (error: any) {
+      if (error.response) {
+        console.error(error.response.data.message);
+        setErrMsgFromServer(error.response.data.message);
+      } else {
+        console.error(error);
+        setErrMsgFromServer('Sorry, unexpected error occured');
+      }
+    }
+  };
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    errMsgFromServer.length !== 0 && setErrMsgFromServer('');
+    if (name === 'email') {
+      setIsEmailInvalid((prevState) => prevState && !prevState);
+    } else if (name === 'password') {
+      setIsPasswordInvalid((prevState) => prevState && !prevState);
+    }
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    e.preventDefault();
+    if (name === 'email') {
+      !validator.isEmail(value) && setIsEmailInvalid(true);
+    } else if (name === 'password') {
+      checkPassword(value) && setIsPasswordInvalid(true);
     }
   };
 
@@ -55,25 +103,30 @@ const SignUp = () => {
             <div className="relative">
               <input
                 type="email"
-                className="mb-8 h-10 text-xl w-full pl-8"
-                onChange={(e) =>
-                  setInputs({ ...inputs, email: e.target.value })
-                }
+                className="h-10 text-xl w-full pl-8"
+                onChange={(e) => handleOnChange(e)}
+                onBlur={(e) => handleOnBlur(e)}
                 value={inputs.email}
+                name="email"
               />
               <MdMail className="absolute top-2.5 left-2 text-xl text-gray-300" />
             </div>
-            <label htmlFor="password" className="text-lg mb-2">
+            {isEmailInvalid ? (
+              <p className="text-warning_color">
+                Please input a valid email address
+              </p>
+            ) : null}
+            <label htmlFor="password" className="text-lg mb-2 mt-8">
               Password
             </label>
             <div className="relative">
               <input
                 type={isVisible ? 'text' : 'password'}
-                className="h-10 mb-12 w-full px-8"
-                onChange={(e) =>
-                  setInputs({ ...inputs, password: e.target.value })
-                }
+                className="h-10 w-full px-8"
+                onChange={(e) => handleOnChange(e)}
+                onBlur={(e) => handleOnBlur(e)}
                 value={inputs.password}
+                name="password"
               />
               <FaUnlockAlt className="absolute top-2.5 left-2 text-xl text-gray-300" />
               <AiFillEyeInvisible
@@ -103,12 +156,23 @@ const SignUp = () => {
                 onClick={() => setIsVisible((prevState) => !prevState)}
               />
             </div>
+            {isPasswordInvalid ? (
+              <p className="text-warning_color">
+                Your password has to be minimum 6 letters, at least one
+                lowercase and one number
+              </p>
+            ) : null}
             <button
-              className="button"
+              className="button mt-12 mb-2"
               onClick={(e) => signUpWithEmailAndPassword(e)}
             >
               Sign Up
             </button>
+            {errMsgFromServer.length !== 0 && (
+              <p className="text-warning_color text-center">
+                {errMsgFromServer}
+              </p>
+            )}
           </form>
         </div>
       </section>
