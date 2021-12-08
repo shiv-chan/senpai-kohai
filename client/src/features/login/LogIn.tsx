@@ -8,7 +8,7 @@ import { FaUnlockAlt } from 'react-icons/fa';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
 
-const LogIn = () => {
+const LogIn: React.FC = () => {
   const [inputs, setInputs] = useState<ISingUpLogIn>({
     email: '',
     password: '',
@@ -28,10 +28,6 @@ const LogIn = () => {
       });
       navigate('/board');
       console.log(response.data.message);
-      // setInputs({
-      //   email: '',
-      //   password: '',
-      // });
     } catch (error: any) {
       console.log(error);
       if (error.response) {
@@ -54,15 +50,17 @@ const LogIn = () => {
       <LeftPart />
       <section className="flex justify-center my-auto h-9/12 w-1/2 tablet_l_max:w-full ">
         <div className="flex flex-col justify-end h-full w-7/12 mobile_xl_max:w-9/12">
-          <h2 className="flex-initial text-4xl mb-2 mobile_l_max:text-3xl">
+          <h2 className="flex-initial text-4xl mb-3 mobile_l_max:text-3xl">
             Login
           </h2>
-          <p className="flex-initial mb-12 mobile_l_max:text-sm">
-            Not registered yet?{' '}
+          <div className="mb-12 flex mobile_m_max:flex-col">
+            <p className="flex-initial mr-1 mobile_l_max:text-sm">
+              Not registered yet?
+            </p>
             <Link to="/signup" className="underline font-bold">
               Create an Account
             </Link>
-          </p>
+          </div>
           <form action="" className="flex flex-col w-full">
             <label htmlFor="email" className="text-lg mb-2">
               Email Address
@@ -70,7 +68,7 @@ const LogIn = () => {
             <div className="relative">
               <input
                 type="email"
-                className="mb-8 h-10 text-xl w-full pl-8"
+                className="mb-8 h-10 text-xl w-full pl-8 rounded "
                 onChange={(e) => handleOnChange(e)}
                 value={inputs.email}
                 name="email"
@@ -83,7 +81,7 @@ const LogIn = () => {
             <div className="relative">
               <input
                 type={isVisible ? 'text' : 'password'}
-                className="h-10 mb-12 w-full px-8"
+                className="h-10 mb-12 w-full px-8 rounded"
                 onChange={(e) => handleOnChange(e)}
                 value={inputs.password}
                 name="password"
@@ -94,8 +92,7 @@ const LogIn = () => {
                   'cursor-pointer',
                   'absolute',
                   'top-2',
-                  'left-custom_left',
-                  'mobile_l_max:left-mb_custom_left',
+                  'right-2',
                   'text-2xl',
                   'text-gray-300',
                   isVisible ? 'hidden' : null,
@@ -107,8 +104,7 @@ const LogIn = () => {
                   'cursor-pointer',
                   'absolute',
                   'top-2',
-                  'left-custom_left',
-                  'mobile_l_max:left-mb_custom_left',
+                  'right-2',
                   'text-2xl',
                   'text-gray-300',
                   isVisible ? null : 'hidden',
@@ -116,9 +112,9 @@ const LogIn = () => {
                 onClick={() => setIsVisible((prevState) => !prevState)}
               />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between mobile_m_max:text-sm">
               <div className="mb-8">
-                <input type="checkbox" className="mr-1" />
+                <input type="checkbox" className="mr-1 cursor-pointer" />
                 <label htmlFor="">Remember me</label>
               </div>
               <Link to="/forgotpassword" className="underline font-bold">

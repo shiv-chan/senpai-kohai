@@ -110,7 +110,7 @@ const ForgotPasswordReset: React.FC = () => {
                   <div className="relative">
                     <input
                       type={isPwVisible ? 'text' : 'password'}
-                      className="h-10 mb-12 w-full px-8"
+                      className="h-10 mb-12 w-full px-8 rounded"
                       onChange={(e) => handleOnChange(e)}
                       value={passwords.password}
                       name="password"
@@ -121,8 +121,7 @@ const ForgotPasswordReset: React.FC = () => {
                         'cursor-pointer',
                         'absolute',
                         'top-2',
-                        'left-custom_left',
-                        'mobile_l_max:left-mb_custom_left',
+                        'right-2',
                         'text-2xl',
                         'text-gray-300',
                         isPwVisible ? 'hidden' : null,
@@ -134,8 +133,7 @@ const ForgotPasswordReset: React.FC = () => {
                         'cursor-pointer',
                         'absolute',
                         'top-2',
-                        'left-custom_left',
-                        'mobile_l_max:left-mb_custom_left',
+                        'right-2',
                         'text-2xl',
                         'text-gray-300',
                         isPwVisible ? null : 'hidden',
@@ -146,7 +144,7 @@ const ForgotPasswordReset: React.FC = () => {
                   <div className="relative">
                     <input
                       type={isConfirmedPwVisible ? 'text' : 'password'}
-                      className="h-10 w-full px-8"
+                      className="h-10 w-full px-8 rounded"
                       onChange={(e) => handleOnChange(e)}
                       value={passwords.confirmedPassword}
                       name="confirmedPassword"
@@ -157,8 +155,7 @@ const ForgotPasswordReset: React.FC = () => {
                         'cursor-pointer',
                         'absolute',
                         'top-2',
-                        'left-custom_left',
-                        'mobile_l_max:left-mb_custom_left',
+                        'right-2',
                         'text-2xl',
                         'text-gray-300',
                         isConfirmedPwVisible ? 'hidden' : null,
@@ -172,8 +169,7 @@ const ForgotPasswordReset: React.FC = () => {
                         'cursor-pointer',
                         'absolute',
                         'top-2',
-                        'left-custom_left',
-                        'mobile_l_max:left-mb_custom_left',
+                        'right-2',
                         'text-2xl',
                         'text-gray-300',
                         isConfirmedPwVisible ? null : 'hidden',

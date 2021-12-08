@@ -3,7 +3,7 @@ import React from 'react';
 import LeftPart from '../../common/components/LeftPart';
 import { Link } from 'react-router-dom';
 
-const ForgotPasswordResetSuccess = () => {
+const ForgotPasswordResetSuccess: React.FC = () => {
   return (
     <section className="flex justify-center my-auto h-9/12 w-1/2 tablet_l_max:w-full">
       <div className="flex flex-col justify-center text-center h-full w-10/12 mobile_xl_max:w-9/12">

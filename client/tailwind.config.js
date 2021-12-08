@@ -17,8 +17,6 @@ module.exports = {
         mobileHeaderHeight: '3.5rem',
         laptopHeaderHeight: '4rem',
         paddingAroundtheContent: '2.5rem',
-        custom_left: '93%',
-        mb_custom_left: '89%',
       },
       screens: {
         //min-width

@@ -5,7 +5,7 @@ import { MdMail } from 'react-icons/md';
 import ForgotPasswordMessage from './ForgotPasswordMessage';
 import axios from 'axios';
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [isEmailsent, setIsEmailsent] = useState<boolean>(false);
   const [errMsgFromServer, setErrMsgFromServer] = useState<string>('');
@@ -54,9 +54,10 @@ const ForgotPassword = () => {
                 <div className="relative">
                   <input
                     type="email"
-                    className="mb-8 h-10 text-xl w-full pl-8"
+                    className="mb-8 h-10 text-xl w-full pl-8 rounded"
                     value={email}
                     onChange={(e) => handleOnChange(e)}
+                    name="email"
                   />
                   <MdMail className="absolute top-2.5 left-2 text-xl text-gray-300" />
                 </div>

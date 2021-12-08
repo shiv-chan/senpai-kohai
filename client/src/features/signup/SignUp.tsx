@@ -87,15 +87,17 @@ const SignUp: React.FC = () => {
       <LeftPart />
       <section className="flex justify-center my-auto h-9/12 w-1/2 tablet_l_max:w-full">
         <div className="flex flex-col justify-center h-full w-7/12 mobile_xl_max:w-9/12">
-          <h2 className="flex-initial text-4xl mb-2 mobile_l_max:text-3xl">
+          <h2 className="flex-initial text-4xl mb-3 mobile_l_max:text-3xl">
             Create an Account
           </h2>
-          <p className="flex-initial mb-12">
-            Already have an account?{' '}
+          <div className="mb-12 flex mobile_m_max:flex-col">
+            <p className="flex-initial mr-1 mobile_l_max:text-sm">
+              Already have an account?
+            </p>
             <Link to="/login" className="underline font-bold">
               Login
             </Link>
-          </p>
+          </div>
           <form action="" className="flex flex-col w-full">
             <label htmlFor="email" className="text-lg mb-2">
               Email Address
@@ -103,7 +105,7 @@ const SignUp: React.FC = () => {
             <div className="relative">
               <input
                 type="email"
-                className="h-10 text-xl w-full pl-8"
+                className="h-10 text-xl w-full pl-8 rounded"
                 onChange={(e) => handleOnChange(e)}
                 onBlur={(e) => handleOnBlur(e)}
                 value={inputs.email}
@@ -122,7 +124,7 @@ const SignUp: React.FC = () => {
             <div className="relative">
               <input
                 type={isVisible ? 'text' : 'password'}
-                className="h-10 w-full px-8"
+                className="h-10 w-full px-8 rounded"
                 onChange={(e) => handleOnChange(e)}
                 onBlur={(e) => handleOnBlur(e)}
                 value={inputs.password}
@@ -134,8 +136,7 @@ const SignUp: React.FC = () => {
                   'cursor-pointer',
                   'absolute',
                   'top-2',
-                  'left-custom_left',
-                  'mobile_l_max:left-mb_custom_left',
+                  'right-2',
                   'text-2xl',
                   'text-gray-300',
                   isVisible ? 'hidden' : null,
@@ -147,8 +148,7 @@ const SignUp: React.FC = () => {
                   'cursor-pointer',
                   'absolute',
                   'top-2',
-                  'left-custom_left',
-                  'mobile_l_max:left-mb_custom_left',
+                  'right-2',
                   'text-2xl',
                   'text-gray-300',
                   isVisible ? null : 'hidden',
