@@ -53,6 +53,7 @@ const ForgotPassword: React.FC = () => {
                 </label>
                 <div className="relative">
                   <input
+                    id="email"
                     type="email"
                     className="mb-8 h-10 text-xl w-full pl-8 rounded"
                     value={email}

@@ -104,6 +104,7 @@ const SignUp: React.FC = () => {
             </label>
             <div className="relative">
               <input
+                id="email"
                 type="email"
                 className="h-10 text-xl w-full pl-8 rounded"
                 onChange={(e) => handleOnChange(e)}
@@ -123,6 +124,7 @@ const SignUp: React.FC = () => {
             </label>
             <div className="relative">
               <input
+                id="password"
                 type={isVisible ? 'text' : 'password'}
                 className="h-10 w-full px-8 rounded"
                 onChange={(e) => handleOnChange(e)}

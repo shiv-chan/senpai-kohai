@@ -67,6 +67,7 @@ const LogIn: React.FC = () => {
             </label>
             <div className="relative">
               <input
+                id="email"
                 type="email"
                 className="mb-8 h-10 text-xl w-full pl-8 rounded "
                 onChange={(e) => handleOnChange(e)}
@@ -80,6 +81,7 @@ const LogIn: React.FC = () => {
             </label>
             <div className="relative">
               <input
+                id="password"
                 type={isVisible ? 'text' : 'password'}
                 className="h-10 mb-12 w-full px-8 rounded"
                 onChange={(e) => handleOnChange(e)}
@@ -114,8 +116,12 @@ const LogIn: React.FC = () => {
             </div>
             <div className="flex justify-between mobile_m_max:text-sm">
               <div className="mb-8">
-                <input type="checkbox" className="mr-1 cursor-pointer" />
-                <label htmlFor="">Remember me</label>
+                <input
+                  id="checkbox"
+                  type="checkbox"
+                  className="mr-1 cursor-pointer"
+                />
+                <label htmlFor="checkbox">Remember me</label>
               </div>
               <Link to="/forgotpassword" className="underline font-bold">
                 Forgot password?

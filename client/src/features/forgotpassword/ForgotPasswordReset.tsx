@@ -8,8 +8,6 @@ import ForgotPasswordInvalidUrl from './ForgotPasswordInvalidUrl';
 import axios from 'axios';
 import validator from 'validator';
 import ForgotPasswordResetSuccess from './ForgotPasswordResetSuccess';
-// const PASSWORD_REGEX =
-//   /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9~`! @#\$%\^&*()_\-\+=\{\[\}\]\|\\:;"'<,>\.\?/]{6,32}$/;
 
 const ForgotPasswordReset: React.FC = () => {
   const [isPwVisible, setIsPwVisible] = useState<boolean>(false);
@@ -109,6 +107,7 @@ const ForgotPasswordReset: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
+                      id="password"
                       type={isPwVisible ? 'text' : 'password'}
                       className="h-10 mb-12 w-full px-8 rounded"
                       onChange={(e) => handleOnChange(e)}
