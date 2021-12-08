@@ -23,9 +23,9 @@ const KohaiProfile = () => {
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex flex-wrap gap-x-8 gap-y-4 relative">
 					<img
-						src="https://dummyimage.com/300x300/ededed/d4d4d4.png"
-						alt="dummy-profile"
-						className="w-1/3 h-1/3 rounded-full"
+						src={myProfile.profileImage}
+						alt="profile"
+						className="object-cover w-28 h-28 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full"
 					/>
 					<div className="flex flex-col justify-center">
 						<h1 className="text-xl font-bold mb-3">{profileName()}</h1>

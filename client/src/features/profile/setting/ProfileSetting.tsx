@@ -5,10 +5,14 @@ import SenpaiProfileSettingItems from './SenpaiProfileSettingItems';
 import KohaiProfileSettingItems from './KohaiProfileSettingItems';
 import axios from 'axios';
 import ToggleButton from '../../../common/components/ToggleButton';
-import { useAppSelector } from '../../../app/hook';
+import { useAppSelector, useAppDispatch } from '../../../app/hook';
+import { getUsers } from '../../../common/usersSlice';
+import { getProfile } from '../../../common/myProfileSlice';
+import { BiInfoCircle } from 'react-icons/bi';
 
 const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 	const myProfile = useAppSelector((state) => state.myProfile.myProfile);
+	const dispatch = useAppDispatch();
 	const { pathname } = useLocation(); // used as a flag to see if it's senpai or kohai *returns as /profile/setting/senpai
 	const navigate = useNavigate();
 	const [isSenpai, setIsSenpai] = useState<undefined | boolean>(undefined);
@@ -20,7 +24,9 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		description: '',
 		isActive: false,
 	});
+	const [imageFile, setImageFile] = useState<FileList | null>(null);
 	const [fileUrl, setFileUrl] = useState('');
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	useLayoutEffect(() => {
 		if (pathname === '/profile/setting/senpai') {
@@ -54,6 +60,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 			setInputs({ ...inputs, techStack: returnedArr });
 		} else if (name === 'image') {
 			const files = (e.target as HTMLInputElement).files;
+			setImageFile(files);
 			const imageUrl = files && URL.createObjectURL(files[0]);
 			imageUrl && setFileUrl(imageUrl);
 		} else {
@@ -65,13 +72,35 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
 		try {
-			const response = await axios.put(
-				`http://localhost:5000${pathname}`,
-				inputs,
-				{
-					withCredentials: true,
-				}
-			);
+			const formData = new FormData();
+			imageFile && formData.append('file', imageFile[0]);
+			formData.append('upload_preset', 'SenpaiKohai');
+
+			if (imageFile) {
+				const res = await axios.post(
+					`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+					formData
+				);
+
+				await axios.put(
+					`http://localhost:5000${pathname}`,
+					{ ...inputs, profileImage: res.data.secure_url },
+					{
+						withCredentials: true,
+					}
+				);
+			} else {
+				await axios.put(
+					`http://localhost:500${pathname}`,
+					{ ...inputs, profileImage: myProfile.profileImage },
+					{
+						withCredentials: true,
+					}
+				);
+			}
+
+			await dispatch(getProfile());
+
 			if (isSenpai) {
 				navigate('/profile/senpai');
 			} else {
@@ -79,8 +108,14 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 			}
 		} catch (err: any) {
 			if (err.response) {
-				console.error(err.response.data.message);
+				console.error(err.response.data);
+				if (err.response.data.message === 'Please enter a valid email') {
+					setErrorMessage(err.response.data.message);
+				} else {
+					setErrorMessage('Something went wrong...Please try again');
+				}
 			} else {
+				setErrorMessage('Something went wrong...Please try again');
 				console.error(err);
 			}
 		}
@@ -110,14 +145,9 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex gap-x-8 items-center">
 					<img
-						src={
-							fileUrl
-								? fileUrl
-								: 'https://dummyimage.com/300x300/ededed/d4d4d4.png'
-						}
-						// src="https://dummyimage.com/300x300/ededed/d4d4d4.png"
-						alt="dummy-profile"
-						className="w-1/3 h-1/3 rounded-full"
+						src={fileUrl ? fileUrl : myProfile.profileImage}
+						alt="profile"
+						className="object-cover w-28 h-28 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full"
 					/>
 					<div>
 						<h1 className="text-xl font-bold mb-2">{profileName()}</h1>
@@ -131,7 +161,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 				<p className="text-red-500">*required</p>
 				<form className="flex flex-col gap-y-6">
 					<article>
-						<label htmlFor="name" className="font-bold block">
+						<label htmlFor="name" className="font-bold nline-block">
 							*Name
 						</label>
 						<p className="text-sm">Please use your real name.</p>
@@ -145,9 +175,10 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 						/>
 					</article>
 					<article>
-						<label htmlFor="image" className="font-bold block">
+						<label htmlFor="image" className="font-bold inline-block">
 							Profile Picture
 						</label>
+						<br />
 						<input
 							type="file"
 							id="image"
@@ -155,9 +186,22 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 							accept="image/*"
 							onChange={handleOnChange}
 						/>
+						<div className="text-sm">
+							<p className="leading-snug">
+								The pre-set picture is generated by{' '}
+								<a
+									href="https://getavataaars.com/"
+									target="_blank"
+									rel="noreferrer"
+									className="font-semibold hover:text-white"
+								>
+									avataaars generator
+								</a>
+							</p>
+						</div>
 					</article>
 					<article>
-						<label htmlFor="email" className="font-bold block">
+						<label htmlFor="email" className="font-bold inline-block">
 							*Email can be reached at you
 						</label>
 						<p className="text-sm">This one will be on public.</p>
@@ -169,6 +213,12 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 							onChange={handleOnChange}
 							className="border border-gray-300 rounded focus:outline-none focus:border-primary_title_color"
 						/>
+						{errorMessage === 'Please enter a valid email' ? (
+							<p className="leading-snug text-red-500 flex items-center">
+								<BiInfoCircle />
+								{errorMessage}
+							</p>
+						) : null}
 					</article>
 					{isSenpai ? (
 						<SenpaiProfileSettingItems
@@ -182,7 +232,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 						/>
 					)}
 					<article>
-						<label htmlFor="description" className="block font-bold">
+						<label htmlFor="description" className="font-bold inline-block">
 							Description
 						</label>
 						<textarea
@@ -196,12 +246,20 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 						/>
 					</article>
 				</form>
-				<button
-					className="bg-primary_title_color w-48 px-4 py-2 text-white rounded cursor-pointer"
-					onClick={handleSubmitBtn}
-				>
-					Update Profile
-				</button>
+				<div>
+					{errorMessage && errorMessage !== 'Please enter a valid email' ? (
+						<p className="leading-snug text-red-500 flex items-center mb-4">
+							<BiInfoCircle />
+							{errorMessage}
+						</p>
+					) : null}
+					<button
+						className="bg-primary_title_color w-48 px-4 py-2 text-white rounded cursor-pointer"
+						onClick={handleSubmitBtn}
+					>
+						Update Profile
+					</button>
+				</div>
 			</div>
 		</div>
 	);
