@@ -1,6 +1,6 @@
 import User from '../models/userModels.js';
 import jwt from 'jsonwebtoken';
-import handleErrors from '../utils/handleErroes.js';
+import handleErrors from '../utils/handleErrors.js';
 
 export const signUp_post = async (req, res) => {
 	const { email, password } = req.body;
