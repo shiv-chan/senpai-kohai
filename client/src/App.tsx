@@ -1,13 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './common/components/Header';
 import routes from './config/routes';
 import RequireAuth from './common/components/RequireAuth';
 
 const App: React.FunctionComponent = () => {
 	return (
 		<Router>
-			<Header />
 			<Routes>
 				{routes.map((route, index) => {
 					if (route.protected) {
