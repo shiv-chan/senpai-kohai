@@ -10,6 +10,7 @@ import { getUsers } from '../../../common/usersSlice';
 import { getProfile } from '../../../common/myProfileSlice';
 import { BiInfoCircle } from 'react-icons/bi';
 import LoadingScreen from '../../../common/components/LoadingScreen';
+var sha1 = require('sha-1');
 
 const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 	const myProfile = useAppSelector((state) => state.myProfile.myProfile);
@@ -29,6 +30,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 	const [fileUrl, setFileUrl] = useState('');
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [hasOverlay, setHasOverlay] = useState<boolean>(false);
+	const [imageId, setImageId] = useState(null);
 
 	useLayoutEffect(() => {
 		if (pathname === '/profile/setting/senpai') {
@@ -48,6 +50,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 				description: myProfile[profileType].description,
 				isActive: myProfile[profileType].isActive,
 			});
+			setImageId(myProfile.profileImageId);
 		}
 	}, [pathname, myProfile, profileType]);
 
@@ -76,19 +79,46 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 		setHasOverlay(true);
 
 		try {
-			const formData = new FormData();
-			imageFile && formData.append('file', imageFile[0]);
-			formData.append('upload_preset', 'SenpaiKohai');
-
 			if (imageFile) {
+				const timestamp = Date.now();
+				const formDataDestroy = new FormData();
+				imageId && formDataDestroy.append('public_id', imageId);
+				formDataDestroy.append(
+					'api_key',
+					`${process.env.REACT_APP_CLOUDINARY_API_KEY}`
+				);
+				formDataDestroy.append('timestamp', timestamp.toString());
+				formDataDestroy.append(
+					'signature',
+					sha1(
+						`public_id=${imageId}&timestamp=${timestamp}${process.env.REACT_APP_CLOUDINARY_API_SECRET}`
+					)
+				);
+
+				const formDataUpload = new FormData();
+				imageFile && formDataUpload.append('file', imageFile[0]);
+				formDataUpload.append('upload_preset', 'SenpaiKohai');
+
+				imageId &&
+					(await axios.post(
+						`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/destroy`,
+						formDataDestroy
+					));
+
 				const res = await axios.post(
 					`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
-					formData
+					formDataUpload
 				);
+
+				console.log(res);
 
 				await axios.put(
 					`http://localhost:5000${pathname}`,
-					{ ...inputs, profileImage: res.data.secure_url },
+					{
+						...inputs,
+						profileImage: res.data.secure_url,
+						profileImageId: res.data.public_id,
+					},
 					{
 						withCredentials: true,
 					}
@@ -203,7 +233,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 										href="https://getavataaars.com/"
 										target="_blank"
 										rel="noreferrer"
-										className="font-semibold hover:text-white"
+										className="font-semibold hover:text-white underline"
 									>
 										avataaars generator
 									</a>
@@ -224,8 +254,8 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 								className="border border-gray-300 rounded focus:outline-none focus:border-primary_title_color"
 							/>
 							{errorMessage === 'Please enter a valid email' ? (
-								<p className="leading-snug text-red-500 flex items-center">
-									<BiInfoCircle />
+								<p className="text-red-500">
+									<BiInfoCircle className="inline" />
 									{errorMessage}
 								</p>
 							) : null}
@@ -258,8 +288,8 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 					</form>
 					<div>
 						{errorMessage && errorMessage !== 'Please enter a valid email' ? (
-							<p className="leading-snug text-red-500 flex items-center mb-4">
-								<BiInfoCircle />
+							<p className="text-red-500 mb-4">
+								<BiInfoCircle className="inline" />
 								{errorMessage}
 							</p>
 						) : null}

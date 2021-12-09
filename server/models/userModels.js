@@ -56,6 +56,9 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		default: generator.generateRandomAvatar(),
 	},
+	profileImageId: {
+		type: String,
+	},
 	senpaiProfile: {
 		id: {
 			type: String,

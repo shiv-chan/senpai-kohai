@@ -3,8 +3,15 @@ import jwt from 'jsonwebtoken';
 import validator from 'validator';
 
 export const porfile_put = (profileType) => async (req, res) => {
-	const { name, publicEmail, profileImage, isActive, description, techStack } =
-		req.body;
+	const {
+		name,
+		publicEmail,
+		profileImage,
+		profileImageId,
+		isActive,
+		description,
+		techStack,
+	} = req.body;
 	const token = req.cookies.access_token;
 
 	try {
@@ -18,6 +25,7 @@ export const porfile_put = (profileType) => async (req, res) => {
 				name,
 				publicEmail,
 				profileImage,
+				profileImageId,
 				[profileType]: {
 					id: targetUser[profileType].id,
 					isActive,
