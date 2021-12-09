@@ -13,7 +13,7 @@ const SenpaiProfile = () => {
 	};
 
 	const publicEmail = () => {
-		return myProfile.publicEmail === ''
+		return !myProfile.publicEmail
 			? 'Contact is not provided yet'
 			: myProfile.publicEmail;
 	};
