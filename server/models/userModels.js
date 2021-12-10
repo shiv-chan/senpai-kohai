@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
 	},
 	date: {
 		type: Date,
-		default: new Date(),
+		default: Date.now,
 	},
 	name: {
 		type: String,
@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema({
 	},
 	profileImage: {
 		type: String,
-		default: generator.generateRandomAvatar(),
+		default: generator.generateRandomAvatar,
 	},
 	profileImageId: {
 		type: String,
@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema({
 	senpaiProfile: {
 		id: {
 			type: String,
-			default: uuidv4(),
+			default: uuidv4,
 		},
 		isActive: {
 			type: Boolean,
@@ -79,7 +79,7 @@ const userSchema = new mongoose.Schema({
 	kohaiProfile: {
 		id: {
 			type: String,
-			default: uuidv4(),
+			default: uuidv4,
 		},
 		isActive: {
 			type: Boolean,
