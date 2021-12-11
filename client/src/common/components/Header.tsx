@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Squash as Hamburger } from 'hamburger-react';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../app/hook';
 import { checkValidToken } from '../authorizationSlice';
+import axios from 'axios';
 
 const Header = () => {
 	const hasValidToken = useAppSelector(
@@ -12,10 +13,27 @@ const Header = () => {
 	const dispatch = useAppDispatch();
 	const [isOpen, setOpen] = useState(false);
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(checkValidToken());
 	}, [dispatch]);
+
+	const handleClickLogout = async () => {
+		try {
+			const res = await axios.get('http://localhost:5000/logout', {
+				withCredentials: true,
+			});
+			navigate('/login');
+			console.log(res.data.message);
+		} catch (err: any) {
+			if (err.response) {
+				console.error(err.response.data.message);
+			} else {
+				console.error(err);
+			}
+		}
+	};
 
 	const menuStyle = () => {
 		return isOpen
@@ -26,7 +44,10 @@ const Header = () => {
 	const headerItems = () => {
 		return hasValidToken ? (
 			<div className="flex items-center gap-3">
-				<button className="border-2 border-solid	border-primary_bg_color rounded-full px-3 text-sm">
+				<button
+					className="border-2 border-solid	border-primary_bg_color rounded-full px-3 text-sm"
+					onClick={handleClickLogout}
+				>
 					Log out
 				</button>
 				<Hamburger
