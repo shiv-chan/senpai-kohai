@@ -46,52 +46,44 @@ const Header = () => {
 
 	return (
 		<>
-			{location.pathname === '/signup' ||
-			location.pathname === '/login' ||
-			location.pathname === '/forgotpassword' ||
-			location.pathname === '/forgotpassword/message' ||
-			location.pathname === '/forgotpassword/reset' ? null : (
-				<>
-					<header className="bg-header_color w-screen h-mobileHeaderHeight md:h-laptopHeaderHeight fixed z-30 menu">
-						<div className="flex items-center	font-sans text-primary_bg_color h-full mx-4">
-							<div className="flex-grow">
-								<Link to="/" className="italic font-bold">
-									Senpai-Kohai
-								</Link>
-							</div>
-							{headerItems()}
-						</div>
-					</header>
-					<div
-						className="w-screen bg-tertiary_bg_color fixed top-mobileHeaderHeight flex justify-center items-center transition duration-500 ease-linear transform menu z-20"
-						style={menuStyle()}
-					>
-						<ul className="text-header_color font-sans font-bold flex flex-col gap-y-4 text-xl">
-							<Link to="/board" onClick={() => setOpen(false)}>
-								<li>Browsing Peeps</li>
-							</Link>
-							<Link to="/profile/senpai" onClick={() => setOpen(false)}>
-								<li>My Profile as Senpai</li>
-							</Link>
-							<Link to="/profile/kohai" onClick={() => setOpen(false)}>
-								<li>My Profile as Kohai</li>
-							</Link>
-						</ul>
+			<header className="bg-header_color w-screen h-mobileHeaderHeight md:h-laptopHeaderHeight fixed z-30 menu">
+				<div className="flex items-center	font-sans text-primary_bg_color h-full mx-4">
+					<div className="flex-grow">
+						<Link to="/" className="italic font-bold">
+							Senpai-Kohai
+						</Link>
 					</div>
-					<div
-						className={[
-							'z-10',
-							'w-full',
-							'h-screen',
-							'backdrop-filter',
-							'backdrop-blur-sm',
-							'fixed',
-							isOpen ? null : 'hidden',
-						].join(' ')}
-						onClick={() => setOpen(false)}
-					></div>
-				</>
-			)}
+					{headerItems()}
+				</div>
+			</header>
+			<div
+				className="w-screen bg-tertiary_bg_color fixed top-mobileHeaderHeight flex justify-center items-center transition duration-500 ease-linear transform menu z-20"
+				style={menuStyle()}
+			>
+				<ul className="text-header_color font-sans font-bold flex flex-col gap-y-4 text-xl">
+					<Link to="/board" onClick={() => setOpen(false)}>
+						<li>Browsing Peeps</li>
+					</Link>
+					<Link to="/profile/senpai" onClick={() => setOpen(false)}>
+						<li>My Profile as Senpai</li>
+					</Link>
+					<Link to="/profile/kohai" onClick={() => setOpen(false)}>
+						<li>My Profile as Kohai</li>
+					</Link>
+				</ul>
+			</div>
+			<div
+				className={[
+					'z-10',
+					'w-full',
+					'h-screen',
+					'backdrop-filter',
+					'backdrop-blur-sm',
+					'fixed',
+					isOpen ? null : 'hidden',
+				].join(' ')}
+				onClick={() => setOpen(false)}
+			></div>
 		</>
 	);
 };
