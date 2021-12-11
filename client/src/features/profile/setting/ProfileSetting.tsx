@@ -232,7 +232,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 									<a
 										href="https://getavataaars.com/"
 										target="_blank"
-										rel="noreferrer"
+										rel="noreferrer noopener"
 										className="font-semibold hover:text-white underline"
 									>
 										avataaars generator
