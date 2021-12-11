@@ -16,6 +16,9 @@ module.exports = {
 				mobileHeaderHeight: '3.5rem',
 				laptopHeaderHeight: '4rem',
 				paddingAroundtheContent: '2.5rem',
+				// px... padding x
+				laptopPxAroundtheContent: '4rem',
+				mobilePxAroundtheContent: '2rem',
 				custom_left: '93%',
 				mb_custom_left: '89%',
 			},

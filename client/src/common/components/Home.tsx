@@ -144,19 +144,25 @@ const Home = () => {
 					</AccordionItem>
 				</Accordion>
 			</section>
-			<section className="p-10">
-				<h2 className="text-2xl md:text-5xl font-bold text-center">Contact</h2>
-				<div className="md:flex md:p-10 p-10 md: grid justify-items-stretch">
+			<section className="p-paddingAroundtheContent mobile_xl_max:mobilePxAroundtheContent md:laptopPxAroundtheContent mb-16">
+				<h2 className="text-2xl md:text-5xl font-bold text-center mb-10 md:mb-20">
+					Contact
+				</h2>
+				<div className="flex flex-col md:flex-row justify-center items-center gap-y-8 md:gap-x-16 lg:gap-x-40">
 					<img
-						className="md:w-3/6 w-3/4 md:p-20 justify-self-center"
-						src="./assets/contact.svg"
+						className="w-3/4 md:w-3/6 max-w-md"
+						src="/assets/contact.svg"
 						alt="contact"
 					/>
-
-					<p className="text-center mt-10 md:mt-24 md:p-10  text-base md:text-2xl">
-						Please reach at xxxx@xxxx.com <br />
-						Thank you!
-					</p>
+					<div className="md:text-xl lg:text-2xl">
+						<p className="mb-2">
+							Please reach at{' '}
+							<address className="font-bold">
+								info.senpai.kohai@gmail.com
+							</address>
+						</p>
+						<p>Thank you!</p>
+					</div>
 				</div>
 			</section>
 		</div>
