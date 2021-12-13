@@ -4,10 +4,10 @@ import { updatePassword } from '../controllers/forgotPassword/updatePassword.js'
 import { verifyUrl } from '../controllers/forgotPassword/verifyUrl.js';
 const app = express();
 
-app.use('/reset/:hasheduserid', (req, res, next) => {
-  console.log('Request Id:', req.params.hasheduserid);
-  next();
-});
+// app.use('/reset/:hasheduserid', (req, res, next) => {
+//   console.log('Request Id:', req.params.hasheduserid);
+//   next();
+// });
 
 const router = express.Router();
 router.post('/', sendResetPasswordEmail);

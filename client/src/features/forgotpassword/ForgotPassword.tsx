@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   const [isEmailsent, setIsEmailsent] = useState<boolean>(false);
 
   const sendResetPwEmail = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+    // e.preventDefault();
     const data = { email };
     try {
       console.log('clicked');
@@ -49,10 +49,7 @@ const ForgotPassword = () => {
                   <MdMail className="absolute top-2.5 left-2 text-xl text-gray-300" />
                 </div>
                 <Link to="/forgotpassword/message">
-                  <button
-                    className="button w-full"
-                    onClick={(e) => sendResetPwEmail(e)}
-                  >
+                  <button className="button w-full" onClick={sendResetPwEmail}>
                     Send
                   </button>
                 </Link>

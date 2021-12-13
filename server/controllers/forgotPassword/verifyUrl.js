@@ -13,9 +13,7 @@ export const verifyUrl = async (req, res) => {
     });
     console.log(forgotPasswordUser);
     // 900000ms = 15min see how much time passed
-    const timePassed = forgotPasswordUser
-      ? timeAccessedToUrlAt - forgotPasswordUser.urlCreatedAt
-      : 900000;
+    const timePassed = timeAccessedToUrlAt - forgotPasswordUser.urlCreatedAt;
     if (forgotPasswordUser && timePassed < 900000) {
       res.status(201).json({ message: 'url still valid!' });
       console.log('url still valid!');
@@ -26,7 +24,8 @@ export const verifyUrl = async (req, res) => {
         (await forgotPwUser.deleteOne({ _id: forgotPasswordUser._id }));
     }
   } catch (error) {
-    console.log(error);
+    res.status(403).json({ message: 'This is an invalid URL' });
+    console.error(error);
   }
   return;
 };

@@ -27,34 +27,30 @@ const ForgotPasswordReset: React.FC = () => {
     setPasswords({ ...passwords, [name]: value });
   };
 
-  useEffect(() => {
-    const verifyUrl = async () => {
-      try {
-        console.log('verifying');
-        const response = await axios.get(
-          `http://localhost:5000/forgotpassword/reset/${hasheduserid}`
-        );
-        console.log(response.data.message);
-        setIsUrlValid(true);
-      } catch (error: any) {
-        console.log(`the url is already expired! ${error}`);
-        if (error.response) {
-          console.error(error.response.data.message);
-        } else {
-          console.error(error);
-        }
-        setIsUrlValid(false);
+  const verifyUrl = async () => {
+    try {
+      console.log('verifying');
+      const response = await axios.get(
+        `http://localhost:5000/forgotpassword/reset/${hasheduserid}`
+      );
+      console.log(response.data.message);
+      setIsUrlValid(true);
+    } catch (error: any) {
+      console.log(`the url is already expired! ${error}`);
+      if (error.response) {
+        console.error(error.response.data.message);
+      } else {
+        console.error(error);
       }
-    };
+      setIsUrlValid(false);
+    }
+  };
+
+  useEffect(() => {
     verifyUrl();
   }, []);
 
-  useEffect(() => {
-    return;
-  }, [isVisible]);
-
-  const updatePassword = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const updatePassword = async () => {
     // some functions
     if (passwords.password !== passwords.confirmedPassword) {
       setArePasswordDiff(true);
@@ -101,7 +97,7 @@ const ForgotPasswordReset: React.FC = () => {
                   <input
                     type={isVisible ? 'text' : 'password'}
                     className="h-10 mb-12 w-full px-8"
-                    onChange={(e) => handleOnChange(e)}
+                    onChange={handleOnChange}
                     value={passwords.password}
                     name="password"
                   />
@@ -137,7 +133,7 @@ const ForgotPasswordReset: React.FC = () => {
                   <input
                     type="password"
                     className="h-10 mb-12 w-full px-8"
-                    onChange={(e) => handleOnChange(e)}
+                    onChange={handleOnChange}
                     value={passwords.confirmedPassword}
                     name="confirmedPassword"
                   />
@@ -154,10 +150,7 @@ const ForgotPasswordReset: React.FC = () => {
                     lowercase and one number
                   </p>
                 )}
-                <button
-                  className="button mb-10"
-                  onClick={(e) => updatePassword(e)}
-                >
+                <button className="button mb-10" onClick={updatePassword}>
                   Create
                 </button>
                 <Link to="/login" className="flex-initial underline m-auto">
