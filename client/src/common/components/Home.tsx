@@ -12,7 +12,6 @@ import {
 import 'react-accessible-accordion/dist/fancy-example.css';
 
 const Home = () => {
-	// test, added style here just to see the classes work
 	return (
 		<div className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden">
 			<section className="p-10 md:p-20 md:grid md:grid-cols-7 md:grid-row-4 grid justify-items-stretch">
