@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaQuestionCircle } from 'react-icons/fa';
+import Header from './Header';
 
 import {
   Accordion,
@@ -11,9 +12,9 @@ import {
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
 
-const Home = () => {
-  //
-  return (
+const Home = () => (
+  <>
+    <Header />
     <main className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight py-paddingAroundtheContent ">
       <section className="flex justify-center px-28 tablet_md_max:px-10 mb-20 gap-x-8 tablet_md_max:mt-0 mt-4 xl:mt-8">
         <div className="flex flex-col tablet_md_max:items-center tablet_md_max:w-full xl:gap-y-4">
@@ -171,7 +172,7 @@ const Home = () => {
         </div>
       </section>
     </main>
-  );
-};
+  </>
+);
 
 export default Home;
