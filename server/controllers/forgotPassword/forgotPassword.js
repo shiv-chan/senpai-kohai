@@ -34,7 +34,7 @@ export const sendResetPasswordEmail_post = async (req, res) => {
   try {
     // if user didn't input his email address, or if there is only white space
     if (email === '' || !email.match(/\S/g))
-      throw new Error('Please input your email address');
+      throw new Error('Please enter your email address');
     const user = await User.findOne({ email }).exec();
     if (user) {
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
