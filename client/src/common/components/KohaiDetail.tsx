@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/hook';
 import { RiUser3Fill, MdEmail } from 'react-icons/all';
 import { IKohai } from '../../interfaces/profile';
+import ContactButton from './ContactButton';
 
 const KohaiDetail = () => {
 	const { id } = useParams();
@@ -76,6 +77,10 @@ const KohaiDetail = () => {
 						</div>
 					</article>
 				</section>
+				<ContactButton
+					name={profileNameDisplay()}
+					publicEmail={targetUser?.publicEmail}
+				/>
 			</div>
 		</div>
 	);

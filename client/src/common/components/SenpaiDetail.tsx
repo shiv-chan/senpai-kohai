@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/hook';
 import { FaUserNinja, MdEmail } from 'react-icons/all';
 import { ISenpai } from '../../interfaces/profile';
+import ContactButton from './ContactButton';
 
 const SenpaiDetail = () => {
 	const { id } = useParams();
@@ -77,6 +78,10 @@ const SenpaiDetail = () => {
 						</div>
 					</article>
 				</section>
+				<ContactButton
+					name={profileNameDisplay()}
+					publicEmail={targetUser?.publicEmail}
+				/>
 			</div>
 		</div>
 	);
