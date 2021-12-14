@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaQuestionCircle } from 'react-icons/fa';
+import Header from './Header';
 
 import {
 	Accordion,
@@ -11,65 +12,65 @@ import {
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
 
-const Home = () => {
-	// test, added style here just to see the classes work
-	return (
-		<div className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden">
-			<section className="p-10 md:p-20 md:grid md:grid-cols-7 md:grid-row-4 grid justify-items-stretch">
-				<h1 className="text-3xl font-bold md:text-7xl mt-5 text-center md:text-left col-start-1 col-span-3">
-					Senpai Kohai
-				</h1>
-				<img
-					className="md:w-6/6 md:row-span-4 md:col-span-4 mt-5"
-					src="./assets/shared_workspace.svg"
-					alt="shared_workspace"
-				/>
-				<p className="mt-5 font-bold text-base w-auto md:text-2xl text-center md:text-left col-span-3">
-					Find your guide, Support youngs
-				</p>
-				<p className="underline cursor-pointer mt-5 w-auto text-sm md:text-lg text-center md:text-left flex col-span-3 justify-self-center md:justify-self-start">
-					<FaQuestionCircle />
-					&nbsp; What are Senpai and Kohai?
-				</p>
-				<div
-					className="cursor-pointer 
+const Home = () => (
+	<>
+		<Header />
+		<main className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight py-paddingAroundtheContent ">
+			<section className="flex justify-center px-28 tablet_md_max:px-10 mb-20 gap-x-8 tablet_md_max:mt-0 mt-4 xl:mt-8">
+				<div className="flex flex-col tablet_md_max:items-center tablet_md_max:w-full xl:gap-y-4">
+					<div className="mt-7 font-bold">
+						<h1 className="text-center mobile_m_max:text-4xl text-5xl lg:text-7xl whitespace-nowrap md:text-left">
+							Senpai Kohai
+						</h1>
+						<p className="mt-5 text-2xl text-center tablet_l_max:text-xl mobile_l_max:w-48 mx-auto md:text-left md:whitespace-nowrap">
+							Find your guide, Support youngs
+						</p>
+					</div>
+					<img
+						className="w-full my-8 md:hidden"
+						src="./assets/shared_workspace.svg"
+						alt="shared_workspace"
+					/>
+					<div className="flex mt-5 items-center text-lg mobile_m_max:text-sm">
+						<FaQuestionCircle />
+						<p className="underline cursor-pointer ml-2 whitespace-nowrap">
+							What are Senpai and Kohai?
+						</p>
+					</div>
+					<Link
+						to="/signup"
+						className="tablet_md_max:w-full tablet_md_max:flex tablet_md_max:justify-center"
+					>
+						<button
+							className="cursor-pointer 
 								mt-5 
-								border-2 
-								py-2
-								md:py-1.5
-								w-28
-								h-10 
+							  inline-block
+								py-1
+							  px-4
 								text-primary_bg_color 
 								bg-primary_title_color 
 								rounded-full 
-								font-black 
+								font-black
 								hover:bg-secondary_bg_color 
-								text-center
-								text-sm
-								md:text-base
-								col-end-2
-								justify-self-center
-								md:justify-self-start
+								md:text-lg
+							  items-center
+                shadow-lg
 								"
-				>
-					<Link to="/signup">Join Now</Link>
+						>
+							Join Now
+						</button>
+					</Link>
 				</div>
+				<img
+					className="w-7/12 tablet_md_max:hidden"
+					src="./assets/shared_workspace.svg"
+					alt="shared_workspace"
+				/>
 			</section>
 			<section className="p-10 md:p-20 relative">
 				<h2 className="text-2xl md:text-5xl text-center font-bold mb-10 md:mb-20">
 					About
 				</h2>
-				<div className="text-md md:text-2xl max-w-screen-lg mx-auto relative z-10">
-					<p className="mb-4">
-						Volutpat enim commodo condimentum diam pellentesque egestas.
-					</p>
-					<p className="mb-4">
-						Ut tellus viverra amet, ullamcorper mattis eget proin feugiat.
-						Suspendisse diam egestas vulputate tristique amet convallis. Ipsum
-						viverra sagittis fusce interdum dis.
-					</p>
-					<p className="mb-4">Dolor cursus viverra tincidunt sed.</p>
-				</div>
 				<img
 					src="./assets/BlobL.svg"
 					alt="blob-l"
@@ -80,6 +81,17 @@ const Home = () => {
 					alt="blob-r"
 					className="absolute w-48 h-48 md:w-72 md:h-72 xl:w-full xl:h-full top-1/4 -right-14 xl:-top-0 xl:-right-1/2"
 				/>
+				<div className="text-md md:text-2xl max-w-screen-lg mx-auto relative">
+					<p className="mb-4">
+						Volutpat enim commodo condimentum diam pellentesque egestas.
+					</p>
+					<p className="mb-4">
+						Ut tellus viverra amet, ullamcorper mattis eget proin feugiat.
+						Suspendisse diam egestas vulputate tristique amet convallis. Ipsum
+						viverra sagittis fusce interdum dis.
+					</p>
+					<p className="mb-4">Dolor cursus viverra tincidunt sed.</p>
+				</div>
 			</section>
 			<section className="p-10 md:p-20">
 				<h2 className="text-2xl font-bold text-center md:text-5xl">Q&As</h2>
@@ -159,8 +171,8 @@ const Home = () => {
 					</p>
 				</div>
 			</section>
-		</div>
-	);
-};
+		</main>
+	</>
+);
 
 export default Home;
