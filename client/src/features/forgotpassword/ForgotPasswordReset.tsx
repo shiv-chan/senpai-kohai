@@ -16,6 +16,7 @@ const ForgotPasswordReset: React.FC = () => {
     confirmedPassword: '',
   });
   const [isUrlValid, setIsUrlValid] = useState<null | boolean>(null);
+  const [urlErrorMessage, setUrlErrorMessage] = useState<string>('');
   const [arePasswordsDiff, setArePasswordDiff] = useState<boolean>(false);
   const [isPasswordWeak, setIsPasswordWeak] = useState<boolean>(false);
   const { hasheduserid } = useParams();
@@ -36,9 +37,9 @@ const ForgotPasswordReset: React.FC = () => {
       console.log(response.data.message);
       setIsUrlValid(true);
     } catch (error: any) {
-      console.log(`the url is already expired! ${error}`);
       if (error.response) {
         console.error(error.response.data.message);
+        setUrlErrorMessage(error.response.data.message);
       } else {
         console.error(error);
       }
@@ -50,7 +51,8 @@ const ForgotPasswordReset: React.FC = () => {
     verifyUrl();
   }, []);
 
-  const updatePassword = async () => {
+  const updatePassword = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     // some functions
     if (passwords.password !== passwords.confirmedPassword) {
       setArePasswordDiff(true);
@@ -161,7 +163,9 @@ const ForgotPasswordReset: React.FC = () => {
           </section>
         </main>
       ) : (
-        <ForgotPasswordInvalidUrl />
+        urlErrorMessage !== '' && (
+          <ForgotPasswordInvalidUrl errorMessage={urlErrorMessage} />
+        )
       )}
     </>
   );

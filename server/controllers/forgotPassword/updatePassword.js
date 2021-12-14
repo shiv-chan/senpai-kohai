@@ -30,8 +30,7 @@ export const updatePassword = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltPassword);
     await User.updateOne(
       { _id: decodedUserId },
-      { password: hashedPassword },
-      runValidatorOption
+      { password: hashedPassword }
     ).exec();
     const forgotPasswordUser = await forgotPwUser.findOne({
       userId: decodedUserId._id,

@@ -6,8 +6,9 @@ export const verifyUrl = async (req, res) => {
   const timeAccessedToUrlAt = moment().utc().valueOf();
   const hasheduserid = req.params.hasheduserid;
   console.log(`hashed user id in verify url: ${hasheduserid}`);
-  const decodedUserId = jwt.verify(hasheduserid, process.env.TOKEN_SECRET);
   try {
+    const decodedUserId = jwt.verify(hasheduserid, process.env.TOKEN_SECRET);
+    console.log(decodedUserId);
     const forgotPasswordUser = await forgotPwUser.findOne({
       userId: decodedUserId,
     });
@@ -18,8 +19,7 @@ export const verifyUrl = async (req, res) => {
       res.status(201).json({ message: 'url still valid!' });
       console.log('url still valid!');
     } else {
-      res.status(403).json({ message: 'uh oh url is already expired' });
-      console.log('uh-oh, url is already expired');
+      res.status(403).json({ message: 'Uh-oh, the url is already expired!' });
       forgotPasswordUser &&
         (await forgotPwUser.deleteOne({ _id: forgotPasswordUser._id }));
     }

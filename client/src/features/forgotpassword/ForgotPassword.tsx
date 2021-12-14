@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   const [isEmailsent, setIsEmailsent] = useState<boolean>(false);
 
   const sendResetPwEmail = async (e: React.FormEvent<HTMLButtonElement>) => {
-    // e.preventDefault();
+    e.preventDefault();
     const data = { email };
     try {
       console.log('clicked');
