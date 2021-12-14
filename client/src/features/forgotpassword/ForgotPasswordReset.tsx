@@ -109,8 +109,8 @@ const ForgotPasswordReset: React.FC = () => {
                     <input
                       id="password"
                       type={isPwVisible ? 'text' : 'password'}
-                      className="h-10 mb-12 w-full px-8 rounded"
-                      onChange={(e) => handleOnChange(e)}
+                      className="h-10 mb-12 w-full text-xl px-8 rounded"
+                      onChange={handleOnChange}
                       value={passwords.password}
                       name="password"
                     />
@@ -143,8 +143,8 @@ const ForgotPasswordReset: React.FC = () => {
                   <div className="relative">
                     <input
                       type={isConfirmedPwVisible ? 'text' : 'password'}
-                      className="h-10 w-full px-8 rounded"
-                      onChange={(e) => handleOnChange(e)}
+                      className="h-10 w-full text-xl px-8 rounded"
+                      onChange={handleOnChange}
                       value={passwords.confirmedPassword}
                       name="confirmedPassword"
                     />
@@ -189,10 +189,7 @@ const ForgotPasswordReset: React.FC = () => {
                       lowercase and one number
                     </p>
                   )}
-                  <button
-                    className="button my-10"
-                    onClick={(e) => updatePassword(e)}
-                  >
+                  <button className="button my-10" onClick={updatePassword}>
                     Create
                   </button>
                   <Link to="/login" className="flex-initial underline m-auto">

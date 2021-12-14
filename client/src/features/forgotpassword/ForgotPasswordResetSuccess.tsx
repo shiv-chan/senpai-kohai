@@ -11,7 +11,7 @@ const ForgotPasswordResetSuccess: React.FC = () => {
           New password set successfully!
         </p>
         <Link to="/login" className="flex-initial underline m-auto">
-          Login
+          Back to login
         </Link>
       </div>
     </section>

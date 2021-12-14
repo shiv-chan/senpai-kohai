@@ -107,8 +107,8 @@ const SignUp: React.FC = () => {
                 id="email"
                 type="email"
                 className="h-10 text-xl w-full pl-8 rounded"
-                onChange={(e) => handleOnChange(e)}
-                onBlur={(e) => handleOnBlur(e)}
+                onChange={handleOnChange}
+                onBlur={handleOnBlur}
                 value={inputs.email}
                 name="email"
               />
@@ -126,9 +126,9 @@ const SignUp: React.FC = () => {
               <input
                 id="password"
                 type={isVisible ? 'text' : 'password'}
-                className="h-10 w-full px-8 rounded"
-                onChange={(e) => handleOnChange(e)}
-                onBlur={(e) => handleOnBlur(e)}
+                className="h-10 w-full text-xl px-8 rounded"
+                onChange={handleOnChange}
+                onBlur={handleOnBlur}
                 value={inputs.password}
                 name="password"
               />
@@ -166,7 +166,7 @@ const SignUp: React.FC = () => {
             ) : null}
             <button
               className="button mt-12 mb-2"
-              onClick={(e) => signUpWithEmailAndPassword(e)}
+              onClick={signUpWithEmailAndPassword}
             >
               Sign Up
             </button>

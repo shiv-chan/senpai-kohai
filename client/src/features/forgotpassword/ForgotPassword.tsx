@@ -8,11 +8,11 @@ import axios from 'axios';
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [isEmailsent, setIsEmailsent] = useState<boolean>(false);
-  const [errMsgFromServer, setErrMsgFromServer] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    errMsgFromServer.length !== 0 && setErrMsgFromServer('');
+    errorMessage.length !== 0 && setErrorMessage('');
     setEmail(e.target.value);
   };
 
@@ -30,10 +30,10 @@ const ForgotPassword: React.FC = () => {
     } catch (error: any) {
       if (error.response) {
         console.error(error.response.data.message);
-        setErrMsgFromServer(error.response.data.message);
+        setErrorMessage(error.response.data.message);
       } else {
         console.error(error);
-        setErrMsgFromServer('Sorry, unexpected error occured');
+        setErrorMessage('Sorry, unexpected error occured');
       }
     }
   };
@@ -57,20 +57,20 @@ const ForgotPassword: React.FC = () => {
                     type="email"
                     className="mb-8 h-10 text-xl w-full pl-8 rounded"
                     value={email}
-                    onChange={(e) => handleOnChange(e)}
+                    onChange={handleOnChange}
                     name="email"
                   />
                   <MdMail className="absolute top-2.5 left-2 text-xl text-gray-300" />
                 </div>
                 <button
                   className="button w-full mb-2"
-                  onClick={(e) => sendResetPwEmail(e)}
+                  onClick={sendResetPwEmail}
                 >
                   Send
                 </button>
-                {errMsgFromServer.length !== 0 && (
+                {errorMessage.length !== 0 && (
                   <p className="text-warning_color text-center">
-                    {errMsgFromServer}
+                    {errorMessage}
                   </p>
                 )}
                 <Link

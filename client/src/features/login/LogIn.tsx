@@ -70,7 +70,7 @@ const LogIn: React.FC = () => {
                 id="email"
                 type="email"
                 className="mb-8 h-10 text-xl w-full pl-8 rounded "
-                onChange={(e) => handleOnChange(e)}
+                onChange={handleOnChange}
                 value={inputs.email}
                 name="email"
               />
@@ -83,8 +83,8 @@ const LogIn: React.FC = () => {
               <input
                 id="password"
                 type={isVisible ? 'text' : 'password'}
-                className="h-10 mb-12 w-full px-8 rounded"
-                onChange={(e) => handleOnChange(e)}
+                className="h-10 mb-12 text-xl w-full px-8 rounded"
+                onChange={handleOnChange}
                 value={inputs.password}
                 name="password"
               />
@@ -127,10 +127,7 @@ const LogIn: React.FC = () => {
                 Forgot password?
               </Link>
             </div>
-            <button
-              className="button mb-2"
-              onClick={(e) => loginWithEmailAndPassword(e)}
-            >
+            <button className="button mb-2" onClick={loginWithEmailAndPassword}>
               Login
             </button>
             <p className="text-warning_color text-center">{errMsgFromServer}</p>
