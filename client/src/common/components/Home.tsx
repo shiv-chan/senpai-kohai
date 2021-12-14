@@ -9,7 +9,7 @@ import {
 	AccordionItemButton,
 	AccordionItemPanel,
 } from 'react-accessible-accordion';
-import 'react-accessible-accordion/dist/fancy-example.css';
+import './accordion.css';
 
 const Home = () => {
 	return (
@@ -80,10 +80,16 @@ const Home = () => {
 					className="absolute w-48 h-48 md:w-72 md:h-72 xl:w-full xl:h-full top-1/4 -right-14 xl:-top-0 xl:-right-1/2"
 				/>
 			</section>
-			<section className="p-10 md:p-20">
-				<h2 className="text-2xl font-bold text-center md:text-5xl">Q&As</h2>
-				<Accordion className="text-sm md:text-2xl">
-					<AccordionItem className="p-3">
+			<section className="p-10 md:p-20 relative">
+				<h2 className="text-2xl md:text-5xl text-center font-bold mb-10 md:mb-20">
+					Q&As
+				</h2>
+				<Accordion
+					allowMultipleExpanded
+					allowZeroExpanded
+					className="text-sm md:text-2xl w-full max-w-4xl grid grid-flow-row auto-rows-auto gap-y-5 m-auto md:gap-y-8"
+				>
+					<AccordionItem>
 						<AccordionItemHeading>
 							<AccordionItemButton>
 								Who is Senpai for Kohai ?
@@ -97,7 +103,7 @@ const Home = () => {
 							</p>
 						</AccordionItemPanel>
 					</AccordionItem>
-					<AccordionItem className="p-3">
+					<AccordionItem>
 						<AccordionItemHeading>
 							<AccordionItemButton>Why you need Senpai ?</AccordionItemButton>
 						</AccordionItemHeading>
@@ -112,7 +118,7 @@ const Home = () => {
 							</p>
 						</AccordionItemPanel>
 					</AccordionItem>
-					<AccordionItem className="p-3">
+					<AccordionItem>
 						<AccordionItemHeading>
 							<AccordionItemButton>How does it work ?</AccordionItemButton>
 						</AccordionItemHeading>
@@ -124,7 +130,7 @@ const Home = () => {
 							</p>
 						</AccordionItemPanel>
 					</AccordionItem>
-					<AccordionItem className="p-3">
+					<AccordionItem>
 						<AccordionItemHeading>
 							<AccordionItemButton>Why Kohais and Senpai ?</AccordionItemButton>
 						</AccordionItemHeading>
