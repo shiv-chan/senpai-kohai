@@ -32,7 +32,7 @@ const SenpaiDetail = () => {
 			: targetUser?.publicEmail;
 	};
 
-	return (
+	return targetUser ? (
 		<div className="bg-primary_bg_color w-full min-h-screen pt-mobileHeaderHeight lg:pt-laptopHeaderHeight">
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex flex-wrap gap-x-8 gap-y-4 relative">
@@ -84,6 +84,10 @@ const SenpaiDetail = () => {
 				/>
 			</div>
 		</div>
+	) : (
+		<h1 className="pt-mobileHeaderHeight lg:pt-laptopHeaderHeight">
+			Page Not Found!
+		</h1>
 	);
 };
 
