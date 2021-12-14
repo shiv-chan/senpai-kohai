@@ -2,20 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/hook';
 import { FaUserNinja, MdEmail } from 'react-icons/all';
+import { ISenpai } from '../../interfaces/profile';
 
 const SenpaiDetail = () => {
 	const { id } = useParams();
 	const users = useAppSelector((state) => state.users.users);
-	const [targetUser, setTargetUser] = useState<{
-		name: string;
-		profileImage: string;
-		senpaiProfile: {
-			id: string;
-			description: string;
-			techStack: string[];
-		};
-		publicEmail: string;
-	} | null>(null);
+	const [targetUser, setTargetUser] = useState<ISenpai | null>(null);
 
 	useEffect(() => {
 		if (users)
