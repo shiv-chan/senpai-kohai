@@ -12,34 +12,27 @@ import {
 import 'react-accessible-accordion/dist/fancy-example.css';
 
 const Home = () => {
-  // test, added style here just to see the classes work
+  //
   return (
     <main className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight py-paddingAroundtheContent ">
-      <section className="flex justify-evenly px-laptopPxAroundtheContent tablet_md_max:px-mobileHeaderHeight mb-20">
-        <div className="flex flex-col justify-between tablet_md_max:items-center">
+      <section className="flex justify-center px-24 tablet_md_max:px-10 mb-20 gap-x-8">
+        <div className="flex flex-col tablet_md_max:items-center tablet_md_max:w-full xl:gap-y-4">
           <div className="mt-7 font-bold">
-            <h1 className="lg:text-7xl tablet_l_max:text-5xl tablet_md_max:text-center mobile_m_max:hidden">
+            <h1 className="text-center mobile_m_max:text-4xl text-5xl lg:text-7xl whitespace-nowrap md:text-left">
               Senpai Kohai
             </h1>
-            <p className="mt-5 text-2xl tablet_l_max:text-xl mobile_m_max:hidden">
-              Find your guide, Support youngs
-            </p>
-            {/* ↓ for mobile version */}
-            <h1 className="text-center text-4xl mobile_m:hidden">
-              Senpai Kohai
-            </h1>
-            <p className="mt-5 text-lg text-center mobile_m:hidden">
+            <p className="mt-5 text-2xl text-center tablet_l_max:text-xl mobile_l_max:w-48 mx-auto md:text-left md:whitespace-nowrap">
               Find your guide, Support youngs
             </p>
           </div>
           <img
-            className="w-80 my-8 md:hidden"
+            className="w-full my-8 md:hidden"
             src="./assets/shared_workspace.svg"
             alt="shared_workspace"
           />
           <div className="flex mt-5 items-center text-lg mobile_m_max:text-sm">
             <FaQuestionCircle />
-            <p className="underline cursor-pointer ml-2">
+            <p className="underline cursor-pointer ml-2 whitespace-nowrap">
               What are Senpai and Kohai?
             </p>
           </div>
@@ -50,33 +43,17 @@ const Home = () => {
             <button
               className="cursor-pointer 
 								mt-5 
-								py-3.5
-								w-48
+							  inline-block
+								py-1
+							  px-4
 								text-primary_bg_color 
 								bg-primary_title_color 
 								rounded-full 
 								font-black
 								hover:bg-secondary_bg_color 
 								md:text-lg
-								tablet_md_max:w-80
-								mobile_m_max:hidden
-								tablet_l_max:p-2.5
-								"
-            >
-              Join Now
-            </button>
-            {/* ↓ for mobile version */}
-            <button
-              className="cursor-pointer 
-								mt-5 
-								py-2.5
-								w-56
-								text-primary_bg_color 
-								bg-primary_title_color 
-								rounded-full 
-								font-black
-								hover:bg-secondary_bg_color 
-								mobile_m:hidden
+							  items-center
+                shadow-lg
 								"
             >
               Join Now
