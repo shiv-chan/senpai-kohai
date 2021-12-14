@@ -15,7 +15,7 @@ const Home = () => {
   //
   return (
     <main className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight py-paddingAroundtheContent ">
-      <section className="flex justify-center px-24 tablet_md_max:px-10 mb-20 gap-x-8">
+      <section className="flex justify-center px-28 tablet_md_max:px-10 mb-20 gap-x-8 tablet_md_max:mt-0 mt-4 xl:mt-8">
         <div className="flex flex-col tablet_md_max:items-center tablet_md_max:w-full xl:gap-y-4">
           <div className="mt-7 font-bold">
             <h1 className="text-center mobile_m_max:text-4xl text-5xl lg:text-7xl whitespace-nowrap md:text-left">
