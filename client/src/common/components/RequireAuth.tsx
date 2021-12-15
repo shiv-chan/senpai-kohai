@@ -4,6 +4,7 @@ import { checkValidToken } from '../authorizationSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hook';
 import { getUsers } from '../usersSlice';
 import { getProfile } from '../myProfileSlice';
+import Header from './Header';
 
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
 	const hasValidToken = useAppSelector(
@@ -29,7 +30,12 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 		return <Navigate to="/login" state={{ from: location }} />;
 	}
 
-	return hasValidToken ? children : null;
+	return hasValidToken ? (
+		<>
+			<Header />
+			{children}
+		</>
+	) : null;
 };
 
 export default RequireAuth;

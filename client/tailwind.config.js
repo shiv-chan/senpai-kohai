@@ -33,7 +33,9 @@ module.exports = {
 				mobile_m_max: { max: '374px' },
 				mobile_l_max: { max: '424px' },
 				mobile_xl_max: { max: '639px' },
-				tablet_l_max: { max: '1024px' },
+				tablet_md_max: { max: '767px' },
+				tablet_l_max: { max: '1023px' },
+				laptop_sm_max: { max: '1279px' },
 			},
 			minHeight: {
 				6: '6rem',
