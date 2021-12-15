@@ -6,16 +6,14 @@ const BrowsingPage = () => {
   const users = useAppSelector((state) => state.users.users);
   const myProfile = useAppSelector((state) => state.myProfile.myProfile);
   const [otherUsers, setOtherUsers] = useState([]);
-  console.log(myProfile);
-  console.log(users);
 
   const createOtherUsersList = () => {
     const otherUsersList = users.filter(
       (user: any) => user._id !== myProfile._id
     );
     setOtherUsers(otherUsersList);
+    console.log(otherUsersList);
   };
-  console.log(otherUsers);
 
   useEffect(() => {
     if (users && myProfile) createOtherUsersList();
@@ -24,25 +22,23 @@ const BrowsingPage = () => {
   return (
     <>
       {otherUsers.length !== 0 && (
-        <main className="bg-primary_bg_color flex justify-center items-center  mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight px-14 py-16 w-full">
-          <div className="flex flex-row flex-wrap justify-center items-center gap-6">
-            {otherUsers.map((user: any, index: number) => (
-              <>
-                <UserCard
-                  {...user}
-                  key={user.senpaiProfile.id}
-                  profile={user.senpaiProfile}
-                  isSenpai={true}
-                />
-                <UserCard
-                  {...user}
-                  key={user.kohaiProfile.id}
-                  profile={user.kohaiProfile}
-                  isSenpai={false}
-                />
-              </>
-            ))}
-          </div>
+        <main className="bg-primary_bg_color flex flex-row flex-wrap justify-center items-center  mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight px-14 py-16 w-full gap-6">
+          {otherUsers.map((user: any) => (
+            <>
+              <UserCard
+                {...user}
+                key={user.senpaiProfile.id}
+                profile={user.senpaiProfile}
+                isSenpai={true}
+              />
+              <UserCard
+                {...user}
+                key={user.kohaiProfile.id}
+                profile={user.kohaiProfile}
+                isSenpai={false}
+              />
+            </>
+          ))}
         </main>
       )}
     </>

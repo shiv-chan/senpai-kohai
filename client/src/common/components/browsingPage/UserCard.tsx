@@ -67,9 +67,12 @@ const UserCard = ({
           </div>
         </div>
         <div className="flex flex-wrap">
-          {profile.techStack.map((tachStack) => (
-            <span className="bg-tertiary_bg_color m-1 px-1.5 rounded-full mobile_l_max:text-xs">
-              {tachStack}
+          {profile.techStack.map((techStack) => (
+            <span
+              key={techStack}
+              className="bg-tertiary_bg_color m-1 px-1.5 rounded-full mobile_l_max:text-xs"
+            >
+              {techStack}
             </span>
           ))}
         </div>
