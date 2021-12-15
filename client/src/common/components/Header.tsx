@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Squash as Hamburger } from 'hamburger-react';
-import { useAppSelector, useAppDispatch } from '../../app/hook';
-import { checkValidToken } from '../authorizationSlice';
+import { useAppSelector } from '../../app/hook';
 import axios from 'axios';
 
 const Header = () => {
 	const hasValidToken = useAppSelector(
 		(state) => state.authorization.hasValidToken
 	);
-	const dispatch = useAppDispatch();
 	const [isOpen, setOpen] = useState(false);
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		dispatch(checkValidToken());
-	}, [dispatch]);
 
 	const handleClickLogout = async () => {
 		try {
