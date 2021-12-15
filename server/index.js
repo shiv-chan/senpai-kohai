@@ -9,6 +9,7 @@ import profileRoute from './routes/profile.js';
 import forgotPwRoute from './routes/forgotPw.js';
 import authorizationRoute from './routes/authorization.js';
 import usersRoute from './routes/users.js';
+import logoutRoute from './routes/logout.js';
 
 const app = express();
 dotenv.config();
@@ -28,6 +29,7 @@ app.use('/profile', profileRoute);
 app.use('/authorization', authorizationRoute);
 app.use('/users', usersRoute);
 app.use('/forgotpassword', forgotPwRoute);
+app.use('/logout', logoutRoute);
 
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 5000;

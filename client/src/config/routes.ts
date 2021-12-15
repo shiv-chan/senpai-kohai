@@ -9,7 +9,9 @@ import SignUp from '../features/signup/SignUp';
 import ForgotPassword from '../features/forgotpassword/ForgotPassword';
 import ForgotPasswordMessage from '../features/forgotpassword/ForgotPasswordMessage';
 import ForgotPasswordReset from '../features/forgotpassword/ForgotPasswordReset';
-import Detail from '../common/components/Detail';
+import SenpaiDetail from '../common/components/SenpaiDetail';
+import KohaiDetail from '../common/components/KohaiDetail';
+import PageNotFound from '../common/components/PageNotFound';
 
 const routes: IRoute[] = [
   {
@@ -79,10 +81,22 @@ const routes: IRoute[] = [
     component: ForgotPasswordReset,
   },
   {
-    path: 'profile/:id',
-    name: 'Detail',
+    path: 'profile/senpai/:id',
+    name: 'Senpai Detail',
     protected: true,
-    component: Detail,
+    component: SenpaiDetail,
+  },
+  {
+    path: 'profile/kohai/:id',
+    name: 'Kohai Detail',
+    protected: true,
+    component: KohaiDetail,
+  },
+  {
+    path: '*',
+    name: 'Page Not Found',
+    protected: false,
+    component: PageNotFound,
   },
 ];
 

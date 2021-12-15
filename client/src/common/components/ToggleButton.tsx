@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
@@ -7,19 +7,34 @@ import { deepPurple, indigo } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 import IProfileSetting from '../../interfaces/profileSetting';
+import { useAppSelector, useAppDispatch } from '../../app/hook';
+import { getUsers } from '../usersSlice';
+import { getProfile } from '../myProfileSlice';
 
 const ToggleButton: React.FunctionComponent<{
 	isSenpai: undefined | boolean;
 	inputs: IProfileSetting;
 	setInputs: React.Dispatch<React.SetStateAction<IProfileSetting>>;
 }> = ({ isSenpai, inputs, setInputs }) => {
+	const myProfile = useAppSelector((state) => state.myProfile.myProfile);
+	const dispatch = useAppDispatch();
 	const mobileDevices = useMediaQuery('(max-width:425px)');
 
 	const labelText = isSenpai
 		? "I'm available for support"
 		: "I'm looking for support";
 
-	const [isChecked, setIsChecked] = useState(false);
+	const [isChecked, setIsChecked] = useState<boolean>(false);
+
+	useEffect(() => {
+		myProfile.senpaiProfile &&
+			myProfile.kohaiProfile &&
+			setIsChecked(
+				isSenpai
+					? myProfile.senpaiProfile.isActive
+					: myProfile.kohaiProfile.isActive
+			);
+	}, [isSenpai, myProfile]);
 
 	const ToggleLabel = styled(FormControlLabel)(() => ({
 		'& .MuiFormControlLabel-label': {
@@ -63,7 +78,7 @@ const ToggleButton: React.FunctionComponent<{
 		setInputs({ ...inputs, isActive: checked });
 		setIsChecked((prevState) => !prevState);
 		try {
-			const response = await axios.put(
+			await axios.put(
 				`http://localhost:5000${pathname}`,
 				{
 					isActive: checked,
@@ -79,6 +94,9 @@ const ToggleButton: React.FunctionComponent<{
 				console.error(err);
 			}
 		}
+
+		dispatch(getUsers());
+		dispatch(getProfile());
 	};
 
 	return (
