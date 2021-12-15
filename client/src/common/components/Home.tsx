@@ -11,7 +11,7 @@ import {
 	AccordionItemButton,
 	AccordionItemPanel,
 } from 'react-accessible-accordion';
-import 'react-accessible-accordion/dist/fancy-example.css';
+import './accordion.css';
 
 const Home = () => {
 	return (
@@ -95,10 +95,16 @@ const Home = () => {
 						<p className="mb-4">Dolor cursus viverra tincidunt sed.</p>
 					</div>
 				</section>
-				<section className="p-10 md:p-20">
-					<h2 className="text-2xl font-bold text-center md:text-5xl">Q&As</h2>
-					<Accordion className="p-10 text-sm md:text-2xl w-auto">
-						<AccordionItem className="p-5">
+				<section className="p-10 md:p-20 relative">
+					<h2 className="text-2xl md:text-5xl text-center font-bold mb-10 md:mb-20">
+						Q&As
+					</h2>
+					<Accordion
+						allowMultipleExpanded
+						allowZeroExpanded
+						className="text-sm md:text-2xl w-full max-w-4xl grid grid-flow-row auto-rows-auto gap-y-5 m-auto md:gap-y-8"
+					>
+						<AccordionItem>
 							<AccordionItemHeading>
 								<AccordionItemButton>
 									Who is Senpai for Kohai ?
@@ -112,7 +118,7 @@ const Home = () => {
 								</p>
 							</AccordionItemPanel>
 						</AccordionItem>
-						<AccordionItem className="p-5">
+						<AccordionItem>
 							<AccordionItemHeading>
 								<AccordionItemButton>Why you need Senpai ?</AccordionItemButton>
 							</AccordionItemHeading>
@@ -127,7 +133,7 @@ const Home = () => {
 								</p>
 							</AccordionItemPanel>
 						</AccordionItem>
-						<AccordionItem className="p-5">
+						<AccordionItem>
 							<AccordionItemHeading>
 								<AccordionItemButton>How does it work ?</AccordionItemButton>
 							</AccordionItemHeading>
@@ -139,10 +145,10 @@ const Home = () => {
 								</p>
 							</AccordionItemPanel>
 						</AccordionItem>
-						<AccordionItem className="p-5">
+						<AccordionItem>
 							<AccordionItemHeading>
 								<AccordionItemButton>
-									What you can do for Kohais ?
+									Why Kohais and Senpai ?
 								</AccordionItemButton>
 							</AccordionItemHeading>
 							<AccordionItemPanel>
