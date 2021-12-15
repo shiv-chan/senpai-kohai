@@ -16,6 +16,9 @@ module.exports = {
 				mobileHeaderHeight: '3.5rem',
 				laptopHeaderHeight: '4rem',
 				paddingAroundtheContent: '2.5rem',
+				// px... padding x
+				laptopPxAroundtheContent: '4rem',
+				mobilePxAroundtheContent: '2rem',
 				custom_left: '93%',
 				mb_custom_left: '89%',
 			},
@@ -30,7 +33,9 @@ module.exports = {
 				mobile_m_max: { max: '374px' },
 				mobile_l_max: { max: '424px' },
 				mobile_xl_max: { max: '639px' },
-				tablet_l_max: { max: '1024px' },
+				tablet_md_max: { max: '767px' },
+				tablet_l_max: { max: '1023px' },
+				laptop_sm_max: { max: '1279px' },
 			},
 			minHeight: {
 				6: '6rem',

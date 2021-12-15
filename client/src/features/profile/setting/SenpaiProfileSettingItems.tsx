@@ -7,7 +7,7 @@ const SenpaiProfileSettingItems: React.FunctionComponent<{
 }> = ({ inputs, handleOnChange }) => {
 	return (
 		<article>
-			<label htmlFor="tech-stack" className="font-bold block">
+			<label htmlFor="tech-stack" className="font-bold inline-block">
 				<p>*What skills do you have?</p>
 			</label>
 			<p className="text-sm">
