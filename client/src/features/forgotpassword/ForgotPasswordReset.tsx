@@ -17,6 +17,7 @@ const ForgotPasswordReset: React.FC = () => {
     confirmedPassword: '',
   });
   const [isUrlValid, setIsUrlValid] = useState<null | boolean>(null);
+  const [urlErrorMessage, setUrlErrorMessage] = useState<string>('');
   const [arePasswordsDiff, setArePasswordDiff] = useState<boolean>(false);
   const [isPasswordWeak, setIsPasswordWeak] = useState<boolean>(false);
   const [isPasswordSent, setIsPasswordSent] = useState<boolean>(false);
@@ -29,25 +30,26 @@ const ForgotPasswordReset: React.FC = () => {
     setPasswords({ ...passwords, [name]: value });
   };
 
-  useEffect(() => {
-    const verifyUrl = async () => {
-      try {
-        console.log('verifying');
-        const response = await axios.get(
-          `http://localhost:5000/forgotpassword/reset/${hasheduserid}`
-        );
-        console.log(response.data.message);
-        setIsUrlValid(true);
-      } catch (error: any) {
-        console.log(`the url is already expired! ${error}`);
-        if (error.response) {
-          console.error(error.response.data.message);
-        } else {
-          console.error(error);
-        }
-        setIsUrlValid(false);
+  const verifyUrl = async () => {
+    try {
+      console.log('verifying');
+      const response = await axios.get(
+        `http://localhost:5000/forgotpassword/reset/${hasheduserid}`
+      );
+      console.log(response.data.message);
+      setIsUrlValid(true);
+    } catch (error: any) {
+      if (error.response) {
+        console.error(error.response.data.message);
+        setUrlErrorMessage(error.response.data.message);
+      } else {
+        console.error(error);
       }
-    };
+      setIsUrlValid(false);
+    }
+  };
+
+  useEffect(() => {
     verifyUrl();
   }, []);
 
@@ -203,7 +205,9 @@ const ForgotPasswordReset: React.FC = () => {
           )}
         </main>
       ) : (
-        <ForgotPasswordInvalidUrl />
+        urlErrorMessage !== '' && (
+          <ForgotPasswordInvalidUrl errorMessage={urlErrorMessage} />
+        )
       )}
     </>
   );
