@@ -1,32 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../../app/hook';
 import UserCard from './UserCard';
 
 const BrowsingPage = () => {
   const users = useAppSelector((state) => state.users.users);
-  // const authorization = useAppSelector((state) => state.authorization);
+  const myProfile = useAppSelector((state) => state.myProfile.myProfile);
+  const [otherUsers, setOtherUsers] = useState([]);
+  console.log(myProfile);
   console.log(users);
+
+  const createOtherUsersList = () => {
+    const otherUsersList = users.filter(
+      (user: any) => user._id !== myProfile._id
+    );
+    setOtherUsers(otherUsersList);
+  };
+  console.log(otherUsers);
+
+  useEffect(() => {
+    if (users && myProfile) createOtherUsersList();
+  }, [users]);
 
   return (
     <>
-      {users && (
-        <main className="bg-primary_bg_color flex flex-row flex-wrap justify-center gap-6 mt-laptopHeaderHeight px-40 pt-16">
-          {users.map((user: any, index: number) => (
-            <>
-              <UserCard
-                {...user}
-                key={user.senpaiProfile.id}
-                profile={user.senpaiProfile}
-                isSenpai={true}
-              />
-              <UserCard
-                {...user}
-                key={user.kohaiProfile.id}
-                profile={user.kohaiProfile}
-                isSenpai={false}
-              />
-            </>
-          ))}
+      {otherUsers.length !== 0 && (
+        <main className="bg-primary_bg_color flex justify-center items-center  mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight px-14 py-16 w-full">
+          <div className="flex flex-row flex-wrap justify-center items-center gap-6">
+            {otherUsers.map((user: any, index: number) => (
+              <>
+                <UserCard
+                  {...user}
+                  key={user.senpaiProfile.id}
+                  profile={user.senpaiProfile}
+                  isSenpai={true}
+                />
+                <UserCard
+                  {...user}
+                  key={user.kohaiProfile.id}
+                  profile={user.kohaiProfile}
+                  isSenpai={false}
+                />
+              </>
+            ))}
+          </div>
         </main>
       )}
     </>
