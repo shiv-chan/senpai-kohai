@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from './config/routes';
 import RequireAuth from './common/components/RequireAuth';
 
 const App: React.FunctionComponent = () => {
+	useEffect(() => {
+		const element = document.getElementById('loading-screen');
+		if (element) {
+			element.classList.add('loaded');
+			setTimeout(() => {
+				// remove from DOM
+				element.outerHTML = '';
+			}, 2000);
+		}
+	}, []);
+
 	return (
 		<Router>
 			<Routes>
