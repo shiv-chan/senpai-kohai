@@ -103,6 +103,11 @@ userSchema.pre('save', async function (next) {
 	next();
 });
 
+userSchema.pre('updateOne', function (next) {
+  this.options.runValidators = true;
+  next();
+});
+
 const User = mongoose.model('User', userSchema);
 
 export default User;

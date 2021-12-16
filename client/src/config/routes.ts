@@ -11,6 +11,7 @@ import ForgotPasswordMessage from '../features/forgotpassword/ForgotPasswordMess
 import ForgotPasswordReset from '../features/forgotpassword/ForgotPasswordReset';
 import SenpaiDetail from '../common/components/SenpaiDetail';
 import KohaiDetail from '../common/components/KohaiDetail';
+import PageNotFound from '../common/components/PageNotFound';
 
 const routes: IRoute[] = [
   {
@@ -74,7 +75,7 @@ const routes: IRoute[] = [
     component: ForgotPasswordMessage,
   },
   {
-    path: 'forgotpassword/reset',
+    path: 'forgotpassword/reset/:hasheduserid',
     name: 'Forgot password',
     protected: false,
     component: ForgotPasswordReset,
@@ -90,6 +91,12 @@ const routes: IRoute[] = [
     name: 'Kohai Detail',
     protected: true,
     component: KohaiDetail,
+  },
+  {
+    path: '*',
+    name: 'Page Not Found',
+    protected: false,
+    component: PageNotFound,
   },
 ];
 

@@ -16,11 +16,8 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 	useEffect(() => {
 		dispatch(getUsers());
 		dispatch(getProfile());
-	}, [dispatch]);
-
-	if (hasValidToken === undefined) {
 		dispatch(checkValidToken());
-	}
+	}, [dispatch]);
 
 	if (hasValidToken === false) {
 		// Redirect them to the /login page, but save the current location they were
@@ -32,7 +29,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 
 	return hasValidToken ? (
 		<>
-			<Header />
+			<Header hasValidToken={true} />
 			{children}
 		</>
 	) : null;

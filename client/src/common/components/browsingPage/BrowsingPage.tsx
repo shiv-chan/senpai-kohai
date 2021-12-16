@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useAppSelector } from "../../../app/hook";
-import UserCard from "./UserCard";
+import React, { useState, useEffect } from 'react';
+import { useAppSelector } from '../../../app/hook';
+import UserCard from './UserCard';
 
 const BrowsingPage = () => {
   const users = useAppSelector((state) => state.users.users);
@@ -43,7 +43,8 @@ const BrowsingPage = () => {
 
   const createOtherProfilesList = () => {
     const otherProfilesList = users.filter(
-      (user: any) => user._id !== myProfile._id
+      (user: any) =>
+        user._id !== myProfile._id && user._id !== '61bb0f8da297a7612998f0ae'
     );
     const senpaiProfiles: any = sortSenpaiOrKohai(otherProfilesList, true);
     const kohaiProfiles: any = sortSenpaiOrKohai(otherProfilesList, false);
