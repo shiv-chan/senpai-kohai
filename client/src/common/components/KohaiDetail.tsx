@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hook';
 import { RiUser3Fill, MdEmail } from 'react-icons/all';
 import { IKohai } from '../../interfaces/profile';
 import ContactButton from './ContactButton';
+import LoadingScreen from './LoadingScreen';
 
 const KohaiDetail = () => {
 	const { id } = useParams();
@@ -11,7 +12,7 @@ const KohaiDetail = () => {
 	const [targetUser, setTargetUser] = useState<IKohai | null>(null);
 
 	useEffect(() => {
-		if (users)
+		if (users.length)
 			setTargetUser(
 				users.find(
 					(user: { kohaiProfile: { id: string | undefined } }) =>
@@ -31,7 +32,14 @@ const KohaiDetail = () => {
 			? 'Contact is not provided yet'
 			: targetUser?.publicEmail;
 	};
-	return targetUser ? (
+
+	if (targetUser === null) {
+		return <LoadingScreen text="Loading" />;
+	}
+
+	return targetUser === undefined ? (
+		<Navigate to="/notfound" />
+	) : (
 		<div className="bg-secondary_bg_color w-full min-h-screen pt-mobileHeaderHeight lg:pt-laptopHeaderHeight">
 			<div className="container max-w-xl mx-auto py-paddingAroundtheContent px-6 sm:px-8 flex flex-col gap-y-6">
 				<section className="flex flex-wrap gap-x-8 gap-y-4 relative">
@@ -83,10 +91,6 @@ const KohaiDetail = () => {
 				/>
 			</div>
 		</div>
-	) : (
-		<h1 className="pt-mobileHeaderHeight lg:pt-laptopHeaderHeight">
-			Page Not Found
-		</h1>
 	);
 };
 
