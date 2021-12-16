@@ -27,10 +27,17 @@ const UserCard = ({
       return name;
     }
   };
+
+  const handleLike = (e: React.MouseEvent<SVGAElement>) => {
+    e.preventDefault();
+    setIsLiked((prevState) => !prevState);
+    e.stopPropagation();
+  };
+
   return (
     <Link
       to={`/profile/${isSenpai ? 'senpai' : 'kohai'}/${profile.id}`}
-      className="z-0"
+      className="z-0 "
     >
       <div className="mobile_l_max:h-48 mobile_l_max:w-72 mobile_l_max:p-2.5 h-56 w-80 mobile_l:h-64 mobile_l:w-96 flex-initial bg-white hover:bg-gray-50 rounded-lg p-5 z-0">
         <div className="flex justify-between items-start mb-7 mb-l-max:mb-2">
@@ -47,12 +54,12 @@ const UserCard = ({
               {isLiked ? (
                 <RiHeart3Fill
                   className="text-2xl mobile_l_max:text-xl z-30 text-favorite_color"
-                  onClick={() => setIsLiked((prevState) => !prevState)}
+                  onClick={handleLike}
                 />
               ) : (
                 <RiHeart3Line
                   className="text-2xl mobile_l_max:text-xl z-30"
-                  onClick={() => setIsLiked((prevState) => !prevState)}
+                  onClick={handleLike}
                 />
               )}
             </div>
@@ -77,6 +84,17 @@ const UserCard = ({
           ))}
         </div>
       </div>
+      {/* {isLiked ? (
+        <RiHeart3Fill
+          className="text-2xl mobile_l_max:text-xl z-30 text-favorite_color absolute top-0 right-0"
+          onClick={handleLike}
+        />
+      ) : (
+        <RiHeart3Line
+          className="text-2xl mobile_l_max:text-xl z-30"
+          onClick={handleLike}
+        />
+      )} */}
     </Link>
   );
 };
