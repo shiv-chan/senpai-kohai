@@ -39,29 +39,29 @@ const UserCard = ({
 			to={`/profile/${isSenpai ? 'senpai' : 'kohai'}/${profile.id}`}
 			className="z-0 w-full h-full"
 		>
-			<div className="w-full h-60 mobile_l_max:h-48 flex-initial bg-white hover:bg-gray-50 rounded-lg mobile_l_max:p-2.5 p-5 z-0">
-				<div className=" w-full flex justify-between items-start mb-7 mb-l-max:mb-2">
+			<div className="w-full h-full flex flex-col bg-white hover:bg-gray-50 rounded-lg p-5 z-0 relative">
+				{isLiked ? (
+					<RiHeart3Fill
+						className="text-2xl mobile_l_max:text-xl z-30 text-favorite_color absolute top-4 right-4"
+						onClick={handleLike}
+					/>
+				) : (
+					<RiHeart3Line
+						className="text-2xl mobile_l_max:text-xl z-30 hover:text-favorite_color absolute top-4 right-4"
+						onClick={handleLike}
+					/>
+				)}
+				<div className="w-full flex flex-wrap mb-7 mb-l-max:mb-2">
 					<img
 						src={profileImage}
 						alt={name}
 						className="h-28 rounded-full mr-5 mobile_l_max:h-20"
 					/>
-					<div className="mt-2 w-full">
+					<div className="mt-2 min-w-max">
 						<div className="flex items-center justify-between mb-1">
 							<h1 className="text-xl font-bold mobile_l_max:text-base">
 								{profileNameDisplay()}
 							</h1>
-							{isLiked ? (
-								<RiHeart3Fill
-									className="text-2xl mobile_l_max:text-xl z-30 text-favorite_color"
-									onClick={handleLike}
-								/>
-							) : (
-								<RiHeart3Line
-									className="text-2xl mobile_l_max:text-xl z-30 hover:text-favorite_color"
-									onClick={handleLike}
-								/>
-							)}
 						</div>
 						<div className="flex items-center gap-x-1 text-sm mobile_l_max:text-xs">
 							{isSenpai ? <FaUserNinja /> : <RiUser3Fill />}

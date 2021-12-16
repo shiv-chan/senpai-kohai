@@ -61,7 +61,7 @@ const BrowsingPage = () => {
 		<>
 			{otherProfiles.length !== 0 && (
 				<main className="bg-primary_bg_color mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight mobile_xl_max:px-4 px-12 lg:px-20 py-16 w-full">
-					<section className="mx-auto grid grid-cols-1-min-300-max-500 lg:grid-cols-auto-fit-minmax-350 auto-rows-auto justify-center items-center gap-6 lg:gap-8">
+					<section className="w-4/5 tablet_l_max:max-w-[500px] mx-auto grid grid-cols-1 lg:grid-cols-auto-fit-minmax-350 auto-rows-auto justify-center items-center gap-6 lg:gap-8">
 						{otherProfiles.map((user: any) => (
 							<UserCard {...user} key={user.id} profile={user.profile} />
 						))}
