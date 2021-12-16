@@ -37,16 +37,16 @@ const UserCard = ({
   return (
     <Link
       to={`/profile/${isSenpai ? 'senpai' : 'kohai'}/${profile.id}`}
-      className="z-0 "
+      className="z-0 w-full h-full"
     >
-      <div className="mobile_l_max:h-48 mobile_l_max:w-72 mobile_l_max:p-2.5 h-56 w-80 mobile_l:h-64 mobile_l:w-96 flex-initial bg-white hover:bg-gray-50 rounded-lg p-5 z-0">
-        <div className="flex justify-between items-start mb-7 mb-l-max:mb-2">
+      <div className="w-full h-60 mobile_l_max:h-48 flex-initial bg-white hover:bg-gray-50 rounded-lg mobile_l_max:p-2.5 p-5 z-0">
+        <div className=" w-full flex justify-between items-start mb-7 mb-l-max:mb-2">
           <img
             src={profileImage}
-            alt={`${name}'s image`}
+            alt={name}
             className="h-28 rounded-full mr-5 mobile_l_max:h-20"
           />
-          <div className="mt-2 w-60 mobile_l_max:w-50">
+          <div className="mt-2 w-full">
             <div className="flex items-center justify-between mb-1">
               <h1 className="text-xl font-bold mobile_l_max:text-base">
                 {profileNameDisplay()}
@@ -58,7 +58,7 @@ const UserCard = ({
                 />
               ) : (
                 <RiHeart3Line
-                  className="text-2xl mobile_l_max:text-xl z-30"
+                  className="text-2xl mobile_l_max:text-xl z-30 hover:text-favorite_color"
                   onClick={handleLike}
                 />
               )}
@@ -74,7 +74,7 @@ const UserCard = ({
           </div>
         </div>
         <div className="flex flex-wrap">
-          {profile.techStack.map((techStack) => (
+          {profile.techStack.slice(0, 5).map((techStack) => (
             <span
               key={techStack}
               className="bg-tertiary_bg_color m-1 px-1.5 rounded-full mobile_l_max:text-xs"
@@ -82,19 +82,14 @@ const UserCard = ({
               {techStack}
             </span>
           ))}
+          {profile.techStack.length > 5 && (
+            <span className="mobile_l_max:text-xs self-center">
+              {' '}
+              ...and more
+            </span>
+          )}
         </div>
       </div>
-      {/* {isLiked ? (
-        <RiHeart3Fill
-          className="text-2xl mobile_l_max:text-xl z-30 text-favorite_color absolute top-0 right-0"
-          onClick={handleLike}
-        />
-      ) : (
-        <RiHeart3Line
-          className="text-2xl mobile_l_max:text-xl z-30"
-          onClick={handleLike}
-        />
-      )} */}
     </Link>
   );
 };

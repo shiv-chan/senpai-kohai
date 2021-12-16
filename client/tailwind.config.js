@@ -32,11 +32,15 @@ module.exports = {
         mobile_l_max: { max: '424px' },
         mobile_xl_max: { max: '639px' },
         tablet_md_max: { max: '767px' },
-        tablet_l_max: { max: '1024px' },
+        tablet_l_max: { max: '1023px' },
       },
       minHeight: {
         6: '6rem',
         12: '12rem',
+      },
+      gridTemplateColumns: {
+        '1-min-300-max-500': 'repeat(1, minmax(300px, 500px))',
+        'auto-fit-minmax-350': 'repeat(auto-fit, minmax(350px, 1fr))',
       },
     },
   },
