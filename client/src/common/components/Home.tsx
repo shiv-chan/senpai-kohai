@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaQuestionCircle } from 'react-icons/fa';
 import Footer from './Footer';
 import Header from './Header';
+import { useAppSelector, useAppDispatch } from '../../app/hook';
+import { checkValidToken } from '../authorizationSlice';
 
 import {
 	Accordion,
@@ -14,9 +16,20 @@ import {
 import './accordion.css';
 
 const Home = () => {
+	const dispatch = useAppDispatch();
+	const hasValidToken = useAppSelector(
+		(state) => state.authorization.hasValidToken
+	);
+
+	useEffect(() => {
+		if (hasValidToken === undefined) {
+			dispatch(checkValidToken());
+		}
+	}, [dispatch]);
+
 	return (
 		<>
-			<Header />
+			<Header hasValidToken={hasValidToken} />
 			<main className="bg-primary_bg_color text-primary_title_color font-sans overflow-x-hidden mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight py-paddingAroundtheContent ">
 				<section className="flex justify-center px-28 tablet_md_max:px-10 mb-20 gap-x-8 tablet_md_max:mt-0 mt-4 xl:mt-8">
 					<div className="flex flex-col tablet_md_max:items-center tablet_md_max:w-full xl:gap-y-4">
