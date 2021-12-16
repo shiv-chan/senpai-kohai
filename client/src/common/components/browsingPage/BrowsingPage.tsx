@@ -5,82 +5,65 @@ import UserCard from './UserCard';
 const BrowsingPage = () => {
 	const users = useAppSelector((state) => state.users.users);
 	const myProfile = useAppSelector((state) => state.myProfile.myProfile);
-	const [otherUsers, setOtherUsers] = useState<any>([]);
-	const [senpaiProfiles, setSenpaiProfiles] = useState<any>([]);
-	const [kohaiProfiles, setKohaiProfiles] = useState<any>([]);
+	const [otherProfiles, setOtherProfiles] = useState<any>([]);
 
-	const createOtherUsersList = () => {
-		const otherUsersList = users.filter(
-			(user: any) => user._id !== myProfile._id
-		);
-		setOtherUsers(otherUsersList);
-		console.log(otherUsersList);
-	};
-
-	const sortSenpai = () => {
-		if (otherUsers.length) {
-			const senpaiProfilesArr = otherUsers.map((user: any) => {
-				const { _id, name, profileImage, publicEmail, senpaiProfile } = user;
-				return {
-					id: `s${_id}`,
+	const sortSenpaiOrKohai = (otherProfiles: any, isSenpai: boolean) => {
+		let sortedProfilesArr = [];
+		if (otherProfiles.length !== 0) {
+			sortedProfilesArr = otherProfiles.map((user: any) => {
+				const {
+					_id,
 					name,
 					profileImage,
 					publicEmail,
-					profile: senpaiProfile,
-					isSenapi: true,
-				};
+					senpaiProfile,
+					kohaiProfile,
+				} = user;
+				return isSenpai
+					? {
+							id: `s-${_id}`,
+							name,
+							profileImage,
+							publicEmail,
+							profile: senpaiProfile,
+							isSenpai: true,
+					  }
+					: {
+							id: `k-${_id}`,
+							name,
+							profileImage,
+							publicEmail,
+							profile: kohaiProfile,
+							isSenpai: false,
+					  };
 			});
-
-			setSenpaiProfiles(senpaiProfilesArr);
 		}
+		return sortedProfilesArr;
 	};
 
-	const sortKohai = () => {
-		if (otherUsers.length) {
-			const kohaiProfilesArr = otherUsers.map((user: any) => {
-				const { name, profileImage, publicEmail, kohaiProfile } = user;
-				return { name, profileImage, publicEmail, profile: kohaiProfile };
-			});
-
-			setKohaiProfiles(kohaiProfilesArr);
-		}
+	const createOtherProfilesList = () => {
+		const otherProfilesList = users.filter(
+			(user: any) => user._id !== myProfile._id
+		);
+		console.log(otherProfilesList);
+		const senpaiProfiles: any = sortSenpaiOrKohai(otherProfilesList, true);
+		const kohaiProfiles: any = sortSenpaiOrKohai(otherProfilesList, false);
+		console.log(senpaiProfiles);
+		console.log(kohaiProfiles);
+		setOtherProfiles([...senpaiProfiles, ...kohaiProfiles]);
 	};
 
 	useEffect(() => {
-		if (users && myProfile) {
-			createOtherUsersList();
-		}
-		sortSenpai();
-		sortKohai();
+		if (users && myProfile) createOtherProfilesList();
 	}, [users]);
-
-	console.group('Senapi');
-	console.log(senpaiProfiles);
-	console.groupEnd();
-	console.group('Kohai');
-	console.log(kohaiProfiles);
-	console.groupEnd();
 
 	return (
 		<>
-			{otherUsers.length !== 0 && (
-				<main className="bg-primary_bg_color mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight px-14 py-16 w-full">
-					<section className="relative mx-auto grid grid-cols-1 md:grid-cols-2 auto-rows-auto justify-items-center items-center gap-6">
-						{otherUsers.map((user: any, index: number) => (
-							<React.Fragment key={index}>
-								<UserCard
-									{...user}
-									key={user.senpaiProfile.id}
-									profile={user.senpaiProfile}
-									isSenpai={true}
-								/>
-								<UserCard
-									{...user}
-									key={user.kohaiProfile.id}
-									profile={user.kohaiProfile}
-									isSenpai={false}
-								/>
-							</React.Fragment>
+			{otherProfiles.length !== 0 && (
+				<main className="bg-primary_bg_color mt-laptopHeaderHeight tablet_md_max:mt-mobileHeaderHeight mobile_xl_max:px-4 px-12 lg:px-20 py-16 w-full">
+					<section className="mx-auto grid grid-cols-1-min-300-max-500 lg:grid-cols-auto-fit-minmax-350 auto-rows-auto justify-center items-center gap-6 lg:gap-8">
+						{otherProfiles.map((user: any) => (
+							<UserCard {...user} key={user.id} profile={user.profile} />
 						))}
 					</section>
 				</main>

@@ -27,19 +27,26 @@ const UserCard = ({
 			return name;
 		}
 	};
+
+	const handleLike = (e: React.MouseEvent<SVGAElement>) => {
+		e.preventDefault();
+		setIsLiked((prevState) => !prevState);
+		e.stopPropagation();
+	};
+
 	return (
 		<Link
 			to={`/profile/${isSenpai ? 'senpai' : 'kohai'}/${profile.id}`}
 			className="z-0 w-full h-full"
 		>
-			<div className="w-full h-full flex-initial bg-white hover:bg-gray-50 rounded-lg p-5 z-0">
-				<div className="flex justify-between items-start mb-7 mb-l-max:mb-2">
+			<div className="w-full h-60 mobile_l_max:h-48 flex-initial bg-white hover:bg-gray-50 rounded-lg mobile_l_max:p-2.5 p-5 z-0">
+				<div className=" w-full flex justify-between items-start mb-7 mb-l-max:mb-2">
 					<img
 						src={profileImage}
-						alt={`${name}'s image`}
+						alt={name}
 						className="h-28 rounded-full mr-5 mobile_l_max:h-20"
 					/>
-					<div className="mt-2 w-60 mobile_l_max:w-50">
+					<div className="mt-2 w-full">
 						<div className="flex items-center justify-between mb-1">
 							<h1 className="text-xl font-bold mobile_l_max:text-base">
 								{profileNameDisplay()}
@@ -47,12 +54,12 @@ const UserCard = ({
 							{isLiked ? (
 								<RiHeart3Fill
 									className="text-2xl mobile_l_max:text-xl z-30 text-favorite_color"
-									onClick={() => setIsLiked((prevState) => !prevState)}
+									onClick={handleLike}
 								/>
 							) : (
 								<RiHeart3Line
-									className="text-2xl mobile_l_max:text-xl z-30"
-									onClick={() => setIsLiked((prevState) => !prevState)}
+									className="text-2xl mobile_l_max:text-xl z-30 hover:text-favorite_color"
+									onClick={handleLike}
 								/>
 							)}
 						</div>
@@ -66,7 +73,7 @@ const UserCard = ({
 						</div>
 					</div>
 				</div>
-				<div className="flex flex-wrap items-center">
+				<div className="flex flex-wrap">
 					{profile.techStack.slice(0, 5).map((techStack) => (
 						<span
 							key={techStack}
@@ -75,7 +82,12 @@ const UserCard = ({
 							{techStack}
 						</span>
 					))}
-					{profile.techStack.length > 5 ? <span> and more</span> : null}
+					{profile.techStack.length > 5 && (
+						<span className="mobile_l_max:text-xs self-center">
+							{' '}
+							...and more
+						</span>
+					)}
 				</div>
 			</div>
 		</Link>
