@@ -21,6 +21,10 @@ const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true, //access-control-allow-credentials:true
 };
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use('/login', loginRoute);
@@ -30,9 +34,6 @@ app.use('/authorization', authorizationRoute);
 app.use('/users', usersRoute);
 app.use('/forgotpassword', forgotPwRoute);
 app.use('/logout', logoutRoute);
-
-const distDir = __dirname + '/dist/';
-app.use(express.static(distDir));
 
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 5000;
