@@ -31,6 +31,16 @@ app.use('/users', usersRoute);
 app.use('/forgotpassword', forgotPwRoute);
 app.use('/logout', logoutRoute);
 
+app.get('/', (req, res, next) => {
+  res.status(200).json({
+    status: 'success',
+    data: {
+      name: 'senpai-kohai',
+      version: 'v1.0.0',
+    },
+  });
+});
+
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 5000;
 
