@@ -22,9 +22,6 @@ const corsOptions = {
   credentials: true, //access-control-allow-credentials:true
 };
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use('/login', loginRoute);
