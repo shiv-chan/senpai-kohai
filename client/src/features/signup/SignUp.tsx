@@ -43,9 +43,9 @@ const SignUp: React.FC = () => {
         .post('http://localhost:5000/signup', inputs, {
           withCredentials: true,
         })
-        .then((response) => {
+        .then(async (response) => {
+          await console.log(response.data.message);
           navigate('/board');
-          console.log(response.data.message);
         });
     } catch (error: any) {
       if (error.response) {
