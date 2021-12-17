@@ -51,11 +51,11 @@ const UserCard = ({
 						onClick={handleLike}
 					/>
 				)}
-				<div className="w-full flex flex-wrap mb-7 mb-l-max:mb-2">
+				<div className="w-full flex flex-wrap mb-7 mb-l-max:mb-2 gap-5">
 					<img
 						src={profileImage}
 						alt={name}
-						className="h-28 rounded-full mr-5 mobile_l_max:h-20"
+						className="object-cover w-28 h-28 rounded-full mobile_l_max:h-16 mobile_l_max:w-16"
 					/>
 					<div className="mt-2 min-w-max">
 						<div className="flex items-center justify-between mb-1">
