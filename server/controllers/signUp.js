@@ -18,9 +18,16 @@ export const signUp_post = async (req, res) => {
 			const newUser = await signedUser.save();
 			// create and assign a token
 			const token = jwt.sign({ _id: newUser._id }, process.env.TOKEN_SECRET);
+			res.set({
+				'Access-Control-Allow-Credentials': true,
+				'Access-Control-Allow-Origin': [
+					'https://kaho-test-client.herokuapp.com',
+				],
+			});
 			res.cookie('access_token', token, {
 				httpOnly: true,
-				// secure: true  // --> uncomment on production
+				secure: true,
+				sameSite: 'None',
 			});
 			res.status(201).json({ message: 'Signed up successfully!' });
 		}

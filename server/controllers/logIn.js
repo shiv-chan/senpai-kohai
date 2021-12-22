@@ -15,9 +15,16 @@ export const login_post = async (req, res) => {
 				if (result) {
 					// create and assign a token
 					const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+					res.set({
+						'Access-Control-Allow-Credentials': true,
+						'Access-Control-Allow-Origin': [
+							'https://kaho-test-client.herokuapp.com',
+						],
+					});
 					res.cookie('access_token', token, {
 						httpOnly: true,
-						// secure: true  // --> uncomment on production
+						secure: true,
+						sameSite: 'None',
 					});
 
 					// 201 request succeeded, and resource created and returend

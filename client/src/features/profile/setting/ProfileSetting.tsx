@@ -113,7 +113,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 				console.log(res);
 
 				await axios.put(
-					`http://localhost:5000${pathname}`,
+					`https://kaho-test-server.herokuapp.com${pathname}`,
 					{
 						...inputs,
 						profileImage: res.data.secure_url,
@@ -125,7 +125,7 @@ const ProfileSetting: React.FunctionComponent<{ props?: any }> = () => {
 				);
 			} else {
 				await axios.put(
-					`http://localhost:5000${pathname}`,
+					`https://kaho-test-server.herokuapp.com${pathname}`,
 					{ ...inputs, profileImage: myProfile.profileImage },
 					{
 						withCredentials: true,

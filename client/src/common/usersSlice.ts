@@ -6,7 +6,7 @@ const initialState: any = {
 };
 
 export const getUsers = createAsyncThunk('users/getUsers', async () => {
-	const res = await axios.get('http://localhost:5000/users', {
+	const res = await axios.get('https://kaho-test-server.herokuapp.com/users', {
 		withCredentials: true,
 	});
 

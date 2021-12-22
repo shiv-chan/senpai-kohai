@@ -12,9 +12,12 @@ const initialState: IAuthorizationState = {
 export const checkValidToken = createAsyncThunk(
 	'authorization/checkValidToken',
 	async () => {
-		const res = await axios.get('http://localhost:5000/authorization', {
-			withCredentials: true,
-		});
+		const res = await axios.get(
+			'https://kaho-test-server.herokuapp.com/authorization',
+			{
+				withCredentials: true,
+			}
+		);
 
 		if (res.status !== 201) {
 			throw new Error(res.data.message);
