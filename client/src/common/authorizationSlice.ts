@@ -25,7 +25,11 @@ export const checkValidToken = createAsyncThunk(
 const authorizationSlice = createSlice({
 	name: 'authorization',
 	initialState,
-	reducers: {},
+	reducers: {
+		reset: (state) => {
+			state.hasValidToken = undefined;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(checkValidToken.pending, (state) => {
@@ -40,4 +44,5 @@ const authorizationSlice = createSlice({
 	},
 });
 
+export const { reset } = authorizationSlice.actions;
 export default authorizationSlice.reducer;

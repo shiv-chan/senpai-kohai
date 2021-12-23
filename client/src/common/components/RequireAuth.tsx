@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { checkValidToken } from '../authorizationSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hook';
@@ -13,7 +13,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
 	const dispatch = useAppDispatch();
 	const location = useLocation();
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		dispatch(getUsers());
 		dispatch(getProfile());
 		dispatch(checkValidToken());
