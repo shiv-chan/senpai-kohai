@@ -7,6 +7,8 @@ import { MdMail } from 'react-icons/md';
 import { FaUnlockAlt } from 'react-icons/fa';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 import { AiFillEye } from 'react-icons/ai';
+import { useAppDispatch } from '../../app/hook';
+import { reset } from '../../common/authorizationSlice';
 
 const LogIn: React.FC = () => {
 	const [inputs, setInputs] = useState<ISingUpLogIn>({
@@ -16,6 +18,7 @@ const LogIn: React.FC = () => {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const [errMsgFromServer, setErrMsgFromServer] = useState<string>('');
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const handleLogInBtn = async (e: React.FormEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -26,6 +29,7 @@ const LogIn: React.FC = () => {
 				})
 				.then(async (response) => {
 					await console.log(response.data.message);
+					await dispatch(reset());
 					navigate('/board');
 				});
 		} catch (error: any) {
