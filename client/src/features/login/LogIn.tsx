@@ -24,7 +24,7 @@ const LogIn: React.FC = () => {
 		e.preventDefault();
 		try {
 			await axios
-				.post('http://localhost:5000/login', inputs, {
+				.post('https://senpai-kohai-backend.herokuapp.com/login', inputs, {
 					withCredentials: true,
 				})
 				.then(async (response) => {

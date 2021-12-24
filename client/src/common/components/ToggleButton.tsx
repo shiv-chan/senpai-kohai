@@ -79,7 +79,7 @@ const ToggleButton: React.FunctionComponent<{
 		setIsChecked((prevState) => !prevState);
 		try {
 			await axios.put(
-				`http://localhost:5000${pathname}`,
+				`https://senpai-kohai-backend.herokuapp.com${pathname}`,
 				{
 					isActive: checked,
 				},

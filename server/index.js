@@ -18,8 +18,8 @@ dotenv.config();
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true, //access-control-allow-credentials:true
+	origin: 'https://senpai-kohai.herokuapp.com',
+	credentials: true, //access-control-allow-credentials:true
 };
 
 app.use(cors(corsOptions));
@@ -36,11 +36,11 @@ const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(DATABASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() =>
-    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
-  )
-  .catch((error) => console.log(error.message));
+	.connect(DATABASE_URL, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() =>
+		app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+	)
+	.catch((error) => console.log(error.message));

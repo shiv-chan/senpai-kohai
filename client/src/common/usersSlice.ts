@@ -6,9 +6,12 @@ const initialState: any = {
 };
 
 export const getUsers = createAsyncThunk('users/getUsers', async () => {
-	const res = await axios.get('http://localhost:5000/users', {
-		withCredentials: true,
-	});
+	const res = await axios.get(
+		'https://senpai-kohai-backend.herokuapp.com/users',
+		{
+			withCredentials: true,
+		}
+	);
 
 	if (res.status !== 201) {
 		throw new Error(res.data.message);

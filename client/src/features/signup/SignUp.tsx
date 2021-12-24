@@ -43,7 +43,7 @@ const SignUp: React.FC = () => {
 		}
 		try {
 			await axios
-				.post('http://localhost:5000/signup', inputs, {
+				.post('https://senpai-kohai-backend.herokuapp.com/signup', inputs, {
 					withCredentials: true,
 				})
 				.then(async (response) => {
