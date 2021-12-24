@@ -7,7 +7,9 @@ _Senpai(先輩)_ and _Kohai(後輩)_ are Japanese words meaning "Senior" and "Ju
 
 ## 📸 Screenshots
 
-Screenshots and the description of each feature go here.
+### Mobile
+![mobile-screenshot](https://user-images.githubusercontent.com/51708229/147373476-b492ad5f-d7ca-4ce0-a0a6-97ff348707cb.png)
+
 
 ### Production Site
 
