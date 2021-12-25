@@ -51,7 +51,7 @@ We started to work on this project as a final project in our class. [Here's](htt
 - [GitHub](https://github.com/shiv-chan)
 
 ### Miyabi Tanimichi
-- [LinkedIn]()
+- [LinkedIn](https://www.linkedin.com/in/miyabi-tanimichi-71001a203/)
 - [Website]()
 - [GitHub](https://github.com/miyabitanimchi)
 
