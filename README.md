@@ -52,7 +52,7 @@ We started to work on this project as a final project in our class. [Here's](htt
 
 ### Miyabi Tanimichi
 - [LinkedIn](https://www.linkedin.com/in/miyabi-tanimichi-71001a203/)
-- [Website]()
+- [Website](https://miyabitanimichi.com)
 - [GitHub](https://github.com/miyabitanimchi)
 
 ### Danny Lee
